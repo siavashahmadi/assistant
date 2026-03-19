@@ -28,10 +28,26 @@
 - **Tools:** VS Code, GitHub, Supabase, terminal
 
 ## Interests
-- S&P 500/MES futures trading
-- Farsi language
+- S&P 500/MES futures trading (has a strategy called FBD — Failed Breakdown)
+- Farsi language (born in Iran, came to US at age 2, wants to learn properly)
 - Personal productivity systems
 - AI/LLM applications
+- Algo trading / alert systems
+- AI freelancing potential (websites for restaurants, etc.)
+
+## Personal
+- Iranian-American, parents are from Iran
+- Family is important — long-term goal is to retire his parents
+- Wants daily Farsi practice (15 min minimum)
+- Likes Persian poetry (Hafez, Rumi, etc.) — use it for motivation
+- Going through a self-improvement phase: cutting weed, exercising more, eating healthier, building discipline
+- Has a habit tracker project at ~/Desktop/coding projects/ASDF/habit-tracker
+
+## Motivation Style
+- Responds to urgency and momentum — when he's in flow, keep feeding the next thing
+- Wants to be pushed, not coddled. Hold him accountable.
+- Sees this as an AI gold rush — wants to maximize Claude Max subscription
+- Big picture: job → trading income → business → generational wealth
 
 ## Skill Gaps to Address
 Go, GCP (vs AWS), Terraform/IaC, Ruby on Rails, Elixir, Node.js backend
