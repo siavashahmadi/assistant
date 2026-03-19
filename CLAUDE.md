@@ -39,17 +39,17 @@ After every session that produces decisions, progress, or new information:
 - Add to `memory/learnings.md` if you discover how Sia works best
 - Update `memory/private/job-search.md` if job pipeline changed
 
-## MCP Integrations (Not Yet Configured)
+## MCP Integrations
 
-- **Gmail MCP** — for drafting follow-up emails, checking for responses
-- **Google Calendar MCP** — for checking schedule, suggesting time blocks
-
-When these are available, the `/start` and `/wrap` commands will use them.
+- **Google Workspace MCP** (`google-jobs-email`) — Gmail + Calendar for siavashahmadi1998@gmail.com (jobs email). Working as of 2026-03-19.
+- **Apple Notes MCP** — working
+- **Playwright MCP** — working
 
 ## Commands
 
 Project-level slash commands live in `.claude/commands/`. Key ones:
 - `/start` — morning kickoff, read all context, surface priorities
+- `/now` — mid-day check-in: done/remaining/calendar/texts reminder (ADHD-friendly)
 - `/wrap` — end-of-day summary, update logs, set tomorrow's priorities
 - `/brain-dump` — organize stream of consciousness
 - `/job-apply` — tailor an application for a specific company/role
@@ -64,8 +64,10 @@ Project-level slash commands live in `.claude/commands/`. Key ones:
 ## File Structure
 
 ```
-memory/           — Persistent context (read on startup)
-memory/private/   — Sensitive data (gitignored)
-outputs/          — Generated artifacts (prep docs, plans, etc.)
-.claude/commands/ — Slash commands
+memory/              — Persistent context (read on startup)
+memory/private/      — Sensitive data (gitignored)
+outputs/             — Generated artifacts
+outputs/job-apply/   — Application prep files (one per company)
+outputs/interview-prep/ — Interview prep files (one per company)
+.claude/commands/    — Slash commands
 ```

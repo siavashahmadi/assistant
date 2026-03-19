@@ -45,7 +45,7 @@ Update `memory/private/job-search.md` with:
 - Company, role, salary range, match score, status: "Applied [date]"
 
 ## Step 6: Save Output
-Save the full prep to `outputs/job-apply-[company-slug].md`
+Save the full prep to `outputs/job-apply/[company-slug].md`
 
 ## Rules
 - Be specific, not generic. Reference actual job requirements.

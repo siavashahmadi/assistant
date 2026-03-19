@@ -45,7 +45,7 @@ Generate 5-8 technical questions based on:
 Generate 5 thoughtful questions Sia should ask, based on the research. Not generic "what's the culture like" — specific to what was found about $ARGUMENTS.
 
 ## Step 4: Save Output
-Save everything to `outputs/interview-prep-[company-slug].md`
+Save everything to `outputs/interview-prep/[company-slug].md`
 
 ## Rules
 - Present everything in a clean, scannable format. Bold key points.

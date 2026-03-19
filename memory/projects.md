@@ -6,6 +6,10 @@
 - **What:** Platform for interview preparation and strategy
 - **Repo:** ~/Desktop/maxilev (assumed)
 
+## maxilev-data-pipeline
+- **Status:** Active
+- **What:** Data pipeline component for MaxiLev
+
 ## Joulea — Interview-Proof the Stack
 - **Goal:** Be able to deeply explain every system you built — architecture decisions, tradeoffs, scale, and what you'd do differently. Bulletproof for system design and technical interviews.
 - **Stack:** React, Redux, TypeScript, Three.js, Flask, AWS (EC2, S3, Lambda, CloudFront, RDS Aurora, Redis), RabbitMQ, PostgreSQL, GraphQL (Strawberry), LangChain, LlamaIndex, FAISS
@@ -19,10 +23,6 @@
   - Microservices — 4 services (admin, dashboards, analytics, user management), service boundaries, inter-service communication
   - Database design — PostgreSQL sharding, time-based partition keys, 200+ buildings at scale
 - **Interview angles:** Why this architecture? What broke? What would you change? How does it scale?
-
-## maxilev-data-pipeline
-- **Status:** Active
-- **What:** Data pipeline component for MaxiLev
 
 ## Habit Tracker
 - **Stack:** TBD (check ~/Desktop/coding projects/ASDF/habit-tracker)

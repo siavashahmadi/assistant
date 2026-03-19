@@ -3,7 +3,8 @@
 ## Basics
 - **Name:** Siavash Ahmadi (goes by Sia)
 - **Phone:** 678-467-7239
-- **Email:** siavashahmadi1998@gmail.com
+- **Email (jobs):** siavashahmadi1998@gmail.com — job applications, professional stuff
+- **Email (personal):** sia2156@gmail.com — Claude account, personal
 - **LinkedIn:** https://www.linkedin.com/in/siaahmadi
 - **Location:** Atlanta, GA (open to remote, interested in LA)
 - **Education:** BS Computer Science, Georgia State University (2016–2020), Honors College, Dean's List
