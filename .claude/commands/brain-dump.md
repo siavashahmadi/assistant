@@ -46,7 +46,7 @@ Pick the top 3 items for today/this week. Use these criteria:
 After presenting, organize items into the appropriate memory files:
 - Action items and priorities → append to `memory/daily-log.md` under today's entry
 - Project-related items → update `memory/projects.md`
-- Job search items → update `memory/private/job-search.md`
+- Job search items → update `memory/private/application-tracker.md`
 - New ideas or learnings → `memory/learnings.md`
 
 Ask Sia before writing to confirm the organization looks right.

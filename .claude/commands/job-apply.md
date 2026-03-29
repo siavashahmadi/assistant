@@ -11,7 +11,7 @@ Sia wants to apply to **$ARGUMENTS**. Help him tailor a strong application.
 Read:
 - `memory/resume.md` — full resume
 - `memory/me.md` — background and preferences
-- `memory/private/job-search.md` — existing pipeline and strategy
+- `memory/private/application-tracker.md` — existing pipeline and strategy
 
 ## Step 2: Research the Role
 Use WebSearch to find:
@@ -41,7 +41,7 @@ Draft a 3-paragraph cover letter angle:
 Any role-specific tips: keywords to include, things to emphasize, red flags to address.
 
 ## Step 5: Log It
-Update `memory/private/job-search.md` with:
+Update `memory/private/application-tracker.md` with:
 - Company, role, salary range, match score, status: "Applied [date]"
 
 ## Step 6: Save Output

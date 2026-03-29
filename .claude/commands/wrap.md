@@ -10,6 +10,7 @@ Time to wrap up Sia's day. Capture what happened and set up tomorrow.
 
 ### Step 1: Load Context
 Read:
+- `todos/` — today's TODO file (YYYY-MM-DD.md)
 - `memory/daily-log.md` — what was planned for today
 - `memory/projects.md` — current project status
 - `memory/learnings.md` — existing learnings
@@ -33,7 +34,11 @@ Based on his response:
 
 3. **Add to `memory/learnings.md`** if you noticed anything about how Sia works best.
 
-4. **Update `memory/private/job-search.md`** if job search activity happened.
+4. **Update `memory/private/application-tracker.md`** if job search activity happened.
+
+5. **Close out today's TODO file** (`todos/YYYY-MM-DD.md`):
+   - Check off everything that got done
+   - Any unchecked items get noted as carryover for tomorrow
 
 ### Step 4: Quick Review
 Present a 5-line summary:

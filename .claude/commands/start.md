@@ -15,40 +15,58 @@ Read all memory files:
 - `memory/projects.md`
 - `memory/daily-log.md`
 - `memory/learnings.md`
-- `memory/private/job-search.md`
+- `memory/private/application-tracker.md`
 
-### Step 2: Summarize the Plate
+### Step 2: Check for Yesterday's TODO
+Read `todos/` for yesterday's file (or most recent). Pull forward any unchecked items.
+
+### Step 3: Summarize the Plate
 
 Present a concise morning briefing:
 
 **Active Projects** — Pull from `memory/projects.md`. For each, one line: status + next step.
 
-**Yesterday's Carryover** — Check `memory/daily-log.md` for unfinished items or tomorrow's priorities from the last entry.
+**Yesterday's Carryover** — Unchecked items from yesterday's TODO file.
 
-**Job Search** — Check `memory/private/job-search.md`. Any pending applications, follow-ups due, or interviews coming up?
+**Job Search** — Check `memory/private/application-tracker.md`. Any pending applications, follow-ups due, or interviews coming up?
 
-**Open Loops** — Anything in the daily log that's been sitting for 2+ days without progress.
+**Open Loops** — Anything that's been sitting for 2+ days without progress.
 
-### Step 3: Propose Today's Focus
+### Step 4: Propose Today's Focus
 
 Pick 1–3 things to focus on today. Use these criteria:
 - What has a deadline?
 - What's blocking other things?
 - What would build the most momentum?
 
-Format as:
-> **Today's focus:**
-> 1. [Thing] — why
-> 2. [Thing] — why
-> 3. [Thing] — why
-
-### Step 4: Calendar Check (When MCP Available)
-_When Gmail/Calendar MCPs are configured:_
+### Step 5: Calendar Check
 - Pull today's calendar events
 - Flag any meetings that need prep
 - Check for important emails that need response
 
+### Step 6: Create Today's TODO File
+Write `todos/YYYY-MM-DD.md` with this structure:
+
+```
+# YYYY-MM-DD
+
+## Today's Focus
+1. [Thing] — why
+2. [Thing] — why
+3. [Thing] — why
+
+## Tasks
+- [ ] [carried over from yesterday]
+- [ ] [new tasks]
+
+## Job Apps to Apply
+[any pending roles from /job-search sessions or application-tracker.md]
+
+## Done
+```
+
 ## Rules
-- Keep the whole briefing under 30 lines. Sia needs to scan this fast.
+- Keep the briefing under 30 lines. Sia needs to scan this fast.
 - Don't repeat information Sia already knows — surface what's changed or needs attention.
 - If memory files seem stale (last daily-log entry is 3+ days old), flag it.
+- The TODO file is the artifact — it's what Sia references all day.

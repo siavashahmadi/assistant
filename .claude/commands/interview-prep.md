@@ -11,7 +11,7 @@ You are helping Sia prepare for a job interview at **$ARGUMENTS**.
 Read:
 - `memory/resume.md` — full resume and key metrics
 - `memory/me.md` — background, stack, preferences
-- `memory/private/job-search.md` — existing pipeline info on this company
+- `memory/private/application-tracker.md` — existing pipeline info on this company
 
 ## Step 2: Research the Company
 
@@ -42,7 +42,7 @@ Generate 5-8 technical questions based on:
 - Include system design, coding, and architecture questions
 
 ### E. Questions to Ask Them
-Generate 5 thoughtful questions Sia should ask, based on the research. Not generic "what's the culture like" — specific to what was found about $ARGUMENTS.
+Generate 5 thoughtful questions Sia should ask, based on the research. Not generic "what's the culture like" — specific to what was found about $ARGUMENTS. Sia always likes to ask what's your least favorite thing about working at this company?
 
 ## Step 4: Save Output
 Save everything to `outputs/interview-prep/[company-slug].md`
