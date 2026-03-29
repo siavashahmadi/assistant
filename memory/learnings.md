@@ -11,4 +11,9 @@ _Observations about work style, preferences, and what helps Sia be most effectiv
 - **Momentum is a resource.** Sia applied to 5 jobs in one late-night session by staying in the flow. When he's moving, keep feeding him the next thing — don't break the rhythm with too much overhead.
 - **Push, don't coddle.** Sia explicitly wants to be held accountable. He responds to directness and urgency. Don't soften things — keep it real.
 - **Persian poetry lands.** Hafez, Rumi, Saadi — use sparingly for motivation. He connects with his culture through it.
-- **Phone/doomscrolling is the enemy.** When distracted (especially by news), redirect to action. He knows it, he just needs the nudge.
+- **Phone/doomscrolling is the enemy.** When distracted (especially by news — particularly Iran/geopolitics), redirect to action. He knows it, he just needs the nudge.
+- **LeetCode: stack problems trip him up.** Valid Parentheses took a while — the "final statement" logic (checking if stack is empty at the end) wasn't intuitive. Worth revisiting stack-based patterns.
+- **LeetCode: overwhelm kicks in on medium problems.** Group Anagrams caused him to shut down. When a problem feels big, break it into "what data structure would make the lookup fast?" first — same pattern that made Two Sum click (hashmap). Tomorrow: approach Group Anagrams as "it's just sorted-string keys in a hashmap."
+- **Farsi learning is personal.** Discovered his family has a slight accent — this motivates him to learn the "correct" forms. Emotional connection to the language, not just a skill checkbox.
+- **Design-first for creative projects.** Building 3 portfolio sites without a design direction first led to wasted hours. Lesson: pick the design/aesthetic before writing code — especially for visual projects.
+- **Late-night creative sessions eat into next-day output.** 5 AM nights → low job search days. The creative work feels productive in the moment but trades off against structured goals. Worth being aware of the pattern.

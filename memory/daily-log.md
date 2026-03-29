@@ -4,6 +4,79 @@ _Newest first. Updated after each session._
 
 ---
 
+## 2026-03-27
+
+### Context
+- Back from CA (or still there — traveling). No tasks completed on Mar 26.
+- Google Workspace MCP token expired — Gmail + Calendar unavailable until reauth.
+
+### Carry Forward from Mar 26
+- Angela Adams / OLarry call happened — outcome unknown, needs logging
+- Machina Cognita reply still pending
+- 7 job apps still in backlog
+
+---
+
+## 2026-03-26
+
+### Context
+- In California visiting girlfriend. Yesterday (Mar 25) = full travel + hang day, no work.
+- Mar 24 was Machina Cognita phone screen — went well, advanced to next stage.
+
+### Today
+- Angela Adams call @ 4:30 PM EST / 1:30 PM PST — Fora Travel dead (5yr req), real agenda is OLarry (AI tax advisory, React/Python, fully remote, $10M Series A)
+- Machina Cognita: Natalie Guo invited to 30-min video interview — needs reply with availability
+- Light day — traveling/girlfriend time
+
+### Inbox Recap (since Mar 24)
+- Rejected: FanDuel (filled), Whatnot, Attentive (filled), T-Mobile (canceled)
+- Advanced: Machina Cognita — next video interview stage
+
+---
+
+## 2026-03-24
+
+### Context
+- Took 3-4 days mostly off (Mar 21-23). Nowruz family time + mental break.
+- Machina Cognita phone screen rescheduled from Mar 23 → TODAY Mar 24 at 12:30 PM ET (15 min, recruiter Natalie Guo)
+- MC call on Mar 23 went well per Sia — wants to study ML if he moves forward
+- 4-day LeetCode gap — needs to restart
+
+### Today
+- MC phone screen @ 12:30 PM ET
+- Resume LeetCode
+
+---
+
+## 2026-03-20
+
+### Done
+- **Applied to 2 jobs:** Regal.ai (Backend SE — voice infra, $160K–$220K) and Norm AI (Full Stack, $190K–$270K)
+- **LeetCode:** Solved Group Anagrams (sorted-string key hashmap approach — picked it back up from yesterday's wall)
+- **Portfolio websites (3 built with Astro JS):**
+  - Avalon Guard — dark hacker aesthetic, took the longest, turned out ugly
+  - Bubbly gradient pastel — turned out well, strong candidate to actually use
+  - Initial attempt — scrapped, realized should design-first before building
+- **Blackjack multiplayer website** — started building, enjoying it
+- Stayed up til 5 AM — long creative session, low job search output
+
+### Decisions
+- Portfolio: leaning toward the bubbly gradient pastel design
+- Lesson learned: design-first before building portfolio sites (use AI to find/create design, then implement)
+
+### Skipped / Carried
+- System Design study — didn't happen
+- Joulea stack deep-dive — didn't happen
+- Blake Gardner (TripleCo) reply — still pending
+- Machina Cognita interview prep — still needed (phone screen Monday 2026-03-23)
+
+### Tomorrow (2026-03-21)
+- **Nowruz** — Persian New Year, family time. Light day.
+- Machina Cognita interview prep (phone screen Monday)
+- Review remaining job apps from list (Yuzu, Uncountable, Oboe, Salesloft, Calendly, Cloudflare, PrizePicks)
+
+---
+
 ## 2026-03-19
 
 ### Session 3 — Applications + System Improvements
@@ -21,7 +94,7 @@ _Newest first. Updated after each session._
 - **Google Jobs Email MCP** now working — confirmed 5 application receipt emails (BlackLine x2, Dandy, Whatnot, Twilio)
 - Found 2 new roles: **Teamworks** SE II Full Stack ($166K, Python/React/TS/PostgreSQL/GraphQL — near-perfect match) and **Stable** Product Engineer ($160K–$220K, React/TS/GraphQL/AWS, YC-backed)
 - Dropbox DocSend — confirmed gone, removed from all tracking
-- Consolidated job search files into single `outputs/job-search.md`, deleted old split files
+- Consolidated job search files into single `application-tracker.md`, deleted old split files
 - Created `outputs/interview-prep/` and `outputs/job-apply/` subfolders, updated commands to use them
 
 ### Session 1 — Applications + MCP Setup
@@ -51,11 +124,19 @@ _Newest first. Updated after each session._
 - Replaced **Apple Reminders** with **Apple Notes** (`mcp-apple-notes`) — working
 - **Google jobs email** MCP — now working and confirmed
 
-### Remaining Today
-- Apply to 5 more (Whatnot x2, ActBlue, Teamworks, Stable)
-- LeetCode: minimum 1.5 hrs
-- System Design: minimum 1–2 hrs
-- Joulea stack deep-dive: start with IoT pipeline architecture
+### Session 4 — Evening (LeetCode + Farsi + Life)
+- **LeetCode (5 problems):** Two Sum, Valid Parentheses (stack — struggled then solved), Contains Duplicate, Valid Anagram, looked at Group Anagrams (overwhelmed, tabled it)
+- **RACE project:** Added individual bullet editing — can now generate hyper-custom resumes per application
+- **Farsi:** Watched 30 min video, learned informal forms + correct pronunciations. Realized family has a slight accent — been saying some words slightly off
+- **Personal:** FaceTime with girlfriend, talked to mom
+- **Productivity:** Used Claude coworker to mass-clean emails
+- **Distractions:** YouTube rabbit hole + Iran war content (self-aware about it)
+### Carry to Tomorrow (2026-03-20)
+- System Design: minimum 1–2 hrs (Hello Interview + ByteByteGo)
+- Joulea stack deep-dive: IoT pipeline architecture
+- LeetCode: Group Anagrams (pick back up fresh)
+- Reply to Blake Gardner (TripleCo) recruiter email or skip
+- Review Machina Cognita interview prep (phone screen Monday)
 
 ---
 
