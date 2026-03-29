@@ -38,8 +38,9 @@ memory/
   daily-log.md             — Running log (newest first)
   learnings.md             — How Sia works best
   private/                 — Gitignored sensitive data
-    job-search.md          — Job pipeline and applications
+    application-tracker.md — Job pipeline and applications
     trading-log.md         — Trade journal
+todos/                     — Daily TODO files (YYYY-MM-DD.md)
 outputs/                   — Generated artifacts (prep docs, plans)
 .claude/commands/          — Slash commands
 ```
