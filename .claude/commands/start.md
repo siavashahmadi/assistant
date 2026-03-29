@@ -44,7 +44,17 @@ Pick 1–3 things to focus on today. Use these criteria:
 - Flag any meetings that need prep
 - Check for important emails that need response
 
-### Step 6: Create Today's TODO File
+### Step 6: Scale Daily Practice Blocks
+
+Sia does LeetCode, System Design, and Farsi practice **every day**. Scale the time based on how busy the day is:
+
+- **Light day** (no interviews, few tasks): LeetCode 3–5 problems (1.5–2 hrs), System Design 1–2 hrs, Farsi 30–45 min
+- **Normal day**: LeetCode 2–3 problems (1 hr), System Design 45 min–1 hr, Farsi 15–30 min
+- **Heavy day** (interviews, deadlines, lots of tasks): LeetCode 1–2 problems (30 min), System Design 30 min, Farsi 15 min
+
+Assess today's load from Steps 2–5, then assign the appropriate tier. Always include these in the TODO — they are non-negotiable daily habits, not optional.
+
+### Step 7: Create Today's TODO File
 Write `todos/YYYY-MM-DD.md` with this structure:
 
 ```
@@ -58,6 +68,11 @@ Write `todos/YYYY-MM-DD.md` with this structure:
 ## Tasks
 - [ ] [carried over from yesterday]
 - [ ] [new tasks]
+
+## Daily Practice [Light/Normal/Heavy day]
+- [ ] LeetCode — [X problems, ~Y min]
+- [ ] System Design — [topic/resource, ~Y min]
+- [ ] Farsi — [activity, ~Y min]
 
 ## Job Apps to Apply
 [any pending roles from /job-search sessions or application-tracker.md]
