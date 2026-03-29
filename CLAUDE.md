@@ -16,7 +16,7 @@ Before responding to any request, read:
 - `memory/learnings.md` — how Sia works best
 
 For job-related commands, also read:
-- `memory/private/job-search.md` — pipeline and applications
+- `memory/private/application-tracker.md` — pipeline and applications
 
 For trading commands, also read:
 - `memory/private/trading-log.md` — trade journal
@@ -37,7 +37,7 @@ After every session that produces decisions, progress, or new information:
 - Append to `memory/daily-log.md` (newest first)
 - Update `memory/projects.md` if project status changed
 - Add to `memory/learnings.md` if you discover how Sia works best
-- Update `memory/private/job-search.md` if job pipeline changed
+- Update `memory/private/application-tracker.md` if job pipeline changed
 
 ## MCP Integrations
 
@@ -66,6 +66,7 @@ Project-level slash commands live in `.claude/commands/`. Key ones:
 ```
 memory/              — Persistent context (read on startup)
 memory/private/      — Sensitive data (gitignored)
+todos/               — Daily TODO files (YYYY-MM-DD.md) — tasks, job apps, focus
 outputs/             — Generated artifacts
 outputs/job-apply/   — Application prep files (one per company)
 outputs/interview-prep/ — Interview prep files (one per company)
