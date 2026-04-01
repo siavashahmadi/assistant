@@ -55,3 +55,5 @@ _When Gmail MCP is configured:_
 - Don't make Sia write a report. One question, then you organize.
 - Keep the summary tight — this is a closing ritual, not an essay.
 - Always update the daily log, even if the day was "nothing."
+- **Be honest about the day.** If Sia checked off 1 out of 8 tasks, don't frame it as "productive." Say "1/8 — here's what slipped and why it matters." He wants the truth, not comfort.
+- **Make tomorrow's priority feel urgent.** Connect it to what's at stake — interviews, pipeline momentum, skill gaps. Not just "here's what's next" but "here's what you lose if you skip this."
