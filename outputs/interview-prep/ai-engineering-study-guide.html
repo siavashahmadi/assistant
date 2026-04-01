@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep — Makna Cognito</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --border: #2a2a3a;
+  --text: #e4e4ef;
+  --text-dim: #8888a0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --accent2: #22d3ee;
+  --accent3: #f472b6;
+  --accent4: #34d399;
+  --accent5: #fb923c;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --card-radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header .subtitle {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.mode-toggle {
+  display: flex;
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.mode-btn {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 8px;
+  padding: 16px 32px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.nav-btn {
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.nav-btn:hover { border-color: var(--accent); color: var(--text); }
+.nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+/* Main Content */
+.container { max-width: 900px; margin: 0 auto; padding: 32px; }
+
+/* Study Guide Styles */
+.section { margin-bottom: 48px; display: none; }
+.section.visible { display: block; animation: fadeUp 0.4s ease; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.section-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.section-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent2);
+  letter-spacing: -0.01em;
+}
+
+.card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--accent3);
+}
+
+.card p, .card li {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+.card ul { padding-left: 20px; }
+.card li { margin-bottom: 6px; }
+
+.card code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  background: var(--surface2);
+  padding: 2px 7px;
+  border-radius: 5px;
+  color: var(--accent2);
+  border: 1px solid var(--border);
+}
+
+.resume-bullet {
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  margin: 16px 0;
+  background: var(--accent-glow);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+.resume-bullet strong { color: var(--accent); font-style: normal; }
+
+.depth-box {
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(34,211,238,0.05));
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.depth-box h4 { color: var(--accent); margin-top: 0; }
+
+.analogy {
+  background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(251,146,60,0.05));
+  border: 1px solid rgba(244,114,182,0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  font-size: 0.9rem;
+}
+
+.analogy::before { content: '💡 '; }
+
+.step-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.step-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.step-arrow { color: var(--accent); font-weight: bold; }
+
+/* Flashcard Styles */
+.flashcard-container { display: none; }
+.flashcard-container.visible { display: block; animation: fadeUp 0.4s ease; }
+
+.flashcard-progress {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.flashcard-wrapper {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 700px;
+  height: 380px;
+  margin: 0 auto 24px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flashcard-inner.flipped { transform: rotateY(180deg); }
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.flashcard-front {
+  background: linear-gradient(160deg, var(--surface), var(--surface2));
+}
+
+.flashcard-back {
+  background: linear-gradient(160deg, #111125, #0f1f2e);
+  transform: rotateY(180deg);
+  border-color: var(--accent);
+}
+
+.flashcard-front h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.flashcard-category {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.flashcard-back p, .flashcard-back li {
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.flashcard-back ul { padding-left: 18px; }
+.flashcard-back li { margin-bottom: 4px; }
+
+.flashcard-hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.flashcard-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.fc-btn {
+  padding: 12px 32px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fc-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
+.fc-btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
+.fc-btn.primary:hover { opacity: 0.9; }
+
+/* Confidence tracker */
+.confidence {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.conf-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.conf-btn.got-it { color: var(--success); border-color: rgba(52,211,153,0.3); }
+.conf-btn.got-it:hover { background: rgba(52,211,153,0.1); }
+.conf-btn.shaky { color: var(--warning); border-color: rgba(251,191,36,0.3); }
+.conf-btn.shaky:hover { background: rgba(251,191,36,0.1); }
+.conf-btn.missed { color: var(--accent3); border-color: rgba(244,114,182,0.3); }
+.conf-btn.missed:hover { background: rgba(244,114,182,0.1); }
+
+/* Score bar */
+.score-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+
+.score-item { display: flex; align-items: center; gap: 6px; }
+.score-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .header { padding: 12px 16px; }
+  .nav { padding: 12px 16px; }
+  .container { padding: 20px 16px; }
+  .flashcard-wrapper { height: 420px; }
+  .flashcard-front, .flashcard-back { padding: 24px; }
+  .step-flow { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>INTERVIEW PREP — MAKNA COGNITO</h1>
+    <div class="subtitle">ML Engineer · Round 2 · Tomorrow</div>
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode('study')">📖 Study</button>
+    <button class="mode-btn" onclick="setMode('cards')">🃏 Flashcards</button>
+  </div>
+</div>
+
+<div class="nav" id="nav"></div>
+
+<div class="container">
+  <!-- ============ STUDY MODE ============ -->
+  <div id="study-mode">
+
+    <!-- SECTION 1: RAG Architecture -->
+    <div class="section" data-section="rag">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent),var(--accent2))">🧠</div>
+        <div>
+          <div class="section-title">RAG Architecture</div>
+          <div class="section-subtitle">Retrieval-Augmented Generation — your chatbot's backbone</div>
+        </div>
+      </div>
+
+      <div class="resume-bullet">
+        <strong>Your Bullet:</strong> "Collaborated with AI Engineers to build an agent-based LLM+RAG chatbot using LangChain and LlamaIndex, achieving 85% response accuracy validated through internal subject matter testing"
+      </div>
+
+      <div class="card">
+        <h3>What is RAG and Why Does It Exist?</h3>
+        <div class="analogy">Think of an LLM like a brilliant student who memorized every textbook before exam day — but they graduated in 2023. They know nothing about your company's internal docs. RAG is like giving that student an open-book section: they can now <em>look stuff up</em> before answering.</div>
+        <p>RAG solves the fundamental problem of LLMs: <strong>they only know what they were trained on</strong>. If you need an AI to answer questions about your HVAC documentation, product manuals, or internal processes, the LLM alone can't do it. RAG lets you inject relevant context at query time without retraining the model.</p>
+        
+        <h4>The RAG Pipeline — Step by Step</h4>
+        <div class="step-flow">
+          <span class="step-item">📄 Documents</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">✂️ Chunking</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🔢 Embedding</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">📦 Vector Store</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🔍 Retrieval</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🤖 Generation</span>
+        </div>
+
+        <div class="depth-box">
+          <h4>Step 1 — Ingestion & Chunking</h4>
+          <p>You take your raw documents (PDFs, manuals, docs) and split them into smaller pieces. Why? Because LLMs have a limited <strong>context window</strong> (e.g., 4K-128K tokens). You can't feed the entire HVAC manual in every time. Plus, smaller chunks = more precise retrieval.</p>
+          <ul>
+            <li><strong>Chunk size matters:</strong> Too small (50 tokens) → loses context. Too large (2000 tokens) → dilutes relevance. Sweet spot is typically 256-512 tokens with overlap.</li>
+            <li><strong>Overlap:</strong> You overlap chunks by ~50-100 tokens so you don't slice an important idea in half. Think of it like overlapping tiles on a roof.</li>
+            <li><strong>Strategies:</strong> Fixed-size, sentence-based, semantic (split on topic boundaries), recursive character splitting (LangChain's default).</li>
+          </ul>
+        </div>
+
+        <div class="depth-box">
+          <h4>Step 2 — Embedding</h4>
+          <p>Each chunk gets converted into a <strong>vector</strong> — a list of numbers (e.g., 1536 floats for OpenAI's <code>text-embedding-ada-002</code>) that represent the <em>meaning</em> of that text in high-dimensional space.</p>
+          <div class="analogy">Imagine mapping every sentence onto a 3D globe. Sentences about "HVAC temperature" land near each other, while sentences about "billing" land on the other side. Except it's not 3 dimensions — it's 1536.</div>
+          <ul>
+            <li><strong>Models:</strong> OpenAI <code>text-embedding-ada-002</code> / <code>text-embedding-3-small</code>, Cohere Embed, open-source like <code>sentence-transformers</code></li>
+            <li><strong>Key concept:</strong> Semantically similar text → vectors that are close together (measured by cosine similarity)</li>
+          </ul>
+        </div>
+
+        <div class="depth-box">
+          <h4>Step 3 — Vector Storage</h4>
+          <p>Store those vectors in a specialized database optimized for similarity search.</p>
+          <ul>
+            <li><strong>Pinecone:</strong> Fully managed, serverless, scales automatically. You used this.</li>
+            <li><strong>FAISS:</strong> Facebook's open-source library. Runs in-memory, blazing fast for local/smaller datasets. You also listed this.</li>
+            <li><strong>Others:</strong> Chroma, Weaviate, Qdrant, Milvus, pgvector (PostgreSQL extension)</li>
+          </ul>
+          <p><strong>Index types in FAISS:</strong> Flat (exact, slow), IVF (approximate, clusters vectors), HNSW (graph-based, fast). Trade-off is always <em>speed vs. accuracy</em>.</p>
+        </div>
+
+        <div class="depth-box">
+          <h4>Step 4 — Retrieval</h4>
+          <p>When a user asks a question, their query gets embedded using the <em>same</em> model, then you search the vector store for the top-K most similar chunks.</p>
+          <ul>
+            <li><strong>Similarity metrics:</strong> Cosine similarity (most common), dot product, Euclidean distance</li>
+            <li><strong>Top-K:</strong> Typically retrieve 3-5 chunks. More = more context but also more noise.</li>
+            <li><strong>Re-ranking:</strong> Optional step — use a cross-encoder or re-ranking model to re-order retrieved chunks by actual relevance (not just embedding proximity).</li>
+            <li><strong>Hybrid search:</strong> Combine vector similarity with keyword search (BM25) for better recall. Your chatbot may have used this.</li>
+          </ul>
+        </div>
+
+        <div class="depth-box">
+          <h4>Step 5 — Augmented Generation</h4>
+          <p>Stuff those retrieved chunks into the LLM's prompt as context, then the LLM generates an answer <em>grounded in your data</em>.</p>
+          <ul>
+            <li><strong>Prompt structure:</strong> System message + "Here is relevant context: [chunks]" + User question</li>
+            <li><strong>Grounding:</strong> The LLM should only answer based on the provided context, not hallucinate from training data</li>
+            <li><strong>Context window management:</strong> If chunks are too big, you exceed the window. That's why chunk size matters upstream.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>How to Talk About Your RAG Chatbot in the Interview</h3>
+        <ul>
+          <li><strong>Architecture:</strong> "We built an agent-based RAG system — LangChain orchestrated the pipeline, LlamaIndex handled document ingestion and indexing, and we stored embeddings in a vector database for similarity-based retrieval."</li>
+          <li><strong>Why agent-based:</strong> "An agent can decide <em>when</em> to retrieve vs. answer from memory, and can chain multiple tools — so it wasn't just Q&A, it could route to different knowledge bases or escalate."</li>
+          <li><strong>Validation:</strong> "We validated against internal SMEs — had domain experts score responses for accuracy and relevance, hitting 85%."</li>
+          <li><strong>What you'd improve:</strong> "I'd add evaluation frameworks like RAGAS for automated metrics (faithfulness, answer relevancy, context precision) and implement hybrid search for better recall."</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 2: LangChain & LangGraph -->
+    <div class="section" data-section="langchain">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent3),var(--accent5))">🔗</div>
+        <div>
+          <div class="section-title">LangChain & LangGraph</div>
+          <div class="section-subtitle">Orchestration frameworks for LLM applications</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>LangChain — The Framework</h3>
+        <div class="analogy">LangChain is like Express.js but for LLM apps. Express gives you routing, middleware, request/response patterns for web servers. LangChain gives you chains, prompts, memory, and tool-calling patterns for AI apps. You <em>could</em> build everything from scratch, but the framework saves you months.</div>
+
+        <h4>Core Concepts You Should Know</h4>
+        <ul>
+          <li><strong>LLMs / Chat Models:</strong> Wrappers around model APIs (OpenAI, Anthropic, etc.) with a unified interface. <code>ChatOpenAI(model="gpt-4")</code></li>
+          <li><strong>Prompt Templates:</strong> Reusable prompt structures with variables. Not just f-strings — they support chat messages, few-shot examples, and partial filling.</li>
+          <li><strong>Chains:</strong> Composable sequences of steps. Legacy: <code>LLMChain</code>. Modern: LCEL (LangChain Expression Language) using the pipe operator: <code>prompt | llm | output_parser</code></li>
+          <li><strong>Tools & Agents:</strong> Tools are functions the LLM can call (search, calculator, database lookup). Agents decide <em>which</em> tool to call and <em>when</em> based on the user's input. This is what makes your chatbot "agent-based."</li>
+          <li><strong>Memory:</strong> Conversation history management. Options: buffer (keep everything), summary (compress old messages), window (keep last N turns).</li>
+          <li><strong>Retrievers:</strong> Interface to your vector store. Your RAG retriever fetches relevant documents and feeds them to the chain.</li>
+          <li><strong>Output Parsers:</strong> Structure LLM output into JSON, lists, Pydantic models, etc.</li>
+        </ul>
+
+        <h4>LCEL — The Modern Way (Post-2023)</h4>
+        <p>LangChain migrated from the old <code>Chain</code> classes to <strong>LCEL</strong> (LangChain Expression Language). This is the pipe-based declarative syntax:</p>
+        <p><code>chain = prompt | llm | StrOutputParser()</code></p>
+        <p>Benefits: streaming support, async, batching, easier debugging. If asked about LangChain evolution, mention you're aware of this shift from legacy chains to LCEL.</p>
+      </div>
+
+      <div class="card">
+        <h3>LangGraph — Stateful Agent Workflows</h3>
+        <div class="analogy">If LangChain chains are like a conveyor belt (linear: A → B → C), LangGraph is like a flowchart with decision points and loops. The agent can go back to a previous step, branch based on conditions, or run parallel tasks.</div>
+        <ul>
+          <li><strong>What it is:</strong> A library (from LangChain team) for building stateful, multi-step agent applications as graphs.</li>
+          <li><strong>Nodes:</strong> Each node is a function (e.g., "retrieve documents", "generate answer", "check quality").</li>
+          <li><strong>Edges:</strong> Define flow between nodes. Can be conditional — "if quality < threshold, go back to retrieve."</li>
+          <li><strong>State:</strong> A shared state object passed through the graph. Each node reads/writes to it. Think of it as a mutable context that flows through your pipeline.</li>
+          <li><strong>Checkpointing:</strong> Can save state mid-execution for human-in-the-loop workflows or recovery from failures.</li>
+          <li><strong>Why use it over plain LangChain:</strong> When your agent needs loops, conditional routing, parallel execution, or persistence. A simple RAG chain doesn't need it. A complex agent that retrieves, evaluates, re-retrieves, then generates — that's LangGraph territory.</li>
+        </ul>
+
+        <h4>When to Mention LangGraph</h4>
+        <p>If asked about more complex agent architectures or "how would you improve the chatbot," you can say: "For more complex multi-step reasoning, I'd consider LangGraph to build a graph-based workflow where the agent can loop through retrieval and quality-checking steps before returning a final answer."</p>
+      </div>
+    </div>
+
+    <!-- SECTION 3: LlamaIndex -->
+    <div class="section" data-section="llamaindex">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent4),var(--accent2))">🦙</div>
+        <div>
+          <div class="section-title">LlamaIndex</div>
+          <div class="section-subtitle">The data framework for LLM apps</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>LlamaIndex vs. LangChain — Know the Difference</h3>
+        <div class="analogy">LangChain is like a Swiss Army knife — orchestration, agents, memory, tools, everything. LlamaIndex is like a specialized power drill — it does one thing exceptionally well: <strong>connecting your data to LLMs</strong>. Ingestion, indexing, querying. That's its superpower.</div>
+
+        <ul>
+          <li><strong>LlamaIndex excels at:</strong> Document loading (100+ connectors), smart chunking, multiple index types, query engines, response synthesis</li>
+          <li><strong>LangChain excels at:</strong> Agent orchestration, tool calling, chain composition, memory management</li>
+          <li><strong>In your chatbot:</strong> You likely used LlamaIndex for the ingestion/retrieval side and LangChain for the agent/orchestration side. This is a very common pattern.</li>
+        </ul>
+
+        <h4>Key LlamaIndex Concepts</h4>
+        <ul>
+          <li><strong>Documents & Nodes:</strong> Documents are raw files. Nodes are the chunks after splitting. Each node has metadata (source, page number, etc.).</li>
+          <li><strong>Indexes:</strong> The structure that organizes your nodes for retrieval.
+            <ul>
+              <li><code>VectorStoreIndex</code> — most common, stores embeddings</li>
+              <li><code>SummaryIndex</code> — summarizes all docs, good for "tell me about everything"</li>
+              <li><code>TreeIndex</code> — hierarchical, good for documents with structure</li>
+              <li><code>KeywordTableIndex</code> — keyword-based retrieval</li>
+            </ul>
+          </li>
+          <li><strong>Query Engine:</strong> Takes user query → retrieves relevant nodes → synthesizes response. This is the core retrieval+generation loop.</li>
+          <li><strong>Response Synthesizer:</strong> How retrieved chunks become a final answer. Options: "compact" (stuff into one prompt), "refine" (iterate through chunks), "tree_summarize" (hierarchical).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Vector Databases -->
+    <div class="section" data-section="vectors">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">📐</div>
+        <div>
+          <div class="section-title">Vector Databases</div>
+          <div class="section-subtitle">FAISS & Pinecone — where embeddings live</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Why Vector Databases Exist</h3>
+        <div class="analogy">A regular database is like a filing cabinet — great for exact lookups ("find invoice #1234"). A vector database is like a librarian who understands meaning — "find me documents <em>similar to</em> this concept." It works on proximity, not exact match.</div>
+
+        <h4>FAISS (Facebook AI Similarity Search)</h4>
+        <ul>
+          <li><strong>What:</strong> Open-source library (not a managed service) for efficient similarity search</li>
+          <li><strong>Runs:</strong> In-memory, on your machine. No server needed.</li>
+          <li><strong>Best for:</strong> Prototyping, smaller datasets, low-latency requirements, when you don't need cloud infrastructure</li>
+          <li><strong>Index types:</strong> IndexFlatL2 (exact, brute force), IndexIVFFlat (approximate, uses clusters), IndexHNSW (graph-based, fast)</li>
+          <li><strong>Limitation:</strong> No built-in persistence (you serialize to disk), no metadata filtering out of the box, no managed scaling</li>
+        </ul>
+
+        <h4>Pinecone</h4>
+        <ul>
+          <li><strong>What:</strong> Fully managed vector database as a service</li>
+          <li><strong>Best for:</strong> Production deployments, when you need scaling, metadata filtering, and don't want to manage infrastructure</li>
+          <li><strong>Features:</strong> Serverless option, namespaces, metadata filtering (e.g., "find similar docs but only from building X"), hybrid search</li>
+          <li><strong>API:</strong> <code>index.upsert(vectors)</code>, <code>index.query(vector, top_k=5, filter={"building_id": "123"})</code></li>
+        </ul>
+
+        <h4>When Asked "Why Pinecone vs. FAISS?"</h4>
+        <p>"FAISS is great for prototyping and in-memory speed, but for production with metadata filtering requirements — like filtering by building, sensor type, or document category — Pinecone's managed infrastructure and filtering capabilities made more sense. We didn't want to manage our own vector index infrastructure on top of everything else."</p>
+      </div>
+    </div>
+
+    <!-- SECTION 5: GenAI Data Labeling -->
+    <div class="section" data-section="genai-labeling">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent5),var(--warning))">🏷️</div>
+        <div>
+          <div class="section-title">Generative AI Data Labeling</div>
+          <div class="section-subtitle">Your OpenAI-powered sensor normalization pipeline</div>
+        </div>
+      </div>
+
+      <div class="resume-bullet">
+        <strong>Your Bullet:</strong> "Deployed a generative-AI labeling workflow using OpenAI API to label unstructured IoT data for analysis, increasing speed by 67% and automating a manual process while maintaining 90% labeling accuracy."
+      </div>
+
+      <div class="card">
+        <h3>The Problem & Your Solution</h3>
+        <div class="analogy">Imagine 200 buildings, each with sensors from different manufacturers. One calls temperature "TMP", another says "TEMP", another says "ZoneTemp_1". A human had to manually map each of these to a standard label. You used an LLM to automate this classification task.</div>
+
+        <h4>How It Worked</h4>
+        <ul>
+          <li><strong>Input:</strong> Raw, unstructured sensor tag names from IoT devices across buildings</li>
+          <li><strong>Process:</strong> Feed sensor tags + context documents (what each building's naming convention looks like) to OpenAI API</li>
+          <li><strong>Pattern:</strong> This is essentially a <strong>few-shot classification</strong> task — you give the LLM examples of correct mappings (context/RAG) and ask it to classify new, unseen tags</li>
+          <li><strong>Output:</strong> Standardized labels mapped to each raw sensor tag</li>
+          <li><strong>Validation:</strong> Human review loop — SMEs checked a sample for accuracy, achieving 90%</li>
+        </ul>
+
+        <div class="depth-box">
+          <h4>Technical Details to Be Ready For</h4>
+          <ul>
+            <li><strong>"How did you handle edge cases?"</strong> → Some tags were ambiguous (e.g., "SF" could be supply fan or square footage). We provided building-specific context docs so the LLM had manufacturer info to disambiguate.</li>
+            <li><strong>"Why not a traditional ML classifier?"</strong> → The tag vocabulary was constantly changing as new buildings onboarded. An LLM with RAG context adapts without retraining. A traditional classifier would need new training data each time.</li>
+            <li><strong>"How did you measure accuracy?"</strong> → Sampled outputs, had domain experts validate. The 90% accuracy was measured against human expert labels on a holdout set.</li>
+            <li><strong>"What about cost?"</strong> → OpenAI API calls have cost. We batched requests and used the most cost-effective model tier for this classification task since it didn't need GPT-4-level reasoning.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: IoT Pipeline -->
+    <div class="section" data-section="iot">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent4),#059669)">🏭</div>
+        <div>
+          <div class="section-title">IoT Data Pipeline</div>
+          <div class="section-subtitle">RabbitMQ, VOLTTRON, 10M+ data points/day</div>
+        </div>
+      </div>
+
+      <div class="resume-bullet">
+        <strong>Your Bullet:</strong> "Designed scalable, RESTful APIs using Python and Flask for large-scale HVAC data streamed through RabbitMQ to a PostgreSQL database for fault detection and diagnosis that delivered 25% cost savings."
+      </div>
+
+      <div class="card">
+        <h3>The Architecture</h3>
+        <div class="analogy">Think of your pipeline like a postal system. Sensors are the senders (thousands of letters/data points). RabbitMQ is the post office — it receives everything, sorts it, and routes it to the right department. VOLTTRON is the backup mailbox — if the post office goes down, it queues the mail until it's back. Your Flask services are the departments that read, process, and file the mail.</div>
+
+        <div class="step-flow">
+          <span class="step-item">🏢 Building Sensors</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">📡 VOLTTRON Agent</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🐰 RabbitMQ</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🔄 Normalization</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">⚠️ Fault Detection</span>
+          <span class="step-arrow">→</span>
+          <span class="step-item">🗄️ PostgreSQL / S3</span>
+        </div>
+
+        <h4>RabbitMQ — Message Broker</h4>
+        <ul>
+          <li><strong>What:</strong> Open-source message broker that implements AMQP (Advanced Message Queuing Protocol)</li>
+          <li><strong>Why use it:</strong> Decouples producers (sensors) from consumers (your services). If your processing service goes down, messages queue up instead of being lost.</li>
+          <li><strong>Key concepts:</strong> Exchanges (routing rules), Queues (where messages wait), Bindings (rules connecting exchanges to queues), Consumers (your services pulling messages)</li>
+          <li><strong>Exchange types:</strong> Direct (exact routing key match), Topic (pattern matching), Fanout (broadcast to all queues), Headers</li>
+          <li><strong>In your system:</strong> Sensors publish data → RabbitMQ routes to appropriate processing queues → consumers pick up and process</li>
+        </ul>
+
+        <h4>VOLTTRON</h4>
+        <ul>
+          <li><strong>What:</strong> Open-source platform (DOE-funded) for distributed sensing and control in buildings</li>
+          <li><strong>Your usage:</strong> Deployed at the edge (on-site) for message replay — when Wi-Fi drops, VOLTTRON queues HTTP requests locally and replays them when connectivity returns</li>
+          <li><strong>Why it matters:</strong> Solves the #1 IoT problem — unreliable networks. Without this, you lose data during outages.</li>
+          <li><strong>Key concept:</strong> Agent-based architecture — each VOLTTRON "agent" is an independent service that can be deployed, updated, and monitored separately</li>
+        </ul>
+
+        <h4>Fault Detection & Diagnosis</h4>
+        <ul>
+          <li><strong>What:</strong> Algorithms that analyze HVAC sensor data to detect when equipment is malfunctioning</li>
+          <li><strong>Examples:</strong> Simultaneous heating and cooling (waste), stuck dampers, sensor drift</li>
+          <li><strong>Impact:</strong> The 25% cost savings — detecting and alerting on these faults before they waste energy</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 7: AWS Architecture -->
+    <div class="section" data-section="aws">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#f59e0b,var(--accent5))">☁️</div>
+        <div>
+          <div class="section-title">AWS Architecture</div>
+          <div class="section-subtitle">Glue, Athena, S3, hot/cold storage strategy</div>
+        </div>
+      </div>
+
+      <div class="resume-bullet">
+        <strong>Your Bullet:</strong> "Migrated data to S3 using AWS Glue to save 57% on cost, queried via Athena-backed APIs for analytics."
+      </div>
+
+      <div class="card">
+        <h3>Hot/Cold Storage Strategy</h3>
+        <div class="analogy">Think of it like your closet. Clothes you wear this week (hot data) stay in your dresser (RDS Aurora) — fast access, premium space. Clothes from last season (cold data) go in storage bins in the garage (S3) — cheap, still accessible, just takes a bit longer to dig through.</div>
+
+        <h4>The Architecture</h4>
+        <ul>
+          <li><strong>Hot path (RDS Aurora):</strong> Last 7 days of sensor data. Sub-second queries. This is what the real-time dashboards hit.</li>
+          <li><strong>Cold path (S3):</strong> Historical data beyond 7 days. Cheap storage (~$0.023/GB/month vs. Aurora's much higher cost). This is where the 57% savings came from.</li>
+          <li><strong>Migration:</strong> AWS Glue ETL jobs run on a schedule, moving aged-out data from Aurora → S3 in Parquet format.</li>
+          <li><strong>Querying cold data:</strong> Athena queries S3 directly using SQL. No server to manage — pay per query. Partitioned by date for efficiency.</li>
+        </ul>
+
+        <h4>AWS Glue</h4>
+        <ul>
+          <li><strong>What:</strong> Serverless ETL (Extract, Transform, Load) service</li>
+          <li><strong>In your system:</strong> Scheduled jobs that extract data from RDS Aurora, transform it into Parquet (columnar, compressed format), and load it into S3</li>
+          <li><strong>Crawlers:</strong> Glue Crawlers discover schema automatically and populate the Glue Data Catalog</li>
+          <li><strong>Why Parquet:</strong> Columnar format → only reads the columns you query (not entire rows). Huge performance gain for analytics queries.</li>
+        </ul>
+
+        <h4>AWS Athena</h4>
+        <ul>
+          <li><strong>What:</strong> Serverless query engine that runs SQL directly on S3</li>
+          <li><strong>Key feature:</strong> No infrastructure to manage. You literally write SQL and it scans S3.</li>
+          <li><strong>Pricing:</strong> $5 per TB scanned — so partitioning and Parquet format are critical to keep costs down</li>
+          <li><strong>In your system:</strong> Analytics APIs call Athena for historical trend data, cost analysis, long-term performance reports</li>
+        </ul>
+
+        <h4>Other AWS Services in Your Stack</h4>
+        <ul>
+          <li><strong>EC2:</strong> Compute instances running your Flask backend</li>
+          <li><strong>S3:</strong> Object storage for cold data and static assets</li>
+          <li><strong>Lambda:</strong> Serverless functions for event-driven tasks (e.g., triggering on new data arrival)</li>
+          <li><strong>CloudFront:</strong> CDN for your React frontend — caches static assets at edge locations</li>
+          <li><strong>RDS Aurora:</strong> Managed PostgreSQL with auto-scaling replicas</li>
+          <li><strong>Redis:</strong> In-memory caching for frequently accessed data (dashboard configs, user sessions)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 8: Full Stack -->
+    <div class="section" data-section="fullstack">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent2),var(--accent))">⚡</div>
+        <div>
+          <div class="section-title">Full-Stack Architecture</div>
+          <div class="section-subtitle">React, Flask, APIs, Three.js</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Your Full-Stack at Joulea</h3>
+        <h4>Frontend: React + TypeScript + Redux</h4>
+        <ul>
+          <li><strong>React:</strong> Component-based UI library. You built reusable components with Material UI design system.</li>
+          <li><strong>Redux:</strong> Centralized state management. Actions → Reducers → Store → Components. Used for complex cross-component state (building data, user auth, sensor readings).</li>
+          <li><strong>TypeScript:</strong> Static typing on top of JavaScript. Catches bugs at compile time, self-documenting code, better IDE support.</li>
+          <li><strong>Three.js:</strong> 3D rendering library. You used it for building visualizations — rendering 3D models of commercial buildings with sensor data overlays.</li>
+          <li><strong>Performance:</strong> Implemented memoization (<code>React.memo</code>, <code>useMemo</code>, <code>useCallback</code>) to prevent unnecessary re-renders, especially important with real-time data updates.</li>
+        </ul>
+
+        <h4>Backend: Python Flask</h4>
+        <ul>
+          <li><strong>Flask:</strong> Lightweight Python web framework. "Micro" framework — you add what you need (SQLAlchemy, Flask-CORS, etc.)</li>
+          <li><strong>SQLAlchemy ORM:</strong> Maps Python classes to database tables. Write Python, it generates SQL.</li>
+          <li><strong>RESTful API design:</strong> Resources as URLs (<code>/api/buildings/{id}/sensors</code>), HTTP methods (GET, POST, PUT, DELETE), status codes (200, 201, 400, 404, 500)</li>
+          <li><strong>API patterns:</strong> Authentication middleware, request validation, error handling, pagination for large datasets, CORS configuration</li>
+        </ul>
+
+        <h4>T-Mobile Full Stack</h4>
+        <ul>
+          <li><strong>Angular:</strong> Full-featured framework (vs React's library). Two-way data binding, dependency injection, TypeScript by default, opinionated project structure.</li>
+          <li><strong>Spring Boot:</strong> Java framework for microservices. Auto-configuration, embedded server, production-ready features (metrics, health checks).</li>
+          <li><strong>Apigee:</strong> API gateway/management platform. Rate limiting, authentication, analytics, API versioning at the gateway level.</li>
+          <li><strong>OAuth 2.0:</strong> Authorization framework. User authenticates → gets access token → includes token in API calls → backend validates. Flows: Authorization Code (web), Client Credentials (service-to-service).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 9: Interview Talking Points -->
+    <div class="section" data-section="talking-points">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,var(--accent3),#be185d)">🎯</div>
+        <div>
+          <div class="section-title">Interview Talking Points</div>
+          <div class="section-subtitle">Ready-to-fire answers for common questions</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>"Tell me about your AI/ML experience"</h3>
+        <p>"At Joulea, I've worked on two major AI initiatives. First, I collaborated with AI engineers to build a RAG-based support chatbot using LangChain and LlamaIndex — I worked on the ingestion pipeline, retrieval logic, and integration with our product. We validated it against internal SMEs and hit 85% accuracy. Second, I built a generative AI data labeling workflow where we used OpenAI's API to automatically classify unstructured IoT sensor tags — things like mapping vendor-specific names to standardized labels. That cut our manual labeling time by 67% while maintaining 90% accuracy. I'm not coming from a research background — I'm an engineer who builds production AI systems."</p>
+      </div>
+
+      <div class="card">
+        <h3>"How would you improve the RAG chatbot?"</h3>
+        <ul>
+          <li>Implement automated evaluation using frameworks like RAGAS (faithfulness, answer relevancy, context recall)</li>
+          <li>Add hybrid search (vector + keyword/BM25) for better recall</li>
+          <li>Implement re-ranking with a cross-encoder after initial retrieval</li>
+          <li>Add metadata filtering so retrieval is scoped to relevant building/system</li>
+          <li>Experiment with chunk size optimization and different chunking strategies</li>
+          <li>Consider fine-tuning the embedding model on domain-specific HVAC terminology</li>
+          <li>Add conversation memory so the agent maintains context across turns</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>"What's the hardest technical challenge you solved?"</h3>
+        <p>"The IoT data pipeline reliability problem. We were processing 10 million data points a day from sensors across 200+ buildings, and we kept seeing gaps in the data. After root cause analysis, I found that customer-side Wi-Fi disconnections were causing data loss during outages. I integrated VOLTTRON for edge-level message queuing and replay, and implemented retry logic with exponential backoff. The result was near-zero data loss even during network interruptions. This was hard because it crossed layers — from on-prem edge devices to cloud infrastructure — and required understanding the full data flow end-to-end."</p>
+      </div>
+
+      <div class="card">
+        <h3>"Why are you interested in ML Engineering?"</h3>
+        <p>"I've been doing applied AI work at Joulea — building RAG systems, LLM-powered labeling pipelines, and integrating these into production products. I'm drawn to the intersection of software engineering and AI — taking models and making them work reliably in production with proper data pipelines, evaluation, and monitoring. I'm not a researcher; I'm an engineer who builds systems that use AI to solve real business problems."</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ FLASHCARD MODE ============ -->
+  <div class="flashcard-container" id="flashcard-mode">
+    <div class="score-bar" id="score-bar">
+      <div class="score-item"><div class="score-dot" style="background:var(--success)"></div> Got it: <span id="score-got">0</span></div>
+      <div class="score-item"><div class="score-dot" style="background:var(--warning)"></div> Shaky: <span id="score-shaky">0</span></div>
+      <div class="score-item"><div class="score-dot" style="background:var(--accent3)"></div> Missed: <span id="score-missed">0</span></div>
+    </div>
+    <div class="flashcard-progress" id="fc-progress">1 / 20</div>
+    <div class="flashcard-wrapper" id="fc-wrapper" onclick="flipCard()">
+      <div class="flashcard-inner" id="fc-inner">
+        <div class="flashcard-front">
+          <div class="flashcard-category" id="fc-category">Category</div>
+          <h3 id="fc-question">Question</h3>
+          <div class="flashcard-hint">tap to flip</div>
+        </div>
+        <div class="flashcard-back">
+          <div id="fc-answer">Answer</div>
+          <div class="flashcard-hint">tap to flip back</div>
+        </div>
+      </div>
+    </div>
+    <div class="confidence">
+      <button class="conf-btn missed" onclick="rateCard('missed')">❌ Missed</button>
+      <button class="conf-btn shaky" onclick="rateCard('shaky')">🤔 Shaky</button>
+      <button class="conf-btn got-it" onclick="rateCard('got-it')">✅ Got It</button>
+    </div>
+    <div class="flashcard-controls" style="margin-top:16px;">
+      <button class="fc-btn" onclick="prevCard()">← Prev</button>
+      <button class="fc-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+      <button class="fc-btn primary" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ DATA ============
+const sections = [
+  { id: 'rag', label: '🧠 RAG', color: 'var(--accent)' },
+  { id: 'langchain', label: '🔗 LangChain', color: 'var(--accent3)' },
+  { id: 'llamaindex', label: '🦙 LlamaIndex', color: 'var(--accent4)' },
+  { id: 'vectors', label: '📐 Vectors', color: '#8b5cf6' },
+  { id: 'genai-labeling', label: '🏷️ GenAI Labeling', color: 'var(--accent5)' },
+  { id: 'iot', label: '🏭 IoT Pipeline', color: 'var(--accent4)' },
+  { id: 'aws', label: '☁️ AWS', color: '#f59e0b' },
+  { id: 'fullstack', label: '⚡ Full Stack', color: 'var(--accent2)' },
+  { id: 'talking-points', label: '🎯 Talking Points', color: 'var(--accent3)' },
+];
+
+const flashcards = [
+  // RAG
+  { cat: 'RAG', q: 'What problem does RAG solve?', a: '<p>LLMs only know what they were trained on. RAG lets you inject <strong>external, up-to-date, domain-specific</strong> context at query time without retraining. For your chatbot, this meant answering questions about Joulea\'s HVAC docs that GPT had never seen.</p>' },
+  { cat: 'RAG', q: 'Walk through the 5 steps of the RAG pipeline', a: '<ul><li><strong>1. Chunking:</strong> Split docs into 256-512 token pieces with overlap</li><li><strong>2. Embedding:</strong> Convert chunks to vectors (e.g., 1536-dim with ada-002)</li><li><strong>3. Store:</strong> Index vectors in a vector DB (Pinecone/FAISS)</li><li><strong>4. Retrieve:</strong> Embed user query → similarity search → top-K chunks</li><li><strong>5. Generate:</strong> Feed retrieved chunks + query to LLM → grounded answer</li></ul>' },
+  { cat: 'RAG', q: 'Why does chunk size matter?', a: '<p>Too small (~50 tokens) → loses context, meaning is fragmented. Too large (~2000 tokens) → dilutes relevance and wastes context window space. Sweet spot: <strong>256-512 tokens with 50-100 token overlap</strong>. Overlap prevents slicing ideas in half at boundaries.</p>' },
+  { cat: 'RAG', q: 'What is cosine similarity and why use it?', a: '<p>Measures the angle between two vectors. Range: -1 to 1 (1 = identical direction). Used in RAG to find which stored chunks are most <strong>semantically similar</strong> to the user\'s query. Preferred over Euclidean distance because it\'s <strong>magnitude-independent</strong> — focuses on direction (meaning) not length.</p>' },
+  { cat: 'RAG', q: 'How did you validate your RAG chatbot\'s 85% accuracy?', a: '<p>Internal <strong>subject matter experts</strong> scored chatbot responses for accuracy and relevance against known correct answers. This was human evaluation, not automated metrics. If asked how to improve: mention <strong>RAGAS framework</strong> for automated metrics (faithfulness, answer relevancy, context precision).</p>' },
+  { cat: 'RAG', q: 'What is hybrid search and why would you add it?', a: '<p>Combines <strong>vector similarity search</strong> (semantic meaning) with <strong>keyword search like BM25</strong> (exact term matching). Vector search might miss exact acronyms ("AHU-3"); BM25 catches them. Together, better recall than either alone. Pinecone supports this natively.</p>' },
+
+  // LangChain
+  { cat: 'LangChain', q: 'What is LangChain and why did you use it?', a: '<p>An <strong>orchestration framework</strong> for building LLM applications. Like Express.js for AI — gives you standardized patterns for prompts, chains, memory, tools, and agents. You used it to orchestrate the chatbot pipeline: routing queries, managing conversation, calling retrieval tools.</p>' },
+  { cat: 'LangChain', q: 'What makes your chatbot "agent-based"?', a: '<p>An agent has <strong>autonomy to decide which tools to use</strong> and when. Instead of a fixed chain (always retrieve → always generate), the agent can: decide if retrieval is needed, pick which knowledge base to query, chain multiple lookups, or escalate. It uses the LLM\'s reasoning to plan actions.</p>' },
+  { cat: 'LangChain', q: 'What is LCEL and how is it different from legacy chains?', a: '<p><strong>LangChain Expression Language</strong> — the modern pipe syntax: <code>prompt | llm | parser</code>. Replaced old <code>LLMChain</code> classes. Benefits: native streaming, async support, batching, better debugging, declarative composition. Shows you\'re aware of LangChain\'s evolution.</p>' },
+  { cat: 'LangChain', q: 'What is LangGraph and when would you use it?', a: '<p>A library for building <strong>stateful, graph-based</strong> agent workflows with nodes, edges, and shared state. Use it when you need <strong>loops, conditional routing, or parallel execution</strong> — e.g., retrieve → check quality → re-retrieve if poor → generate. Simple RAG doesn\'t need it; complex multi-step agents do.</p>' },
+
+  // LlamaIndex
+  { cat: 'LlamaIndex', q: 'LlamaIndex vs. LangChain — what\'s the difference?', a: '<p><strong>LlamaIndex</strong> specializes in connecting data to LLMs: ingestion, indexing, querying. Think "power drill." <strong>LangChain</strong> is general orchestration: agents, memory, tools, chains. Think "Swiss Army knife." In your chatbot: LlamaIndex handled document ingestion + retrieval; LangChain handled agent orchestration.</p>' },
+  { cat: 'LlamaIndex', q: 'Name 3 LlamaIndex index types and when to use each', a: '<ul><li><strong>VectorStoreIndex:</strong> Most common. Stores embeddings for similarity search. Your primary RAG use case.</li><li><strong>SummaryIndex:</strong> Summarizes all docs. Good for "tell me everything about X" queries.</li><li><strong>KeywordTableIndex:</strong> Keyword-based retrieval. Good for exact term lookups when vector search misses.</li></ul>' },
+
+  // Vector DBs
+  { cat: 'Vector DBs', q: 'FAISS vs. Pinecone — trade-offs?', a: '<ul><li><strong>FAISS:</strong> Open-source, in-memory, blazing fast, great for prototyping. No managed infrastructure, no built-in metadata filtering, you handle persistence.</li><li><strong>Pinecone:</strong> Managed service, auto-scales, metadata filtering, hybrid search built-in. Higher cost, vendor lock-in.</li><li><strong>Your choice:</strong> Production with metadata filtering (by building/sensor) → Pinecone made sense.</li></ul>' },
+  { cat: 'Vector DBs', q: 'What is an embedding and what dimensions does it have?', a: '<p>A <strong>dense numerical vector</strong> representing the semantic meaning of text. OpenAI\'s <code>text-embedding-ada-002</code> produces <strong>1536-dimensional</strong> vectors. Semantically similar text → vectors that are close together in this high-dimensional space. The embedding model must be the <strong>same</strong> for indexing and querying.</p>' },
+
+  // GenAI Labeling
+  { cat: 'GenAI Labeling', q: 'Explain your GenAI data labeling pipeline', a: '<p>200+ buildings, each with different sensor naming conventions (TMP, TEMP, ZoneTemp_1). Manual labeling was slow. You fed raw sensor tags + building context docs to <strong>OpenAI API as a few-shot classification task</strong>. LLM maps raw tags to standardized labels. <strong>67% faster</strong>, <strong>90% accuracy</strong> validated by SMEs.</p>' },
+  { cat: 'GenAI Labeling', q: 'Why use an LLM instead of a traditional ML classifier?', a: '<p>The tag vocabulary <strong>constantly changed</strong> as new buildings onboarded with new manufacturers. A traditional classifier needs retraining with new labeled data each time. An LLM with RAG context <strong>adapts to new formats without retraining</strong> — just update the context documents. Much more flexible for a constantly growing system.</p>' },
+
+  // IoT Pipeline
+  { cat: 'IoT Pipeline', q: 'Explain your IoT data pipeline architecture', a: '<p><strong>Sensors → VOLTTRON (edge) → RabbitMQ (broker) → Normalization service → Fault detection → PostgreSQL/S3</strong>. 10M+ data points/day from 200+ buildings. VOLTTRON handles edge queuing during Wi-Fi outages. RabbitMQ decouples producers from consumers. Flask services process and persist data.</p>' },
+  { cat: 'IoT Pipeline', q: 'What is RabbitMQ and why use a message broker?', a: '<p>Open-source message broker implementing AMQP. <strong>Decouples producers from consumers</strong> — if your processing service crashes, messages queue up instead of being lost. Key concepts: Exchanges (routing), Queues (buffering), Consumers (your services). Also enables horizontal scaling — add more consumers as load grows.</p>' },
+  { cat: 'IoT Pipeline', q: 'What is VOLTTRON and how did you use it?', a: '<p>DOE-funded open-source platform for building automation. You deployed it <strong>at the edge</strong> (on-site) for <strong>message replay</strong>. When customer Wi-Fi drops, VOLTTRON queues HTTP requests locally and replays them when connectivity returns. Solves the #1 IoT problem: <strong>unreliable networks causing data loss</strong>.</p>' },
+  { cat: 'IoT Pipeline', q: 'What is exponential backoff and why did you implement it?', a: '<p>A retry strategy where wait time <strong>doubles after each failure</strong> (1s, 2s, 4s, 8s...). Prevents hammering a down service with retries (thundering herd). You implemented it for network reconnection attempts after Wi-Fi outages. Usually add <strong>jitter</strong> (random variation) so multiple clients don\'t retry simultaneously.</p>' },
+
+  // AWS
+  { cat: 'AWS', q: 'Explain your hot/cold storage architecture', a: '<p><strong>Hot (RDS Aurora):</strong> Last 7 days of sensor data. Sub-second queries for real-time dashboards. Expensive per GB.<br><strong>Cold (S3):</strong> Historical data. ~$0.023/GB/month. AWS Glue ETL moves aged data from Aurora → S3 in Parquet format. Athena queries S3 with SQL. <strong>Result: 57% cost reduction.</strong></p>' },
+  { cat: 'AWS', q: 'What is AWS Glue and how did you use it?', a: '<p>Serverless <strong>ETL service</strong>. Scheduled jobs that: <strong>Extract</strong> data from RDS Aurora, <strong>Transform</strong> into Parquet (columnar, compressed), <strong>Load</strong> into S3. Glue Crawlers discover schema automatically. You used it for automated data lifecycle management — moving old sensor data to cold storage.</p>' },
+  { cat: 'AWS', q: 'Why Parquet format for cold storage?', a: '<p>Parquet is <strong>columnar</strong> — reads only the columns you query, not entire rows. Huge win for analytics queries like "average temperature across all buildings." Also <strong>compressed</strong> — smaller files = faster scans = cheaper Athena queries (billed per TB scanned). Combined with date partitioning → massive cost optimization.</p>' },
+  { cat: 'AWS', q: 'What is Athena and how does pricing work?', a: '<p>Serverless <strong>SQL query engine</strong> that runs directly on S3. No infrastructure to manage. Pricing: <strong>$5 per TB scanned</strong>. That\'s why Parquet (columnar = less data scanned) and partitioning (skip irrelevant data) are critical. You used it for historical analytics, trend reports, and cost analysis APIs.</p>' },
+
+  // Full Stack
+  { cat: 'Full Stack', q: 'Why Redux in your React app? When is it overkill?', a: '<p>Redux: centralized store for <strong>complex cross-component state</strong> (building data, auth, sensor readings). Overkill for: simple apps, state that lives in one component, or when React Context + useReducer suffices. You used it because Joulea\'s dashboard had deeply nested components all needing the same global data.</p>' },
+  { cat: 'Full Stack', q: 'Flask vs. FastAPI — when to choose which?', a: '<p><strong>Flask:</strong> Mature, flexible, huge ecosystem, sync by default. Best for: existing projects, when you need maximum library compatibility.<br><strong>FastAPI:</strong> Modern, async-native, auto-generates OpenAPI docs, Pydantic validation, faster. Best for: new APIs, when you need async, auto-documentation.<br>Joulea started with Flask; for a greenfield project, FastAPI might be better.</p>' },
+  { cat: 'Full Stack', q: 'Explain OAuth 2.0 flow for your T-Mobile work', a: '<p><strong>Authorization Code Flow</strong> (web): User clicks login → redirected to auth server → enters credentials → gets authorization code → your backend exchanges code for access token → token stored, sent with API calls → backend validates token on each request. For service-to-service: <strong>Client Credentials</strong> flow (no user involved).</p>' },
+];
+
+// ============ STATE ============
+let currentMode = 'study';
+let currentSection = sections[0].id;
+let currentCardIndex = 0;
+let cardOrder = flashcards.map((_, i) => i);
+let scores = { 'got-it': 0, shaky: 0, missed: 0 };
+
+// ============ NAVIGATION ============
+function buildNav() {
+  const nav = document.getElementById('nav');
+  if (currentMode === 'study') {
+    nav.innerHTML = sections.map(s => 
+      `<button class="nav-btn ${s.id === currentSection ? 'active' : ''}" onclick="selectSection('${s.id}')">${s.label}</button>`
+    ).join('');
+  } else {
+    const cats = [...new Set(flashcards.map(f => f.cat))];
+    nav.innerHTML = `<button class="nav-btn active" onclick="filterCards('all')">All (${flashcards.length})</button>` +
+      cats.map(c => `<button class="nav-btn" onclick="filterCards('${c}')">${c}</button>`).join('');
+  }
+}
+
+function selectSection(id) {
+  currentSection = id;
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelector(`[data-section="${id}"]`).classList.add('visible');
+  buildNav();
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.mode-btn').forEach(b => { if ((mode === 'study' && b.textContent.includes('Study')) || (mode === 'cards' && b.textContent.includes('Flash'))) b.classList.add('active'); });
+  
+  if (mode === 'study') {
+    document.getElementById('study-mode').style.display = 'block';
+    document.getElementById('flashcard-mode').classList.remove('visible');
+    selectSection(currentSection);
+  } else {
+    document.getElementById('study-mode').style.display = 'none';
+    document.getElementById('flashcard-mode').classList.add('visible');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    showCard();
+  }
+  buildNav();
+}
+
+// ============ FLASHCARDS ============
+function filterCards(cat) {
+  if (cat === 'all') {
+    cardOrder = flashcards.map((_, i) => i);
+  } else {
+    cardOrder = flashcards.map((f, i) => f.cat === cat ? i : -1).filter(i => i !== -1);
+  }
+  currentCardIndex = 0;
+  scores = { 'got-it': 0, shaky: 0, missed: 0 };
+  updateScores();
+  showCard();
+  // update nav active
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function showCard() {
+  const idx = cardOrder[currentCardIndex];
+  const card = flashcards[idx];
+  document.getElementById('fc-category').textContent = card.cat;
+  document.getElementById('fc-question').textContent = card.q;
+  document.getElementById('fc-answer').innerHTML = card.a;
+  document.getElementById('fc-progress').textContent = `${currentCardIndex + 1} / ${cardOrder.length}`;
+  document.getElementById('fc-inner').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('fc-inner').classList.toggle('flipped');
+}
+
+function nextCard() {
+  if (currentCardIndex < cardOrder.length - 1) {
+    currentCardIndex++;
+    showCard();
+  }
+}
+
+function prevCard() {
+  if (currentCardIndex > 0) {
+    currentCardIndex--;
+    showCard();
+  }
+}
+
+function shuffleCards() {
+  for (let i = cardOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cardOrder[i], cardOrder[j]] = [cardOrder[j], cardOrder[i]];
+  }
+  currentCardIndex = 0;
+  showCard();
+}
+
+function rateCard(rating) {
+  scores[rating]++;
+  updateScores();
+  nextCard();
+}
+
+function updateScores() {
+  document.getElementById('score-got').textContent = scores['got-it'];
+  document.getElementById('score-shaky').textContent = scores.shaky;
+  document.getElementById('score-missed').textContent = scores.missed;
+}
+
+// ============ INIT ============
+buildNav();
+selectSection(sections[0].id);
+</script>
+</body>
+</html>
