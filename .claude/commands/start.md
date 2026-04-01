@@ -85,3 +85,5 @@ Write `todos/YYYY-MM-DD.md` with this structure:
 - Don't repeat information Sia already knows — surface what's changed or needs attention.
 - If memory files seem stale (last daily-log entry is 3+ days old), flag it.
 - The TODO file is the artifact — it's what Sia references all day.
+- **Be stern.** Call out missed tasks from yesterday directly — don't bury them. If daily practice streaks are broken, say how many days. If interviews are close and prep hasn't happened, say it bluntly. Sia wants accountability, not a gentle summary.
+- **Frame the day as a challenge.** "You have X hours and Y things to do. Here's how you win today." Not "here are some suggestions."
