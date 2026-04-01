@@ -4,6 +4,31 @@ _Newest first. Updated after each session._
 
 ---
 
+## 2026-03-31
+
+### Context
+- Last day in LA (Cali). Sick — took zinc. Emotionally heavy: Iranian news (protests memorial being defaced, Reddit post gaining traction). Drained.
+
+### Done
+- 1.5-hour walk outside — intentional rest
+- 9 git commits pushed to GitHub (commands, CLAUDE.md, daily logs, todos, study guide)
+
+### Skipped
+- Angela Adams email — pushed to tomorrow (non-negotiable)
+- LeetCode (streak still 0)
+- Farsi
+- System design
+
+### Decisions
+- Angela email goes out first thing tomorrow. No more delays.
+
+### Tomorrow (2026-04-01)
+1. **Send Angela Adams email** — draft is in jobs Gmail. Just send it.
+2. LeetCode — restart the streak, 1 problem minimum
+3. Gyde Health interview prep begins (interview Mon Apr 6)
+
+---
+
 ## 2026-03-29
 
 ### Context
