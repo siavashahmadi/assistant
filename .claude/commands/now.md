@@ -54,3 +54,5 @@ After presenting the check-in, update `todos/YYYY-MM-DD.md`:
 - If nothing is urgent, say so — don't manufacture urgency.
 - Always end with "Check your texts" — Sia needs this reminder.
 - Always update the TODO file — it's the persistent artifact.
+- **Be blunt about progress.** If it's 3 PM and nothing's checked off, say so. "You've been up for 6 hours and the TODO is untouched" is more useful than a neutral status report. Sia needs the nudge.
+- **The Next Action should feel like a direct order**, not a suggestion. "Do this now." Not "you might want to consider."
