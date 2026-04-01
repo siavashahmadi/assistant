@@ -4,6 +4,33 @@ _Newest first. Updated after each session._
 
 ---
 
+## 2026-03-29
+
+### Context
+- In LA. Going to bed early to prep for Machina Cognita interview at 2 PM PST tomorrow (Mar 30).
+- Mar 28 session: Fixed MCP email server mixup, logged Angela Adams recruiter pipeline (OLarry + Camber Health), drafted Angela email, updated application tracker (A1–A10 → Applied, now 33 total apps).
+
+### Done
+- RAG study — embeddings, retrieval strategies, vector stores
+- Assistant system improvements: stern/motivating tone added to CLAUDE.md + all slash commands
+- Daily practice blocks added to /start command
+
+### Skipped
+- MC background story walkthrough (not done)
+- MC system design prep (not done)
+- MC behavioral prep (not done)
+- LeetCode (not done — streak at 0)
+- Farsi (not done)
+
+### Tomorrow (2026-03-30)
+- **Wake up 8–9 AM PST** — 5–6 hours before interview
+- **MC interview @ 2 PM PST** — technical + background walkthrough, 30-min video
+- Morning: rapid background story run-through + 1 system design question
+- After interview: send Angela Adams draft email (OLarry + Camber Health)
+- Savannah's birthday — reach out
+
+---
+
 ## 2026-03-27
 
 ### Context
