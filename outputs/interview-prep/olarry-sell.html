@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLarry — Sell Yourself</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0f0f13;
+      --surface: #16161e;
+      --surface2: #1e1e28;
+      --border: #2a2a36;
+      --text: #e0e0e8;
+      --text-muted: #888;
+      --text-dim: #666;
+      --text-soft: #c8c8d8;
+      --heading: #fff;
+      --accent: #d4944a;
+      --accent-soft: #e8b070;
+      --accent-bg: rgba(212, 148, 74, 0.1);
+      --accent-border: rgba(212, 148, 74, 0.25);
+      --green: #5eb85e;
+      --green-bg: #1a2a1a;
+      --green-border: #2d4d2d;
+      --green-text: #7dc97d;
+      --blue: #6a9fd4;
+      --blue-bg: rgba(106, 159, 212, 0.1);
+      --blue-border: rgba(106, 159, 212, 0.25);
+      --orange: #e0a060;
+      --orange-bg: #2a1f10;
+      --orange-border: #4a3520;
+      --red: #e07070;
+      --red-bg: #2a1010;
+      --red-border: #4a2020;
+    }
+
+    body.light {
+      --bg: #f4f3f0;
+      --surface: #ffffff;
+      --surface2: #f0efe8;
+      --border: #dddace;
+      --text: #1a1a18;
+      --text-muted: #777;
+      --text-dim: #999;
+      --text-soft: #3a3a30;
+      --heading: #0d0d0a;
+      --accent: #b07020;
+      --accent-soft: #b07020;
+      --accent-bg: rgba(176, 112, 32, 0.08);
+      --accent-border: rgba(176, 112, 32, 0.2);
+      --green: #2d8a2d;
+      --green-bg: #eef6ee;
+      --green-border: #b0d8b0;
+      --green-text: #2a7a2a;
+      --blue: #2a6ea0;
+      --blue-bg: #eef4fa;
+      --blue-border: #b8d4ea;
+      --orange: #b06010;
+      --orange-bg: #fff4e6;
+      --orange-border: #f0c88a;
+      --red: #cc4444;
+      --red-bg: #fff0f0;
+      --red-border: #f0b0b0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 56px;
+    }
+
+    .topbar-left { display: flex; align-items: center; gap: 14px; }
+
+    .topbar-left h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: -0.3px;
+    }
+
+    .topbar-left h1 span { color: var(--accent); }
+
+    .meeting-pill {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meeting-pill .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+
+    .tab-nav {
+      display: flex; gap: 4px;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .tab-btn {
+      background: none; border: none; border-radius: 7px;
+      padding: 5px 14px; font-size: 13px; font-weight: 600;
+      color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+    }
+
+    .tab-btn.active { background: var(--accent); color: #fff; }
+
+    .theme-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 12px;
+      font-size: 12px; color: var(--text-muted); cursor: pointer;
+    }
+
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1; padding: 28px 24px 60px;
+      max-width: 820px; margin: 0 auto; width: 100%;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Context Box ── */
+    .context-box {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      font-size: 13.5px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .context-box strong { color: var(--accent); }
+
+    .context-box .person {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--accent-border);
+    }
+
+    .context-box .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .context-box .person-text {
+      font-size: 12.5px; color: var(--text-muted); line-height: 1.5;
+    }
+
+    .context-box .person-text b { color: var(--text-soft); }
+
+    /* ── Pitch Blocks ── */
+    .pitch-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .pitch-block-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; cursor: pointer; user-select: none;
+    }
+
+    .pitch-block-header:hover { background: var(--surface2); }
+
+    .pitch-block-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--accent);
+    }
+
+    .pitch-block-title {
+      font-size: 15px; font-weight: 700; color: var(--heading); margin-top: 2px;
+    }
+
+    .pitch-block-arrow {
+      color: var(--text-dim); font-size: 12px; transition: transform 0.2s;
+    }
+
+    .pitch-block.open .pitch-block-arrow { transform: rotate(180deg); }
+
+    .pitch-block-body {
+      display: none; padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pitch-block.open .pitch-block-body { display: block; }
+
+    .pitch-script {
+      font-size: 15px; color: var(--text-soft);
+      line-height: 1.8; margin-top: 12px;
+    }
+
+    .pitch-script mark {
+      background: var(--accent-bg); color: var(--accent-soft);
+      border-radius: 3px; padding: 0 3px; font-weight: 600;
+    }
+
+    .pitch-tips { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+
+    .pitch-tips-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;
+    }
+
+    .pitch-tip {
+      font-size: 13px; color: var(--text-muted); padding: 3px 0;
+      padding-left: 14px; position: relative;
+    }
+
+    .pitch-tip::before {
+      content: '>'; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+    }
+
+    /* ── Stories ── */
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .story-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 16px 18px; cursor: pointer; user-select: none; gap: 12px;
+    }
+
+    .story-header:hover { background: var(--surface2); }
+
+    .story-left { display: flex; align-items: flex-start; gap: 14px; }
+
+    .story-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+
+    .story-meta { flex: 1; }
+
+    .story-company {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 2px;
+    }
+
+    .story-title {
+      font-size: 15px; font-weight: 700; color: var(--heading); margin-bottom: 4px;
+    }
+
+    .story-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .story-tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 20px;
+      font-weight: 600; border: 1px solid var(--border);
+      color: var(--text-muted); background: var(--surface2);
+    }
+
+    .story-arrow {
+      color: var(--text-dim); font-size: 12px;
+      transition: transform 0.2s; flex-shrink: 0; margin-top: 4px;
+    }
+
+    .story-card.open .story-arrow { transform: rotate(180deg); }
+
+    .story-body {
+      display: none; padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .story-card.open .story-body { display: block; }
+
+    .sar { display: flex; flex-direction: column; gap: 12px; margin-top: 14px; }
+
+    .sar-row { display: flex; gap: 12px; align-items: flex-start; }
+
+    .sar-label {
+      width: 76px; flex-shrink: 0;
+      font-size: 10px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 0; margin-top: 1px;
+    }
+
+    .sar-label.s { color: var(--accent-soft); }
+    .sar-label.a { color: var(--orange); }
+    .sar-label.r { color: var(--green); }
+
+    .sar-content {
+      font-size: 14px; color: var(--text-soft); line-height: 1.65; flex: 1;
+    }
+
+    .sar-content strong { color: var(--heading); font-weight: 700; }
+
+    .numbers-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .number-chip {
+      background: var(--green-bg); border: 1px solid var(--green-border);
+      color: var(--green-text); border-radius: 8px;
+      padding: 5px 12px; font-size: 13px; font-weight: 700;
+    }
+
+    .olarry-hook {
+      margin-top: 12px; background: var(--accent-bg);
+      border: 1px solid var(--accent-border); border-radius: 8px;
+      padding: 10px 14px; font-size: 13px; color: var(--accent-soft);
+    }
+
+    .olarry-hook strong { color: var(--accent-soft); }
+
+    /* ── Practice Tab ── */
+    .practice-container {
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .category-btns {
+      display: flex; gap: 8px; margin-bottom: 24px;
+      flex-wrap: wrap; justify-content: center;
+    }
+
+    .cat-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      cursor: pointer; transition: all 0.15s;
+    }
+
+    .cat-btn.active {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+    }
+
+    .progress-bar {
+      width: 100%; max-width: 620px;
+      background: var(--surface2); border-radius: 4px; height: 4px;
+      margin-bottom: 8px;
+    }
+
+    .progress-fill {
+      height: 100%; background: var(--accent);
+      border-radius: 4px; transition: width 0.3s;
+    }
+
+    .progress-label {
+      font-size: 12px; color: var(--text-dim); margin-bottom: 20px;
+    }
+
+    .q-card-practice {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; width: 100%; max-width: 620px;
+      overflow: hidden; margin-bottom: 20px;
+    }
+
+    .q-front { padding: 36px 32px; text-align: center; }
+
+    .q-cat-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+    }
+
+    .q-prompt {
+      font-size: 20px; font-weight: 700; color: var(--heading);
+      line-height: 1.4; margin-bottom: 28px;
+    }
+
+    .timer {
+      font-size: 40px; font-weight: 800; color: var(--accent);
+      letter-spacing: -2px; margin-bottom: 20px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer.warning { color: var(--orange); }
+    .timer.urgent { color: var(--red); }
+
+    .q-actions {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none; border-radius: 10px; padding: 10px 22px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { background: var(--surface2); color: var(--text-soft); border: 1px solid var(--border); }
+
+    .answer-guide {
+      display: none; border-top: 1px solid var(--border);
+      padding: 24px 32px; text-align: left;
+    }
+
+    .answer-guide.visible { display: block; }
+
+    .guide-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px;
+    }
+
+    .guide-points {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .guide-point {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: var(--text-soft); line-height: 1.5;
+    }
+
+    .guide-point::before {
+      content: '>'; color: var(--accent); font-weight: 700; flex-shrink: 0;
+    }
+
+    .guide-point strong { color: var(--heading); }
+
+    .guide-ref {
+      margin-top: 14px; padding: 10px 14px;
+      background: var(--accent-bg); border: 1px solid var(--accent-border);
+      border-radius: 8px; font-size: 13px; color: var(--accent-soft);
+    }
+
+    /* ── Section Labels ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .topbar { padding: 0 14px; flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 8px; }
+      .main { padding: 20px 16px 60px; }
+      .meeting-pill { display: none; }
+      .q-front { padding: 24px 20px; }
+      .q-prompt { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>OLarry <span>Prep</span></h1>
+      <div class="meeting-pill">
+        <span class="dot"></span>
+        Today 3:00 PM ET
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('pitch', this)">Your Pitch</button>
+        <button class="tab-btn" onclick="switchTab('stories', this)">Stories</button>
+        <button class="tab-btn" onclick="switchTab('practice', this)">Practice</button>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">Light</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- ════════════════════════════════════
+         TAB 1: YOUR PITCH
+    ════════════════════════════════════ -->
+    <div class="tab-content active" id="tab-pitch">
+
+      <div class="context-box">
+        <strong>30-min call with a co-founder.</strong> This is a first conversation, not a technical gauntlet. Sell yourself as a builder who ships, owns the full stack, and has real AI experience. Be conversational, not rehearsed.
+        <div class="person">
+          <div class="avatar">AW</div>
+          <div class="person-text">
+            <b>Aaron Wayne</b> / Co-Founder, Lead Full-Stack Engineer<br>
+            Ex-D2iQ (Kubernetes), Benchling, App Academy instructor. Values clear thinking & builders.
+          </div>
+        </div>
+      </div>
+
+      <!-- Tell me about yourself -->
+      <div class="pitch-block open" id="block-0">
+        <div class="pitch-block-header" onclick="toggleBlock('block-0')">
+          <div>
+            <div class="pitch-block-label">Opener</div>
+            <div class="pitch-block-title">"Tell me about yourself."</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script">
+            I'm a software engineer with about <mark>5 years of experience</mark>, mostly building full-stack products at B2B startups and shipping AI features into production.<br><br>
+            I started at <mark>T-Mobile</mark> working on enterprise-scale systems &mdash; Angular apps serving <mark>20 million users</mark>, Java microservices processing thousands of daily transactions, PCI compliance, the whole thing. Great foundation for understanding how large systems work.<br><br>
+            Then I moved to <mark>Joulea</mark>, an IoT energy startup, where I've had way more ownership. I architected the full platform &mdash; React, Flask, AWS &mdash; and built some of the most interesting things in my career. An <mark>LLM-powered RAG chatbot</mark> that hit 85% accuracy, a generative AI labeling system that automated a painful manual process, and the data pipeline handling <mark>10 million data points a day</mark>.<br><br>
+            Now I'm looking for somewhere early-stage where I can keep building with AI and actually move the needle as an engineer. When I saw what OLarry is doing &mdash; applying AI to one of the most resistant-to-change industries out there &mdash; that clicked for me.
+          </div>
+          <div class="pitch-tips">
+            <div class="pitch-tips-label">Delivery</div>
+            <div class="pitch-tip">Under 90 seconds. This is the trailer, not the movie.</div>
+            <div class="pitch-tip">Pause after each company. Let the numbers land.</div>
+            <div class="pitch-tip">The OLarry line at the end is the bridge. If he asks "why OLarry?" you already started.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why OLarry -->
+      <div class="pitch-block" id="block-1">
+        <div class="pitch-block-header" onclick="toggleBlock('block-1')">
+          <div>
+            <div class="pitch-block-label">Key Question</div>
+            <div class="pitch-block-title">"Why OLarry?"</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script">
+            Three things. First, <mark>you're applying AI to a domain that actively resists modernization</mark> &mdash; that's the kind of challenge I find most interesting. At Joulea I built AI workflows for HVAC and IoT data, another analog industry. I know what it takes to make AI work when the domain is messy and the users aren't technical.<br><br>
+            Second, <mark>the team size</mark>. Five engineers serving 5,000+ clients means every person's work matters. At Joulea I'm on a small team owning the full stack, and that's where I do my best work. I don't want to be a cog.<br><br>
+            Third, the <mark>founding story resonated</mark>. Building something meaningful that started from a personal place &mdash; that tells me something about the kind of company this is.
+          </div>
+          <div class="pitch-tips">
+            <div class="pitch-tips-label">Delivery</div>
+            <div class="pitch-tip">Three reasons, then stop. Don't ramble.</div>
+            <div class="pitch-tip">"I don't want to be a cog" is strong. Own it.</div>
+            <div class="pitch-tip">The founding story line (Eric's father Larry) shows you did your homework.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why leaving -->
+      <div class="pitch-block" id="block-2">
+        <div class="pitch-block-header" onclick="toggleBlock('block-2')">
+          <div>
+            <div class="pitch-block-label">Sensitive</div>
+            <div class="pitch-block-title">"Why are you leaving Joulea?"</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script">
+            Joulea's been great for growth &mdash; I've had real ownership and built things I'm genuinely proud of. But I've hit a ceiling. The team is small, the product roadmap has slowed, and I want to be somewhere with <mark>more momentum</mark> and working alongside people who push me. The AI space has my full attention and I want to go all-in on it.
+          </div>
+          <div class="pitch-tips">
+            <div class="pitch-tips-label">Delivery</div>
+            <div class="pitch-tip">Never trash Joulea. Stay positive and forward-looking.</div>
+            <div class="pitch-tip">"Hit a ceiling" is honest and clean. Pivot to what excites you.</div>
+            <div class="pitch-tip">Keep it under 30 seconds. They don't need a dissertation.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What you're looking for -->
+      <div class="pitch-block" id="block-3">
+        <div class="pitch-block-header" onclick="toggleBlock('block-3')">
+          <div>
+            <div class="pitch-block-label">Vision</div>
+            <div class="pitch-block-title">"What are you looking for in your next role?"</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script">
+            <mark>Ownership</mark> &mdash; I do my best work when I can take a problem from idea to production without waiting on five other teams. <mark>AI-native work</mark> &mdash; not just calling an API, but thinking about models, retrieval, agents, the hard parts. And <mark>momentum</mark> &mdash; a team that's growing, a product people use, and people who build seriously. I'm not looking for a chill job.
+          </div>
+          <div class="pitch-tips">
+            <div class="pitch-tips-label">Delivery</div>
+            <div class="pitch-tip">Three things, each in one sentence. Punchy.</div>
+            <div class="pitch-tip">"I'm not looking for a chill job" is your strongest closer here.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Walk me through your resume -->
+      <div class="pitch-block" id="block-4">
+        <div class="pitch-block-header" onclick="toggleBlock('block-4')">
+          <div>
+            <div class="pitch-block-label">Career Arc</div>
+            <div class="pitch-block-title">"Walk me through your resume."</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script">
+            CS at <mark>Georgia State</mark>, Honors College, graduated 2020. Joined <mark>T-Mobile</mark> straight out &mdash; enterprise environment, learned how big engineering orgs work. Angular on a platform serving 20M users, Java microservices, PCI compliance, incident response.<br><br>
+            After two years I wanted to own more, so I joined <mark>Joulea</mark>, an IoT startup. Night and day difference. Small team, I own the full stack &mdash; React frontend, Flask backend, AWS infra. But the most exciting part has been the AI work. I built a RAG chatbot, a generative AI labeling system, and designed the data pipeline handling 10M+ daily data points. Migrated our data to S3, cut costs 57%.<br><br>
+            Now I'm looking for somewhere with more velocity where I can go deeper on AI and work with a team that's building something real.
+          </div>
+          <div class="pitch-tips">
+            <div class="pitch-tips-label">Delivery</div>
+            <div class="pitch-tip">This is the extended version of "tell me about yourself." Use if they want the full walk-through.</div>
+            <div class="pitch-tip">The thread is: enterprise scale > startup ownership > AI depth. Each move was intentional.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Questions to ask -->
+      <div class="pitch-block" id="block-5">
+        <div class="pitch-block-header" onclick="toggleBlock('block-5')">
+          <div>
+            <div class="pitch-block-label">Your Turn</div>
+            <div class="pitch-block-title">Questions to Ask Aaron</div>
+          </div>
+          <div class="pitch-block-arrow">▼</div>
+        </div>
+        <div class="pitch-block-body">
+          <div class="pitch-script" style="font-size: 14px;">
+            <strong style="color:var(--accent)">1.</strong> "You're acquiring CPA firms and onboarding them to the platform. What's the hardest part of that from an engineering side?"<br>
+            <span style="color:var(--text-dim); font-size:12px">Shows you understand their strategy. Opens door for your T-Mobile integration story.</span><br><br>
+            <strong style="color:var(--accent)">2.</strong> "The funding PR mentioned building an 'agentic, AI-powered client experience.' How far along is that?"<br>
+            <span style="color:var(--text-dim); font-size:12px">Uses their exact language. Shows homework. Lets you gauge the AI work you'd actually do.</span><br><br>
+            <strong style="color:var(--accent)">3.</strong> "With 5 engineers and 5,000+ clients, how do you think about when to hire vs. when to automate?"<br>
+            <span style="color:var(--text-dim); font-size:12px">Shows you think about leverage. Their whole model depends on AI making small teams effective.</span><br><br>
+            <strong style="color:var(--accent)">4.</strong> "What does a typical week look like for an engineer here?"<br>
+            <span style="color:var(--text-dim); font-size:12px">Practical. Shows you're thinking about the day-to-day, not just the pitch.</span><br><br>
+            <strong style="color:var(--accent)">5.</strong> "What's your least favorite thing about working at OLarry?"<br>
+            <span style="color:var(--text-dim); font-size:12px">Your signature closer. Disarming, honest. A co-founder's answer here tells you everything.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         TAB 2: STORIES
+    ════════════════════════════════════ -->
+    <div class="tab-content" id="tab-stories">
+      <div class="context-box" style="margin-bottom: 18px;">
+        <strong>Each story is ranked by relevance to OLarry.</strong> The hook at the bottom tells you exactly when to deploy it. Click to expand.
+      </div>
+      <div id="stories-container"></div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         TAB 3: PRACTICE
+    ════════════════════════════════════ -->
+    <div class="tab-content" id="tab-practice">
+      <div class="practice-container">
+        <div class="category-btns">
+          <button class="cat-btn active" onclick="filterCat('all', this)">All</button>
+          <button class="cat-btn" onclick="filterCat('pitch', this)">Pitch</button>
+          <button class="cat-btn" onclick="filterCat('behavioral', this)">Behavioral</button>
+          <button class="cat-btn" onclick="filterCat('technical', this)">Technical</button>
+        </div>
+
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="progress-label" id="progressLabel">Question 0 of 0</div>
+
+        <div class="q-card-practice" id="qCard">
+          <div class="q-front">
+            <div class="q-cat-label" id="qCat">&mdash;</div>
+            <div class="q-prompt" id="qPrompt">Press Start to begin</div>
+            <div class="timer" id="timerDisplay">2:00</div>
+            <div class="q-actions">
+              <button class="btn btn-primary" onclick="startPractice()" id="startBtn">Start</button>
+              <button class="btn btn-ghost" onclick="revealGuide()" id="guideBtn" style="display:none">Show Guide</button>
+              <button class="btn btn-ghost" onclick="nextQ()" id="nextBtn" style="display:none">Next</button>
+            </div>
+          </div>
+          <div class="answer-guide" id="answerGuide">
+            <div class="guide-label">What to Hit</div>
+            <ul class="guide-points" id="guidePoints"></ul>
+            <div class="guide-ref" id="guideRef" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ═══════════════════
+  // STORIES DATA
+  // ═══════════════════
+  const stories = [
+    {
+      icon: '\u{1F916}', iconBg: 'rgba(212,148,74,0.15)',
+      company: 'Joulea', title: 'LLM + RAG Support Chatbot',
+      tags: ['AI/ML', 'LLM', 'RAG', 'LangChain'],
+      situation: 'Joulea\'s customers were constantly asking questions that the support team had to answer manually. The answers existed in docs somewhere but were hard to surface. We needed a way to handle this without scaling headcount.',
+      action: 'Collaborated with AI engineers to design and build an <strong>agent-based LLM + RAG chatbot</strong> using LangChain and LlamaIndex. Set up the embedding pipeline, retrieval strategy with FAISS, and tuned the prompting layer to reduce hallucinations.',
+      result: 'Hit <strong>85% response accuracy</strong>, validated through internal subject matter expert testing. Took meaningful load off the support team. Real RAG architecture, not just plugging in an API.',
+      numbers: ['85% accuracy', 'LangChain + LlamaIndex', 'FAISS vectors', 'Agent-based'],
+      hook: '<strong>OLarry hook:</strong> Their #1 priority is an "agentic AI-powered client experience." You\'ve literally built one. Lead with this when AI comes up.'
+    },
+    {
+      icon: '\u{26A1}', iconBg: 'rgba(224,160,96,0.15)',
+      company: 'Joulea', title: 'Generative AI Data Labeling',
+      tags: ['AI/ML', 'Automation', 'OpenAI API'],
+      situation: 'Massive amounts of unstructured IoT sensor data needed labels for downstream analysis. The team was doing it manually \u2014 slow, expensive, couldn\'t scale.',
+      action: 'Designed a <strong>generative AI labeling workflow</strong> using OpenAI API. Built the prompt engineering layer for noisy IoT data and added validation for low-confidence outputs.',
+      result: '<strong>67% faster</strong> than manual. <strong>90% accuracy</strong>. Fully automated a workflow that ate hours of engineer time weekly.',
+      numbers: ['67% speed increase', '90% accuracy', 'Fully automated'],
+      hook: '<strong>OLarry hook:</strong> Their tax document classification is the same pattern: unstructured input \u2192 AI classification \u2192 structured output. Say this explicitly.'
+    },
+    {
+      icon: '\u{1F525}', iconBg: 'rgba(124,106,247,0.15)',
+      company: 'Joulea', title: 'IoT Data Pipeline \u2014 10M+ Daily Points',
+      tags: ['Architecture', 'Scale', 'Cost Reduction'],
+      situation: 'Joulea needed to handle massive real-time sensor data from hundreds of buildings. Dumping everything into the main DB was getting expensive and wouldn\'t scale.',
+      action: 'Designed <strong>hot/cold storage architecture</strong>: live data through RabbitMQ into PostgreSQL for real-time fault detection, archived to S3 via AWS Glue, queried through Athena. Time-based partitioning for scale.',
+      result: '<strong>57% infrastructure cost reduction</strong>. Pipeline handles <strong>10M+ daily data points</strong> across 200+ buildings. Architecture decision was mine from scratch.',
+      numbers: ['10M+ daily', '57% cost cut', '200+ buildings'],
+      hook: '<strong>OLarry hook:</strong> They\'re acquiring CPA firms and need to ingest/migrate client data at scale. Your pipeline thinking maps directly.'
+    },
+    {
+      icon: '\u{1F3AF}', iconBg: 'rgba(94,184,94,0.15)',
+      company: 'Joulea', title: 'Full Platform Ownership',
+      tags: ['Full-Stack', 'Architecture', 'Ownership'],
+      situation: 'Small startup. No dedicated teams. Engineers own features end-to-end.',
+      action: 'Architected the <strong>full B2B SaaS platform</strong>: React + Redux + TypeScript frontend, Flask APIs, AWS infra (EC2, S3, Lambda, CloudFront, RDS Aurora, Redis). Weekly releases with Product, UX, Customer Success.',
+      result: 'Product serving 200+ buildings. Every major layer has code I own. Built the muscle of requirement \u2192 production solo.',
+      numbers: ['React + Flask + AWS', 'Weekly releases', '200+ buildings'],
+      hook: '<strong>OLarry hook:</strong> Their stack is React + Python. You live in React + Python + Flask. 5 engineers = everyone owns everything. You\'ve been doing this for 3 years.'
+    },
+    {
+      icon: '\u{1F4E1}', iconBg: 'rgba(122,173,207,0.15)',
+      company: 'Joulea', title: '3D Building Visualization',
+      tags: ['Frontend', 'Three.js', 'React'],
+      situation: 'Customers needed to see sensor data mapped to physical building space, not just tables. No off-the-shelf tool fit.',
+      action: 'Built interactive <strong>3D building visualizations in Three.js</strong> within the React frontend. Bound real-time sensor data to 3D models. Learned Three.js from scratch.',
+      result: 'Became one of the most-demoed features. Enabled customers to identify HVAC issues they couldn\'t see in tabular data.',
+      numbers: ['Three.js from scratch', 'Real-time binding', '200+ buildings'],
+      hook: '<strong>OLarry hook:</strong> Shows you learn fast and ship. If Aaron asks about picking up new tech, this is your answer.'
+    },
+    {
+      icon: '\u{1F3E2}', iconBg: 'rgba(124,106,247,0.15)',
+      company: 'T-Mobile', title: 'Enterprise Scale \u2014 20M Users',
+      tags: ['Scale', 'Enterprise', 'Legacy Integration'],
+      situation: 'T-Mobile\'s prepaid platform serves 20M+ users. Built Angular components and Java Spring Boot microservices.',
+      action: '<strong>Angular components</strong> on a high-traffic consumer product. <strong>Java microservices</strong> processing 5K+ daily transactions with OAuth 2.0 and PCI compliance. <strong>REST + SOAP APIs</strong> bridging legacy billing to modern apps. Led 40+ incident responses.',
+      result: 'Shipped to 20M+ users. Reduced onboarding time 30%. Zero billing disruptions during integrations.',
+      numbers: ['20M+ users', '5K+ daily txns', '40+ incidents', '30% faster onboarding'],
+      hook: '<strong>OLarry hook:</strong> They\'re acquiring CPA firms with legacy systems. Your SOAP\u2192REST integration at T-Mobile is directly relevant. Mention it.'
+    }
+  ];
+
+  // ═══════════════════
+  // PRACTICE QUESTIONS
+  // ═══════════════════
+  const questions = [
+    {
+      cat: 'pitch', label: 'Pitch',
+      text: 'Tell me about yourself.',
+      time: 90,
+      points: [
+        'Lead with years of experience and what kind of work (full-stack + AI)',
+        'T-Mobile = scale foundation. Joulea = ownership + AI. Clean arc.',
+        'Drop the numbers: 20M users, 10M data points, 85% accuracy, 57% cost reduction',
+        'End with what you want and why OLarry fits',
+        'Under 90 seconds. Stop talking before you feel done.'
+      ],
+      ref: 'Use your "Tell me about yourself" script from the Pitch tab'
+    },
+    {
+      cat: 'pitch', label: 'Pitch',
+      text: 'Why do you want to work at OLarry?',
+      time: 60,
+      points: [
+        'AI applied to a resistant-to-change industry (you\'ve done this at Joulea)',
+        'Small team, high ownership, every person\'s work ships',
+        'Founding story resonated (Eric\'s father Larry)',
+        'Don\'t say "I love AI" \u2014 say what specifically about THEIR AI work interests you',
+        'Keep it under 60 seconds'
+      ],
+      ref: null
+    },
+    {
+      cat: 'pitch', label: 'Pitch',
+      text: 'Why are you leaving your current role?',
+      time: 45,
+      points: [
+        '"Hit a ceiling" \u2014 honest, clean, not negative',
+        'Pivot to what excites you: more momentum, more AI depth, stronger team',
+        'Never trash Joulea',
+        '30 seconds max'
+      ],
+      ref: null
+    },
+    {
+      cat: 'behavioral', label: 'Behavioral',
+      text: 'Tell me about something you built with AI that shipped to production.',
+      time: 120,
+      points: [
+        '<strong>Lead with RAG chatbot</strong> \u2014 most relevant to OLarry\'s "agentic AI" vision',
+        'Situation: support team overwhelmed, answers existed but were buried',
+        'Action: LangChain + LlamaIndex + FAISS, agent-based architecture',
+        'Result: 85% accuracy, validated by SMEs',
+        'Then mention the AI labeling system as a second proof point (67% faster, 90% accuracy)',
+        'Show you\'ve shipped AI twice, not just once'
+      ],
+      ref: 'Stories: RAG Chatbot + AI Labeling'
+    },
+    {
+      cat: 'behavioral', label: 'Behavioral',
+      text: 'Tell me about a time you owned something end-to-end.',
+      time: 120,
+      points: [
+        'Joulea platform architecture: React + Flask + AWS, you own the whole stack',
+        'Be specific about what "end-to-end" means: requirements, design, implementation, deployment, monitoring',
+        'Small team, no one to hand off to \u2014 that\'s a feature, not a bug',
+        'Weekly releases with Product/UX/CS \u2014 shows cross-functional muscle',
+        'Frame it as disciplined ownership, not chaos'
+      ],
+      ref: 'Story: Full Platform Ownership'
+    },
+    {
+      cat: 'behavioral', label: 'Behavioral',
+      text: 'Tell me about a time you reduced costs or improved efficiency.',
+      time: 120,
+      points: [
+        'IoT pipeline: 10M+ daily data points, PostgreSQL getting expensive',
+        'Hot/cold storage architecture: RabbitMQ \u2192 Postgres (hot), S3 + Glue (cold), Athena (query)',
+        '<strong>57% cost reduction</strong> \u2014 let that number land',
+        'Show the decision-making: why this approach vs. alternatives',
+        'This is an architecture story as much as a cost story'
+      ],
+      ref: 'Story: IoT Data Pipeline'
+    },
+    {
+      cat: 'behavioral', label: 'Behavioral',
+      text: 'Tell me about a time you had to learn something quickly.',
+      time: 90,
+      points: [
+        'Three.js for 3D building visualization \u2014 learned from scratch, shipped to production',
+        'Or: LangChain/LlamaIndex for the RAG chatbot \u2014 new framework, shipped production AI',
+        'Show your learning process: how did you go from zero to shipped?',
+        'End with the outcome: it worked, here are the results',
+        'Relevant to OLarry because they need generalists who can ramp fast'
+      ],
+      ref: 'Story: 3D Visualization or RAG Chatbot'
+    },
+    {
+      cat: 'technical', label: 'Technical',
+      text: 'How would you design a document ingestion pipeline for tax forms?',
+      time: 150,
+      points: [
+        '<strong>This is literally their product.</strong> Show you\'ve thought about it.',
+        'Upload \u2192 S3, trigger async worker. Support PDF, images, scans.',
+        'Classification: LLM or fine-tuned model to identify form type (W-2, K-1, 1099)',
+        'Extraction: OCR (Textract) + LLM for structured field extraction',
+        'Validation: human-in-the-loop for low-confidence. CPA reviews flagged items.',
+        'Storage: structured output to Postgres, raw docs in S3, audit trail',
+        'Say: "I built a similar pipeline for IoT sensor data. Same pattern."'
+      ],
+      ref: 'Connect to: IoT pipeline + AI labeling experience'
+    },
+    {
+      cat: 'technical', label: 'Technical',
+      text: 'How does RAG work? Walk me through your implementation.',
+      time: 120,
+      points: [
+        'RAG = Retrieval Augmented Generation \u2014 augment the LLM with relevant context at query time',
+        'Your stack: LangChain + LlamaIndex + FAISS for vector storage',
+        'Pipeline: document ingestion \u2192 chunking \u2192 embedding \u2192 FAISS index',
+        'At query time: embed question, retrieve top-k chunks, inject into prompt, generate',
+        'Failure modes: hallucination, irrelevant retrieval, stale index, context overflow',
+        '85% accuracy \u2014 explain how you measured and validated it'
+      ],
+      ref: 'Story: RAG Chatbot'
+    },
+    {
+      cat: 'technical', label: 'Technical',
+      text: 'What\'s your experience with AWS?',
+      time: 90,
+      points: [
+        'Joulea: EC2, S3, Lambda, CloudFront, RDS Aurora, Redis, Glue, Athena, CloudWatch',
+        'The cold storage migration is your best concrete story',
+        'Be honest: deep on S3/RDS/Glue, have used Lambda and CloudFront, less deep on EKS',
+        'Show you think about tradeoffs: why Aurora over vanilla Postgres? Cost vs. features.',
+        'Mention you\'ve also done Docker, CI/CD with GitHub Actions'
+      ],
+      ref: 'Story: IoT Pipeline'
+    },
+    {
+      cat: 'pitch', label: 'Fit',
+      text: 'What\'s your biggest weakness?',
+      time: 45,
+      points: [
+        '"I\'m a generalist, which means there are specialist domains where I\'m still building depth \u2014 like ML math and infrastructure-as-code"',
+        'Show self-awareness AND what you\'re doing about it',
+        'Don\'t say "I work too hard"',
+        '30 seconds, then stop'
+      ],
+      ref: null
+    },
+    {
+      cat: 'pitch', label: 'Fit',
+      text: 'Where do you see yourself in 3-5 years?',
+      time: 60,
+      points: [
+        'Deeper technical leadership, specialization in AI systems',
+        'Eventually staff-level impact \u2014 shaping architecture, mentoring',
+        'Tie it to OLarry: "somewhere like here is the environment I want to grow in"',
+        'IC track is fine \u2014 you don\'t need to say management'
+      ],
+      ref: null
+    }
+  ];
+
+  // ═══════════════════
+  // RENDER STORIES
+  // ═══════════════════
+  function renderStories() {
+    const c = document.getElementById('stories-container');
+    stories.forEach((s, i) => {
+      const id = 'story-' + i;
+      c.innerHTML += `
+        <div class="story-card" id="${id}">
+          <div class="story-header" onclick="document.getElementById('${id}').classList.toggle('open')">
+            <div class="story-left">
+              <div class="story-icon" style="background:${s.iconBg}">${s.icon}</div>
+              <div class="story-meta">
+                <div class="story-company">${s.company}</div>
+                <div class="story-title">${s.title}</div>
+                <div class="story-tags">${s.tags.map(t=>`<span class="story-tag">${t}</span>`).join('')}</div>
+              </div>
+            </div>
+            <div class="story-arrow">\u25BC</div>
+          </div>
+          <div class="story-body">
+            <div class="sar">
+              <div class="sar-row"><div class="sar-label s">Situation</div><div class="sar-content">${s.situation}</div></div>
+              <div class="sar-row"><div class="sar-label a">Action</div><div class="sar-content">${s.action}</div></div>
+              <div class="sar-row"><div class="sar-label r">Result</div><div class="sar-content">${s.result}</div></div>
+            </div>
+            <div class="numbers-row">${s.numbers.map(n=>`<span class="number-chip">${n}</span>`).join('')}</div>
+            <div class="olarry-hook">${s.hook}</div>
+          </div>
+        </div>`;
+    });
+  }
+
+  // ═══════════════════
+  // PRACTICE ENGINE
+  // ═══════════════════
+  let queue = [], idx = 0, timer = null, timeLeft = 0, running = false, activeCat = 'all';
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = cat;
+    resetPractice();
+  }
+
+  function buildQueue() {
+    const pool = activeCat === 'all' ? [...questions] : questions.filter(q => q.cat === activeCat);
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool;
+  }
+
+  function resetPractice() {
+    clearInterval(timer); running = false; queue = []; idx = 0;
+    document.getElementById('qCat').textContent = '\u2014';
+    document.getElementById('qPrompt').textContent = 'Press Start to begin';
+    document.getElementById('timerDisplay').textContent = '2:00';
+    document.getElementById('timerDisplay').className = 'timer';
+    document.getElementById('startBtn').style.display = 'inline-block';
+    document.getElementById('startBtn').textContent = 'Start';
+    document.getElementById('guideBtn').style.display = 'none';
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('answerGuide').classList.remove('visible');
+    updateProgress(0, 0);
+  }
+
+  function startPractice() {
+    if (!running) { queue = buildQueue(); idx = 0; running = true; }
+    loadQ(idx);
+  }
+
+  function loadQ(i) {
+    clearInterval(timer);
+    document.getElementById('answerGuide').classList.remove('visible');
+    if (i >= queue.length) {
+      document.getElementById('qCat').textContent = 'Done';
+      document.getElementById('qPrompt').textContent = 'All questions complete. Go again?';
+      document.getElementById('timerDisplay').textContent = '';
+      document.getElementById('startBtn').textContent = 'Restart';
+      document.getElementById('startBtn').style.display = 'inline-block';
+      document.getElementById('guideBtn').style.display = 'none';
+      document.getElementById('nextBtn').style.display = 'none';
+      running = false;
+      updateProgress(queue.length, queue.length);
+      return;
+    }
+    const q = queue[i];
+    document.getElementById('qCat').textContent = q.label;
+    document.getElementById('qPrompt').textContent = q.text;
+    document.getElementById('startBtn').style.display = 'none';
+    document.getElementById('guideBtn').style.display = 'inline-block';
+    document.getElementById('nextBtn').style.display = 'none';
+    const gp = document.getElementById('guidePoints');
+    gp.innerHTML = q.points.map(p => `<li class="guide-point">${p}</li>`).join('');
+    const ref = document.getElementById('guideRef');
+    if (q.ref) { ref.style.display = 'block'; ref.innerHTML = q.ref; }
+    else { ref.style.display = 'none'; }
+    updateProgress(i + 1, queue.length);
+    startTimer(q.time);
+  }
+
+  function startTimer(secs) {
+    timeLeft = secs;
+    showTime();
+    timer = setInterval(() => {
+      timeLeft--;
+      showTime();
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById('nextBtn').style.display = 'inline-block';
+      }
+    }, 1000);
+  }
+
+  function showTime() {
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    const el = document.getElementById('timerDisplay');
+    el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    el.className = 'timer';
+    if (timeLeft <= 15) el.classList.add('urgent');
+    else if (timeLeft <= 30) el.classList.add('warning');
+  }
+
+  function revealGuide() {
+    clearInterval(timer);
+    document.getElementById('answerGuide').classList.add('visible');
+    document.getElementById('guideBtn').style.display = 'none';
+    document.getElementById('nextBtn').style.display = 'inline-block';
+  }
+
+  function nextQ() { idx++; loadQ(idx); }
+
+  function updateProgress(cur, total) {
+    const pct = total > 0 ? (cur / total) * 100 : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = total > 0 ? `Question ${cur} of ${total}` : 'Question 0 of 0';
+  }
+
+  // ═══════════════════
+  // TABS + THEME
+  // ═══════════════════
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    if (name !== 'practice') { clearInterval(timer); running = false; }
+  }
+
+  function toggleBlock(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function toggleTheme() {
+    const btn = document.getElementById('themeBtn');
+    if (document.body.classList.contains('light')) {
+      document.body.classList.remove('light');
+      btn.textContent = 'Light';
+      localStorage.setItem('olarryPrepTheme', 'dark');
+    } else {
+      document.body.classList.add('light');
+      btn.textContent = 'Dark';
+      localStorage.setItem('olarryPrepTheme', 'light');
+    }
+  }
+
+  // ═══════════════════
+  // INIT
+  // ═══════════════════
+  renderStories();
+  if (localStorage.getItem('olarryPrepTheme') === 'light') {
+    document.body.classList.add('light');
+    document.getElementById('themeBtn').textContent = 'Dark';
+  }
+</script>
+</body>
+</html>
