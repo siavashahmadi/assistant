@@ -48,6 +48,7 @@ After presenting, organize items into the appropriate memory files:
 - Project-related items → update `memory/projects.md`
 - Job search items → update `memory/private/application-tracker.md`
 - New ideas or learnings → `memory/learnings.md`
+- Reflections, thoughts, personal observations → append to `## Diary` section of today's TODO file (`todos/YYYY-MM-DD.md`). If the section doesn't exist, create it at the bottom.
 
 Ask Sia before writing to confirm the organization looks right.
 
