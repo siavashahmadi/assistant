@@ -39,6 +39,7 @@ Based on his response:
 5. **Close out today's TODO file** (`todos/YYYY-MM-DD.md`):
    - Check off everything that got done
    - Any unchecked items get noted as carryover for tomorrow
+   - If there were diary entries during the day, leave them as-is — they're part of the daily record
 
 ### Step 4: Quick Review
 Present a 5-line summary:
