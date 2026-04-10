@@ -78,6 +78,10 @@ Write `todos/YYYY-MM-DD.md` with this structure:
 [any pending roles from /job-search sessions or application-tracker.md]
 
 ## Done
+
+---
+
+## Diary
 ```
 
 ## Rules
