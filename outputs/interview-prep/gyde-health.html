@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gyde Health — Interview Prep</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0f0f13;
+      --surface: #16161e;
+      --surface2: #1e1e28;
+      --border: #2a2a36;
+      --text: #e0e0e8;
+      --text-muted: #888;
+      --text-dim: #666;
+      --text-soft: #c8c8d8;
+      --text-body: #c0c0d0;
+      --heading: #fff;
+      --accent: #7c6af7;
+      --accent-soft: #a89ef7;
+      --accent-bg: #7c6af722;
+      --accent-border: #7c6af744;
+      --green: #5eb85e;
+      --green-bg: #1a2a1a;
+      --green-border: #2d4d2d;
+      --green-text: #7dc97d;
+      --blue-bg: #1e2535;
+      --blue-border: #2a3548;
+      --blue-text: #7aadcf;
+      --orange: #e0a060;
+      --timer-bg: #1a1a1a;
+      --angle-bg: #1a1a24;
+    }
+
+    body.light {
+      --bg: #f4f4f8;
+      --surface: #ffffff;
+      --surface2: #f0f0f5;
+      --border: #dddde8;
+      --text: #1a1a2e;
+      --text-muted: #777;
+      --text-dim: #999;
+      --text-soft: #333344;
+      --text-body: #444455;
+      --heading: #0d0d1a;
+      --accent: #6254e8;
+      --accent-soft: #6254e8;
+      --accent-bg: #6254e810;
+      --accent-border: #6254e830;
+      --green: #3a9a3a;
+      --green-bg: #eef6ee;
+      --green-border: #b8ddb8;
+      --green-text: #2d7a2d;
+      --blue-bg: #eef4fa;
+      --blue-border: #b8d4ea;
+      --blue-text: #2a6ea0;
+      --orange: #c07020;
+      --timer-bg: #f8f8fc;
+      --angle-bg: #f0f0f8;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      padding: 40px 20px 80px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 100;
+      transition: background 0.2s, border-color 0.2s;
+      user-select: none;
+    }
+
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Header */
+    .header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: -0.5px;
+    }
+
+    .header h1 span {
+      color: var(--accent);
+    }
+
+    .meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .meta-item strong {
+      color: var(--text-soft);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent-bg);
+      color: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    /* What is Gyde */
+    .tagline {
+      font-size: 16px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 3px;
+    }
+
+    .stat-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .news-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--green-text);
+      margin-bottom: 16px;
+    }
+
+    .news-badge::before {
+      content: '⚡';
+      font-size: 12px;
+    }
+
+    .product-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .product-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      margin-bottom: 4px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .ai-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      color: var(--accent-soft);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .founders {
+      display: flex;
+      gap: 8px;
+    }
+
+    .founder-badge {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--blue-text);
+      font-weight: 500;
+    }
+
+    /* Andrew Shults */
+    .person {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .person-avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #7c6af7, #a89ef7);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .person-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 4px;
+    }
+
+    .person-role {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .person-notes {
+      list-style: none;
+    }
+
+    .person-notes li {
+      font-size: 14px;
+      color: var(--text-soft);
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .person-notes li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Stack */
+    .stack-main {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--heading);
+      margin-bottom: 6px;
+    }
+
+    .stack-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .your-angle {
+      background: var(--angle-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* Fit */
+    .fit-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--surface2);
+    }
+
+    .fit-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .fit-item:first-child {
+      padding-top: 0;
+    }
+
+    .fit-num {
+      width: 26px;
+      height: 26px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      flex-shrink: 0;
+    }
+
+    .fit-content strong {
+      color: var(--heading);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .fit-content p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    /* Why Gyde */
+    .why-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--surface2);
+      font-size: 14px;
+      color: var(--text-body);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .why-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .why-item:first-child { padding-top: 0; }
+
+    .why-item::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Questions */
+    .question {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--text-soft);
+      font-style: italic;
+    }
+
+    .question:last-child { margin-bottom: 0; }
+
+    /* Watch out */
+    .warning-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--surface2);
+    }
+
+    .warning-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .warning-item:first-child { padding-top: 0; }
+
+    .warn-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .warning-item strong {
+      font-size: 14px;
+      color: var(--orange);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .warning-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Timer bar */
+    .timer-bar {
+      background: var(--timer-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      transition: background 0.2s;
+    }
+
+    .timer-label {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .timer-time {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .meet-link {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--blue-text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+
+    .meet-link:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Gyde Health <span>Interview Prep</span></h1>
+      <div class="meta">
+        <div class="meta-item">📅 <strong>Today, April 6 — 4:00 PM ET</strong></div>
+        <div class="meta-item">🎥 <strong>Google Meet, 30 min</strong></div>
+        <div class="meta-item">👤 <strong>Andrew Shults</strong></div>
+        <span class="badge">Software Engineer</span>
+      </div>
+    </div>
+
+    <!-- Timer bar -->
+    <div class="timer-bar">
+      <div>
+        <div class="timer-label">Interview in</div>
+        <div class="timer-time" id="countdown">calculating...</div>
+      </div>
+      <a class="meet-link" href="https://meet.google.com/nuz-prbp-vuw" target="_blank">Join Meet →</a>
+    </div>
+
+    <!-- What is Gyde -->
+    <div class="section">
+      <div class="section-title">What is Gyde</div>
+      <p class="tagline">AI-native insurance brokerage. They acquire health insurance agencies and plug in their tech to modernize them. PE roll-up strategy — but tech-led, not leverage-led.</p>
+
+      <div class="news-badge">Just acquired Avid Health (top-rated Medicare agency, Palm Beach FL) — April 3, 2026. Mention this.</div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-label">Raised</div>
+          <div class="stat-value">$60M — Lightspeed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Revenue</div>
+          <div class="stat-value">$60M contracted in 15 weeks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">HQ / Stage</div>
+          <div class="stat-value">Austin, TX — just out of stealth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">TAM</div>
+          <div class="stat-value">$1.5T health insurance market</div>
+        </div>
+      </div>
+
+      <div class="product-row">
+        <div class="product-card">
+          <div class="product-name">GydeOS</div>
+          <div class="product-desc">Broker operating system — the core platform</div>
+        </div>
+        <div class="product-card">
+          <div class="product-name">Gia</div>
+          <div class="product-desc">AI assistant for brokers — automates tasks, decision support</div>
+        </div>
+      </div>
+
+      <div class="ai-pills">
+        <span class="pill">Voice AI</span>
+        <span class="pill">Chat AI</span>
+        <span class="pill">Predictive AI</span>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <div style="font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;">Founding team from</div>
+        <div class="founders">
+          <span class="founder-badge">Oscar Health</span>
+          <span class="founder-badge">Scale AI</span>
+          <span class="founder-badge">Stripe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Andrew Shults -->
+    <div class="section">
+      <div class="section-title">Who is Andrew Shults</div>
+      <div class="person">
+        <div class="person-avatar">AS</div>
+        <div class="person-info">
+          <h3>Andrew Shults</h3>
+          <div class="person-role">Likely CTO / Head of Engineering at Gyde</div>
+          <ul class="person-notes">
+            <li>~6 years at Oscar Health — Lead/Principal Engineer, Office of the CTO</li>
+            <li>Oscar Health = health insurance tech. He knows this domain cold.</li>
+            <li>Matt forwarded your resume to "Shults" directly — this is the real decision maker</li>
+            <li>Expect: technical + culture fit. He's hiring for someone he'll work closely with.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stack -->
+    <div class="section">
+      <div class="section-title">Tech Stack</div>
+      <div class="stack-main">TypeScript</div>
+      <div class="stack-sub">Mostly TypeScript. CTO is hiring generalists — not specialists.</div>
+      <div class="your-angle">
+        <strong style="color: var(--accent-soft);">Your angle:</strong> TypeScript + React is your daily driver. You're a generalist — Python, Flask, AWS, React. You've built AI features in production (LLM/RAG chatbot at Joulea). You've worked on a small team and owned things end-to-end.
+      </div>
+    </div>
+
+    <!-- Why You're a Fit -->
+    <div class="section">
+      <div class="section-title">Why You're a Fit — Have These Ready</div>
+
+      <div class="fit-item">
+        <div class="fit-num">1</div>
+        <div class="fit-content">
+          <strong>Generalist</strong>
+          <p>React, TypeScript, Python, Flask, AWS. You go where the problem is.</p>
+        </div>
+      </div>
+
+      <div class="fit-item">
+        <div class="fit-num">2</div>
+        <div class="fit-content">
+          <strong>AI builder</strong>
+          <p>LLM/RAG chatbot at Joulea — LangChain, LlamaIndex, FAISS. 85% accuracy. Not just using AI tools, building them.</p>
+        </div>
+      </div>
+
+      <div class="fit-item">
+        <div class="fit-num">3</div>
+        <div class="fit-content">
+          <strong>Small team energy</strong>
+          <p>Joulea is a small IoT/energy startup. You own full features end-to-end, wear multiple hats.</p>
+        </div>
+      </div>
+
+      <div class="fit-item">
+        <div class="fit-num">4</div>
+        <div class="fit-content">
+          <strong>Scale experience</strong>
+          <p>10M+ daily IoT data points, RabbitMQ ingestion, time-based partitioning, 57% cost reduction. You build things that handle real volume.</p>
+        </div>
+      </div>
+
+      <div class="fit-item">
+        <div class="fit-num">5</div>
+        <div class="fit-content">
+          <strong>Healthcare-adjacent</strong>
+          <p>Complex data pipelines, messy real-world data. IoT sensors = noisy and unreliable. Same class of problem as health insurance data.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Gyde -->
+    <div class="section">
+      <div class="section-title">Why Gyde — Have This Ready</div>
+      <div class="why-item">The AI + insurance angle is genuinely interesting. Brokers are stuck in the past, Gyde is building the infrastructure to modernize them at scale.</div>
+      <div class="why-item">Founding team pedigree (Oscar, Scale AI, Stripe) = people who've built real products at real scale. That matters.</div>
+      <div class="why-item">Early stage ($60M but just out of stealth) = high impact per engineer. That's what you're optimizing for right now.</div>
+      <div class="why-item">Voice AI and chat AI is exactly the LLM work you want to go deeper on.</div>
+    </div>
+
+    <!-- Questions to Ask -->
+    <div class="section">
+      <div class="section-title">Questions to Ask</div>
+      <div class="question">"What does the engineering team look like right now, and what's the plan for growth over the next 6-12 months?"</div>
+      <div class="question">"What's the biggest technical challenge you're tackling right now with GydeOS or Gia?"</div>
+      <div class="question">"How are you thinking about the voice AI side — building on top of existing models or training custom?"</div>
+      <div class="question">"You just acquired Avid Health — how does the engineering team typically support a new agency coming onto the platform? Is that a heavy integration lift or is it mostly self-serve?"</div>
+      <div class="question">"What does Gia actually look like day-to-day for a broker — is it more of a copilot they interact with, or something running autonomously in the background?"</div>
+      <div class="question">"What's the biggest gap on the engineering side right now — is it speed of shipping, depth in a specific area, or something else?"</div>
+      <div class="question">"You came from Oscar Health which was a much larger org. What's been the biggest adjustment building from scratch at this stage?"</div>
+      <div class="question">"What does success look like for the person in this role in the first 90 days?"</div>
+    </div>
+
+    <!-- Watch Out For -->
+    <div class="section">
+      <div class="section-title">Watch Out For</div>
+
+      <div class="warning-item">
+        <div class="warn-icon">📍</div>
+        <div>
+          <strong>Location</strong>
+          <p>Austin-based, no relo assistance. You already said you can handle it. Confirm if it comes up — don't hesitate.</p>
+        </div>
+      </div>
+
+      <div class="warning-item">
+        <div class="warn-icon">🎯</div>
+        <div>
+          <strong>Shults is senior</strong>
+          <p>Oscar Health CTO-level. Be confident but don't overstate experience. Lean into your hunger and range as a generalist.</p>
+        </div>
+      </div>
+
+      <div class="warning-item">
+        <div class="warn-icon">⏱</div>
+        <div>
+          <strong>30 min is short</strong>
+          <p>Don't ramble. Answer tight, then pivot to what makes you interesting.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const interview = new Date('2026-04-06T16:00:00-04:00');
+      const now = new Date();
+      const diff = interview - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = 'Now — join the call!';
+        document.getElementById('countdown').style.color = '#5eb85e';
+        return;
+      }
+
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+
+      if (h > 0) {
+        document.getElementById('countdown').textContent = `${h}h ${m}m`;
+      } else if (m > 0) {
+        document.getElementById('countdown').textContent = `${m}m ${s}s`;
+        if (m < 15) document.getElementById('countdown').style.color = '#e07070';
+      } else {
+        document.getElementById('countdown').textContent = `${s}s`;
+        document.getElementById('countdown').style.color = '#e07070';
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.getElementById('themeBtn');
+      if (body.classList.contains('light')) {
+        body.classList.remove('light');
+        btn.textContent = '☀️ Light';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.add('light');
+        btn.textContent = '🌙 Dark';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Restore saved preference
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light');
+      document.getElementById('themeBtn').textContent = '🌙 Dark';
+    }
+  </script>
+</body>
+</html>
