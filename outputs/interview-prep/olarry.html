@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLarry — Interview Prep</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0c0b0e;
+      --surface: #141318;
+      --surface2: #1a1920;
+      --surface3: #222130;
+      --border: #2a2938;
+      --border-accent: #3d3850;
+      --text: #d8d5e0;
+      --text-muted: #8a8698;
+      --text-dim: #5e5a6e;
+      --text-soft: #b8b4c8;
+      --heading: #f0eef5;
+      --gold: #d4a54a;
+      --gold-soft: #c49a40;
+      --gold-bg: rgba(212, 165, 74, 0.08);
+      --gold-border: rgba(212, 165, 74, 0.2);
+      --teal: #4ac4b0;
+      --teal-bg: rgba(74, 196, 176, 0.08);
+      --teal-border: rgba(74, 196, 176, 0.2);
+      --rose: #d46a7a;
+      --rose-bg: rgba(212, 106, 122, 0.08);
+      --rose-border: rgba(212, 106, 122, 0.2);
+      --blue: #6a8fd4;
+      --blue-bg: rgba(106, 143, 212, 0.08);
+      --blue-border: rgba(106, 143, 212, 0.2);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12, 11, 14, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .topbar-brand h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .topbar-brand .divider {
+      color: var(--border);
+      font-weight: 300;
+    }
+
+    .topbar-brand .subtitle {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .topbar-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .meeting-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .meeting-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── Tab Navigation ── */
+    .tab-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 12px 18px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+
+    .tab-btn:hover { color: var(--text-muted); }
+
+    .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── Main Content ── */
+    .main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 28px 80px;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Section Headers ── */
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+
+    .section-label.gold { color: var(--gold-soft); }
+    .section-label.teal { color: var(--teal); }
+    .section-label.rose { color: var(--rose); }
+    .section-label.blue { color: var(--blue); }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.1s;
+    }
+
+    .card-header:hover { background: var(--surface2); }
+
+    .card-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-arrow {
+      font-size: 10px;
+      color: var(--text-dim);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+
+    .card.open .card-arrow { transform: rotate(180deg); }
+
+    .card-body {
+      display: none;
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card.open .card-body { display: block; }
+
+    /* ── Stat Grid ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .stat-box .value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--heading);
+    }
+
+    .stat-box .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* ── Key-Value Info ── */
+    .info-row {
+      display: flex;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-key {
+      width: 140px;
+      flex-shrink: 0;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .info-val {
+      color: var(--text);
+    }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 5px;
+      margin: 2px 3px 2px 0;
+    }
+
+    .tag.gold { background: var(--gold-bg); border: 1px solid var(--gold-border); color: var(--gold); }
+    .tag.teal { background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); }
+    .tag.rose { background: var(--rose-bg); border: 1px solid var(--rose-border); color: var(--rose); }
+    .tag.blue { background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--blue); }
+
+    /* ── Prose ── */
+    .prose {
+      color: var(--text-soft);
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .prose p { margin-bottom: 10px; }
+
+    .prose strong { color: var(--heading); font-weight: 600; }
+
+    .prose mark {
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .prose ul {
+      padding-left: 18px;
+      margin: 8px 0;
+    }
+
+    .prose li {
+      margin-bottom: 6px;
+    }
+
+    .prose li::marker { color: var(--text-dim); }
+
+    /* ── STAR blocks ── */
+    .star-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .star-item {
+      background: var(--surface2);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .star-letter {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .star-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .callout strong { color: var(--gold); }
+
+    .callout.teal {
+      background: var(--teal-bg);
+      border-color: var(--teal-border);
+    }
+
+    .callout.teal strong { color: var(--teal); }
+
+    /* ── Question cards ── */
+    .q-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .q-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.1s;
+    }
+
+    .q-header:hover { background: var(--surface2); }
+
+    .q-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-dim);
+      background: var(--surface2);
+      border-radius: 4px;
+      padding: 2px 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .q-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--heading);
+      flex: 1;
+    }
+
+    .q-arrow {
+      font-size: 10px;
+      color: var(--text-dim);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .q-card.open .q-arrow { transform: rotate(180deg); }
+
+    .q-body {
+      display: none;
+      padding: 0 16px 16px;
+      padding-left: 42px;
+      border-top: 1px solid var(--border);
+    }
+
+    .q-card.open .q-body { display: block; }
+
+    /* ── Person card ── */
+    .person {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .person-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-bg), var(--gold-border));
+      border: 2px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .person-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--heading);
+    }
+
+    .person-info .role {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .person-info .bio {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .topbar { padding: 0 16px; }
+      .tab-bar { padding: 0 16px; }
+      .main { padding: 20px 16px 60px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .star-grid { grid-template-columns: 1fr; }
+      .info-key { width: 110px; }
+      .topbar-brand .subtitle { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-brand">
+      <h1>OLarry</h1>
+      <span class="divider">/</span>
+      <span class="subtitle">Interview Prep</span>
+    </div>
+    <div class="topbar-meta">
+      <div class="meeting-badge">
+        <span class="dot"></span>
+        Tomorrow 3:00 PM ET
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="intel">Intel</button>
+    <button class="tab-btn" data-tab="pitch">Your Pitch</button>
+    <button class="tab-btn" data-tab="behavioral">Behavioral</button>
+    <button class="tab-btn" data-tab="technical">Technical</button>
+    <button class="tab-btn" data-tab="ask">Ask Them</button>
+  </div>
+
+  <div class="main">
+
+    <!-- ═══════════════════════════════════════════
+         TAB 1 — INTEL
+    ═══════════════════════════════════════════ -->
+    <div class="tab-content active" id="tab-intel">
+
+      <div class="callout">
+        <strong>Context:</strong> This came through Angela Adams (Goodman Masson recruiter). Aaron Wayne is a <strong>co-founder</strong> and Lead Full-Stack Engineer at OLarry. This is likely a technical/culture screen with a founding engineer. Treat it as a two-way conversation, not a quiz.
+      </div>
+
+      <div class="section">
+        <div class="section-label gold">Company Snapshot</div>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="value">$14.5M</div>
+            <div class="label">Total Funding (Series A)</div>
+          </div>
+          <div class="stat-box">
+            <div class="value">5,000+</div>
+            <div class="label">Clients Nationwide</div>
+          </div>
+          <div class="stat-box">
+            <div class="value">~40</div>
+            <div class="label">Employees</div>
+          </div>
+          <div class="stat-box">
+            <div class="value">5</div>
+            <div class="label">Engineers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">What OLarry Does</div>
+        <div class="card open">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">AI-Powered Tax Advisory for HNW Individuals & Businesses</div>
+              <div class="card-subtitle">Bridging the gap between TurboTax and $800/hr CPAs</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>Flat-fee membership</strong> for year-round tax planning and filing (not just April)</li>
+                <li><strong>AI automates</strong> client onboarding, document ingestion, classification, and data extraction from tax forms</li>
+                <li><strong>Roll-up strategy:</strong> acquiring CPA firms (Branton de Jong, Byrne Seligman, Rossi & Co, Pelzner & Associates) and plugging them into the platform</li>
+                <li><strong>Verticals:</strong> real estate investors, PE/VC, hedge funds, family offices, founders with equity comp</li>
+                <li>Available in all 50 states, fully remote company</li>
+                <li><strong>Vision:</strong> "Tax is too important and too expensive to stay analog" (CEO Eric Rachmel)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Who You're Meeting</div>
+        <div class="person">
+          <div class="person-avatar">AW</div>
+          <div class="person-info">
+            <h3>Aaron Wayne</h3>
+            <div class="role">Co-Founder & Lead Full-Stack Software Engineer</div>
+            <div class="bio">
+              Previously: Led backend development of Kubernetes training platform at <strong>D2iQ</strong>. Contributed at <strong>Benchling</strong> (biotech SaaS). Managed instruction at <strong>App Academy</strong> (full-stack bootcamp, curriculum & lectures). Has both deep engineering chops and teaching instincts. Expect him to probe for clarity of thought and ability to explain, not just code.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Stack & Tech Context</div>
+        <div style="margin-bottom: 10px;">
+          <span class="tag gold">React</span>
+          <span class="tag gold">Python</span>
+          <span class="tag teal">AI/ML (Tax Classification)</span>
+          <span class="tag teal">Document Extraction</span>
+          <span class="tag blue">Cloud Infrastructure</span>
+          <span class="tag rose">Small Eng Team (5)</span>
+        </div>
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">Engineering Priorities (Inferred)</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>Proprietary tax data classification & extraction model</strong> (Series A funding earmarked for this)</li>
+                <li><strong>Predictive scenario planning tools</strong> for real-time tax optimization</li>
+                <li><strong>"Agentic, AI-powered client experience"</strong> (their words from the funding PR)</li>
+                <li><strong>Integration infra</strong> for acquired CPA firms onto the platform</li>
+                <li><strong>Full-stack generalists needed</strong> at this team size, not specialists</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Investors & Backing</div>
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">TTV Capital (Lead), Walkabout Ventures, MSIV</div>
+              <div class="card-subtitle">Fintech-focused investors, $14.5M total raised</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>TTV Capital</strong> is a fintech-specialist VC. They led the $10M Series A.</li>
+                <li>Founded 2024, already at 5K+ clients and 40+ employees by end of 2025. Rapid scale.</li>
+                <li>CEO Eric Rachmel built the company after his father (Larry, a CPA) passed away. The name "OLarry" is a tribute.</li>
+                <li>Co-founders: Eric Rachmel (CEO), Becky Hobbs, Corey Heldreth, Aaron Wayne</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 2 — YOUR PITCH
+    ═══════════════════════════════════════════ -->
+    <div class="tab-content" id="tab-pitch">
+
+      <div class="callout">
+        <strong>Frame:</strong> Aaron is a co-founder and former bootcamp instructor. He values clear thinking, ownership, and builders who ship. Don't oversell. Show you've built real systems, you move fast, and you can wear multiple hats on a tiny team.
+      </div>
+
+      <div class="section">
+        <div class="section-label gold">Why OLarry? (Your Answer)</div>
+        <div class="card open">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">Genuine, Specific, Not Generic</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <p>"Three things stand out to me about OLarry. First, <strong>you're applying AI to a domain that's genuinely resistant to modernization</strong>, and that's the kind of challenge I find most interesting. At Joulea, I built AI workflows for HVAC/IoT data, which is a similarly analog industry. Watching how AI changes a real business process, not just a demo, is what gets me excited.</p>
+              <p>Second, <strong>the team size</strong>. Five engineers building a product that serves 5,000+ clients means every person's work ships and matters. At Joulea I'm one of a small engineering team owning the full stack, and that's where I do my best work.</p>
+              <p>Third, honestly, <strong>the founding story resonated with me</strong>. Building something meaningful that started from a personal place, that's the kind of company I want to be part of."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label teal">Talking Points — Your Experience → Their Needs</div>
+
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">AI/LLM in Production</div>
+              <div class="card-subtitle">Their #1 priority: tax classification, extraction, agentic experience</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>RAG Chatbot @ Joulea:</strong> Built agent-based LLM+RAG chatbot using LangChain + LlamaIndex, 85% response accuracy</li>
+                <li><strong>AI Data Labeling @ Joulea:</strong> Deployed generative-AI labeling workflow using OpenAI API for unstructured IoT data. 67% speed increase, 90% accuracy</li>
+                <li><strong>Direct parallel:</strong> Their tax document extraction is structurally similar to your IoT data classification. Different domain, same pattern: unstructured input → AI pipeline → structured output</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">Full-Stack Generalist on Small Team</div>
+              <div class="card-subtitle">They need someone who owns features end-to-end</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>Joulea stack:</strong> React + Redux + TS + Three.js (frontend) / Flask + Python (backend) / AWS infra. You own the full picture.</li>
+                <li><strong>Their stack:</strong> React + Python. Near-exact overlap.</li>
+                <li>You've shipped weekly releases partnering with Product, UX, and Customer Success. Startup pace, not enterprise pace.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">Data Pipeline & Scale</div>
+              <div class="card-subtitle">Ingesting/processing tax documents at scale is a pipeline problem</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>Joulea:</strong> 10M+ daily IoT data points via RabbitMQ → PostgreSQL pipeline for fault detection</li>
+                <li><strong>S3 migration:</strong> Moved data to S3 + AWS Glue, cut costs 57%, queried via Athena</li>
+                <li>Relevant because OLarry is acquiring CPA firms and needs to ingest/migrate client data at scale</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div>
+              <div class="card-title">Enterprise API & Integration Work</div>
+              <div class="card-subtitle">Connecting legacy CPA systems to a modern platform</div>
+            </div>
+            <span class="card-arrow">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="prose">
+              <ul>
+                <li><strong>T-Mobile:</strong> Designed REST and SOAP APIs connecting legacy billing systems to modern apps. PCI-compliant.</li>
+                <li><strong>Directly relevant:</strong> OLarry acquires traditional CPA firms and needs to onboard their systems/data into the platform</li>
+                <li>You've done exactly this type of "old world → new world" integration</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 3 — BEHAVIORAL
+    ═══════════════════════════════════════════ -->
+    <div class="tab-content" id="tab-behavioral">
+
+      <div class="callout teal">
+        <strong>Read:</strong> Aaron was a bootcamp instructor. He'll value clear, structured answers. Use STAR format but keep it conversational. Don't ramble. Click each question to expand the STAR outline.
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">01</span>
+          <span class="q-text">Tell me about a time you built something with AI/ML that shipped to production.</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="star-grid">
+            <div class="star-item">
+              <div class="star-letter">S</div>
+              <div class="star-text">Joulea's support team was drowning in repetitive HVAC questions from building operators across 200+ buildings. Response times were slow.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">T</div>
+              <div class="star-text">Build an AI chatbot that could answer technical HVAC questions using our existing documentation and domain knowledge.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">A</div>
+              <div class="star-text">Collaborated with AI engineers to build agent-based RAG chatbot using LangChain + LlamaIndex. Handled document ingestion pipeline and vector store integration (FAISS/Pinecone).</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">R</div>
+              <div class="star-text">85% response accuracy validated by SME testing. Reduced support burden and gave building operators instant answers.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">02</span>
+          <span class="q-text">Describe a time you had to own a feature end-to-end on a small team.</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="star-grid">
+            <div class="star-item">
+              <div class="star-letter">S</div>
+              <div class="star-text">Joulea needed 3D visualization of building HVAC systems so operators could see sensor data spatially, not just in tables.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">T</div>
+              <div class="star-text">Design and build the full feature: React + Three.js frontend, Flask API backend, AWS hosting. Small team, no one else to hand off to.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">A</div>
+              <div class="star-text">Built the 3D renderer in Three.js, wired it to real-time sensor data via REST APIs, and deployed on AWS (EC2, CloudFront, S3). Iterated weekly with UX and customer success.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">R</div>
+              <div class="star-text">Shipped to production for 200+ buildings. Became a key differentiator in sales demos. Led to product expansion discussions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">03</span>
+          <span class="q-text">Tell me about a time you reduced costs or improved system efficiency.</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="star-grid">
+            <div class="star-item">
+              <div class="star-letter">S</div>
+              <div class="star-text">Joulea's PostgreSQL database was growing unsustainably with 10M+ daily IoT data points. Storage costs were climbing and query performance was degrading.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">T</div>
+              <div class="star-text">Migrate historical data to a more cost-effective solution without losing analytical capabilities.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">A</div>
+              <div class="star-text">Designed migration to S3 using AWS Glue for ETL. Built Athena-backed APIs so analytics could query the data lake directly. Kept hot data in RDS for real-time needs.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">R</div>
+              <div class="star-text">57% cost reduction on data storage. Maintained query performance for analytics. Clean hot/cold data separation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">04</span>
+          <span class="q-text">How do you handle integrating with messy, legacy systems?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="star-grid">
+            <div class="star-item">
+              <div class="star-letter">S</div>
+              <div class="star-text">At T-Mobile, modern apps needed to talk to legacy billing systems that only spoke SOAP and used outdated data formats. PCI compliance added constraints.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">T</div>
+              <div class="star-text">Design APIs that bridged old and new without disrupting the billing pipeline that processed 5K+ daily transactions.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">A</div>
+              <div class="star-text">Built REST adapter layer over SOAP endpoints. Implemented OAuth 2.0 for modern auth while maintaining backward compatibility. Created comprehensive documentation and ran 20+ knowledge transfer sessions.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">R</div>
+              <div class="star-text">Successful integration, zero billing disruptions. Reduced onboarding time 30% through documentation. Directly relevant to OLarry's CPA firm acquisition integration challenge.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">05</span>
+          <span class="q-text">Tell me about a time you had to make a technical decision with incomplete information.</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="star-grid">
+            <div class="star-item">
+              <div class="star-letter">S</div>
+              <div class="star-text">Joulea needed to automate labeling of unstructured IoT data, but no one knew how accurate AI labeling would be versus manual expert labeling.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">T</div>
+              <div class="star-text">Decide whether to invest engineering time in a generative-AI labeling workflow or keep the manual process.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">A</div>
+              <div class="star-text">Built a quick proof-of-concept using OpenAI API on a sample dataset. Measured accuracy against manual labels. Presented data to the team showing 90% accuracy at 67% speed improvement.</div>
+            </div>
+            <div class="star-item">
+              <div class="star-letter">R</div>
+              <div class="star-text">Got buy-in, deployed to production. Automated what was previously a fully manual process. Proved the approach with data, not speculation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 4 — TECHNICAL
+    ═══════════════════════════════════════════ -->
+    <div class="tab-content" id="tab-technical">
+
+      <div class="callout">
+        <strong>Context:</strong> With only 5 engineers, Aaron will want to know you can be productive across the stack immediately. Expect practical questions, not LeetCode. He may also ask about AI/ML system design given their product direction.
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">01</span>
+          <span class="q-text">How would you design a document ingestion pipeline that classifies and extracts structured data from tax forms (W-2s, K-1s, 1099s)?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>This is their core product challenge.</strong> Walk through:</p>
+            <ul>
+              <li><strong>Ingestion:</strong> Upload to S3, trigger Lambda/async worker. Support PDF, images, scanned docs.</li>
+              <li><strong>Classification:</strong> LLM or fine-tuned model to identify form type. Similar to your IoT data labeling workflow.</li>
+              <li><strong>Extraction:</strong> OCR (Textract) + LLM for structured field extraction. Validate against known schemas for each form type.</li>
+              <li><strong>Validation:</strong> Human-in-the-loop for low-confidence extractions. CPA reviews flagged items.</li>
+              <li><strong>Storage:</strong> Structured output to PostgreSQL, raw docs in S3. Audit trail for compliance.</li>
+            </ul>
+            <p>Tie back to your Joulea experience: "I built a similar pipeline for IoT sensor data. The pattern is the same: unstructured input, classification, extraction, validation."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">02</span>
+          <span class="q-text">We're acquiring CPA firms. How would you approach migrating their client data into our platform?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <ul>
+              <li><strong>Audit:</strong> Map their data formats, schemas, and systems. Every firm will be different.</li>
+              <li><strong>ETL Pipeline:</strong> Build configurable ingestion (like AWS Glue jobs) that can adapt to different source formats</li>
+              <li><strong>Validation:</strong> Checksums, record counts, client-visible verification step</li>
+              <li><strong>Incremental rollout:</strong> Migrate one firm at a time, validate, then template the process</li>
+              <li>Reference your T-Mobile SOAP→REST work and S3/Glue migration at Joulea</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">03</span>
+          <span class="q-text">How do you approach building a RAG system? What are the failure modes?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>You've built one. Speak from experience:</strong></p>
+            <ul>
+              <li><strong>Chunking strategy matters:</strong> Tax documents have structured sections. Chunk by logical units (form fields, sections), not arbitrary token counts.</li>
+              <li><strong>Embedding model choice:</strong> Balance cost vs. accuracy. Start with OpenAI embeddings, benchmark against open-source.</li>
+              <li><strong>Failure modes:</strong> Hallucination on edge cases, retrieval returning irrelevant chunks, stale index after document updates, context window overflow on complex queries.</li>
+              <li><strong>Mitigations:</strong> Citation/source tracking (you did this at Joulea), confidence scoring, human-in-the-loop for tax-sensitive outputs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">04</span>
+          <span class="q-text">Walk me through how you'd build a React component that handles complex form state (multi-step tax questionnaire).</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <ul>
+              <li><strong>State management:</strong> useReducer or Redux for complex, multi-step state. You used Redux at Joulea.</li>
+              <li><strong>Validation:</strong> Schema-based (Zod/Yup) with per-step validation before advancing</li>
+              <li><strong>Persistence:</strong> Auto-save to API on each step completion so users don't lose progress</li>
+              <li><strong>Conditional logic:</strong> Tax forms have branching paths (business vs. individual, state-specific). Drive UI from a config/schema rather than hardcoding branches.</li>
+              <li><strong>Accessibility:</strong> Progress indicator, keyboard nav, error summaries</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">05</span>
+          <span class="q-text">How do you handle data security and compliance in a system that processes sensitive financial data?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>You've done PCI compliance at T-Mobile. Lean on that:</strong></p>
+            <ul>
+              <li><strong>Encryption:</strong> At rest (AES-256, KMS) and in transit (TLS). Joulea does "proactive data monitoring in transit and at rest."</li>
+              <li><strong>Access control:</strong> RBAC, principle of least privilege. OAuth 2.0 (you implemented this at T-Mobile).</li>
+              <li><strong>Audit logging:</strong> Every data access logged. You built Splunk dashboards at T-Mobile for monitoring.</li>
+              <li><strong>Data isolation:</strong> Multi-tenant architecture with strict tenant boundaries. Tax data can't leak between clients.</li>
+              <li><strong>SOC 2 / IRS safeguards:</strong> Show awareness that tax data has specific regulatory requirements beyond general web app security.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">06</span>
+          <span class="q-text">You're on a 5-person eng team. How do you prioritize what to build vs. what to defer?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <ul>
+              <li>Impact × urgency matrix. At Joulea, weekly releases forced ruthless prioritization.</li>
+              <li><strong>Ship the smallest useful thing.</strong> Validate with real users before investing in polish.</li>
+              <li>Technical debt gets a budget, not ignored. But doesn't block shipping.</li>
+              <li>Talk to CPAs/clients directly. The best prioritization signal comes from users, not Jira backlogs.</li>
+              <li>At this team size, over-engineering is the enemy. Build for today's 5K clients, not hypothetical 500K.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TAB 5 — ASK THEM
+    ═══════════════════════════════════════════ -->
+    <div class="tab-content" id="tab-ask">
+
+      <div class="callout teal">
+        <strong>Note:</strong> Aaron is a co-founder. He can answer strategic questions, not just engineering ones. Ask things that show you've researched the company. Your go-to closer is included at the bottom.
+      </div>
+
+      <div class="q-card open">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">01</span>
+          <span class="q-text">You're acquiring CPA firms and plugging them into the platform. What's the hardest part of that integration from an engineering perspective?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>Why this is good:</strong> Shows you understand their growth strategy. Opens a conversation where you can share your T-Mobile legacy integration experience. Lets Aaron talk about real pain points.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">02</span>
+          <span class="q-text">The funding PR mentioned building an "agentic, AI-powered client experience." What does that look like in practice, and how far along are you?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>Why this is good:</strong> Uses their exact language from the press release. Shows you did your homework. Lets you gauge how much AI work you'd actually be doing vs. traditional CRUD.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">03</span>
+          <span class="q-text">With 5 engineers and 5,000+ clients, how do you think about when to hire vs. when to automate?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>Why this is good:</strong> Shows you think about leverage and scale, not just features. Relevant because OLarry's model depends on AI making a small team do what would normally require 50+ CPAs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">04</span>
+          <span class="q-text">What does a typical week look like for an engineer here? How do you balance new features vs. supporting acquired firms vs. AI R&D?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>Why this is good:</strong> Practical, grounded question. Shows you understand the competing priorities of a company doing acquisitions + product + AI simultaneously.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-card open">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-num">05</span>
+          <span class="q-text">What's your least favorite thing about working at OLarry?</span>
+          <span class="q-arrow">▼</span>
+        </div>
+        <div class="q-body">
+          <div class="prose">
+            <p><strong>Your signature closer.</strong> Disarming, honest, shows confidence. Coming from a co-founder, the answer will tell you a lot about the real culture and challenges. Listen carefully to what he says here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Collapsible cards
+    function toggleCard(header) {
+      header.closest('.card').classList.toggle('open');
+    }
+
+    // Collapsible questions
+    function toggleQ(header) {
+      header.closest('.q-card').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
