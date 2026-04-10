@@ -4,6 +4,101 @@ _Newest first. Updated after each session._
 
 ---
 
+## 2026-04-09
+
+### Context
+- Interview day: Bellwether at 2:30 PM ET (Brad Murray, Head of Technology). Via Ben Melanio (TEEMA Group).
+- Sonam submitted Sia to Palantir FDE on Paraform -- needs confirmation click.
+- No calendar events today.
+
+### Resolved (from carry-forward)
+- Georgia unemployment -- applied, **denied**
+- Student loans -- spoke with someone, denied further help. Applied for IDR, waiting on outcome.
+- Ben Melanio call (04-08) -- resulted in Bellwether interview today
+
+### Still Unchecked
+- Mobility workout -- still not done (hips/psoas still wrecked)
+- LeetCode -- streak dead 21+ days
+- Clothes donation
+- Reply to Sonam re: other Paraform roles
+
+### Bellwether Interview (2:30 PM ET)
+- Met Brad Murray (Head of Tech), Cody (Sigma/Salesforce BI, ~10-15yr exp), Steve (enterprise/AI, 40yr exp)
+- Bellwether = AI for commercial real estate. 13 years of building data, unstructured and ugly. Core problem: make it clean, accurate, and autonomous.
+- Key challenges: contextual extraction from massive unstructured data, RAG vs large context windows, AI validation/hallucination, weak CI/CD
+- Brad's vision: agentic automation -- agents that pull Jira tickets, scope work, build, test, PR, and ship autonomously. Not full autopilot but meaningful automation.
+- Cody does Salesforce-to-Sigma BI migration. Steve does enterprise AI (closest to what Sia would do).
+- Vibes: super chill, Brad curses, no-bullshit culture. Steve said team is his favorite part. Cody's least favorite: requirements gathering from customers.
+- Sia and Steve bonded over IBM RAG videos.
+- Interview felt great -- good rapport, natural conversation.
+- Next step: likely interview with Brad + a founder/executive. Waiting on Ben Melanio to confirm.
+
+### Decisions
+- Bellwether: strong culture fit, real AI problems, would be building exactly what Sia wants to build. High interest.
+
+---
+
+## 2026-04-07
+
+### Context
+- OLarry interview day. Woke up unrested. Felt like shit all morning.
+
+### Done
+- OLarry screen with Aaron Wayne (co-founder). Went great -- good rapport, laughing, natural conversation. Moved to coding challenge with Dean Chen.
+- Sent reply to Dean with availability
+- Built olarry-sell.html prep page (pitch scripts, stories with OLarry hooks, timed practice)
+- Built olarry.html research page (company intel, technical questions, questions to ask)
+- Called with Vikash Kumar (Q1 Tech / TCS) -- AI/ML Engineer role, $130K + benefits, onsite Atlanta. Sent updated ML-focused resume.
+- Spoke with Michaela (military job, referred by brother) -- couldn't share much info
+- Applied to Web Developer Full Stack (LinkedIn/Confidential)
+
+### Skipped
+- Job apps (bulk) -- didn't happen
+- Student loan research -- didn't happen
+- Clothes donation -- didn't happen
+- Mobility workout -- didn't happen, paid for it overnight (hips/psoas wrecked)
+- LeetCode -- streak dead 20+ days
+- System Design, Farsi -- not done
+
+### Bad
+- Smoked weed, ate excessively. 20% Whoop recovery. Woke up at 4 AM with severe hip/psoas pain, couldn't sleep until 6 AM.
+
+### New Rejections
+- Dropbox (Dash Experiences)
+
+---
+
+## 2026-04-06
+
+### Context
+- Travel day — flew FLL to ATL (landed 11:29 AM). Weekend in Miami with family for mom's Hyrox competition.
+- Gyde Health interview scheduled for 4 PM ET with Andrew Shults (CTO/Head of Eng). No-show due to Google Meet glitch — both sides on the correct link, never connected. Rescheduled to April 15.
+
+### Done
+- Built Gyde Health interview prep HTML page (dark/light mode, countdown timer, Meet link)
+- Built Story Lab HTML page — pitch scripts, 6 real stories in S-A-R format, timed practice flashcard drill
+- Prepped Gyde interview fully: company research, Andrew Shults background, 8 questions to ask
+- Handled Gyde no-show with grace — check-in email to Matt + Andrew, clean reply to reschedule
+- Sent reply to Angela Adams confirming Fora Travel submission (all 3 companies: OLarry, Camber, Fora)
+- Sent intro reply to Aaron at OLarry (cc: Angela) with availability
+
+### Skipped
+- LeetCode — streak still dead (18+ days)
+- System Design — not done
+- Farsi — not done
+- Machina Cognita tracker update — still pending
+
+### Decisions
+- Gyde is rescheduled April 15. Prep is already done — just review the HTML page the morning of.
+- Angela pipeline: all three companies (OLarry, Camber Health, Fora) are being submitted.
+
+### Tomorrow (2026-04-07)
+1. **LeetCode** — 1 problem. The streak has been dead for 18+ days. This is the day it restarts.
+2. **Machina Cognita** — log the interview outcome in tracker, watch for Natalie's update (due by Apr 10)
+3. **OLarry** — follow up if Aaron hasn't responded to the intro email
+
+---
+
 ## 2026-03-31
 
 ### Context
