@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML/AI Interview Deep Dive - Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-card-hover: #1a1a26;
+    --bg-code: #0d0d14;
+    --border: #1e1e2e;
+    --border-accent: #2a2a3e;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --text-bright: #ffffff;
+    --accent: #6ee7b7;
+    --accent-dim: #2d6a54;
+    --accent-glow: rgba(110, 231, 183, 0.08);
+    --orange: #fbbf24;
+    --orange-dim: #78591a;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --pink: #f472b6;
+    --cyan: #22d3ee;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 32px 0;
+  }
+
+  .nav-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0 24px;
+    margin-bottom: 24px;
+  }
+
+  .nav-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 16px 24px 8px;
+  }
+
+  .nav a {
+    display: block;
+    padding: 8px 24px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav a:hover {
+    color: var(--text-bright);
+    background: var(--accent-glow);
+    border-left-color: var(--accent);
+  }
+
+  .nav a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-glow);
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: 280px;
+    max-width: 860px;
+    padding: 48px 56px 120px;
+  }
+
+  /* HERO */
+  .hero {
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 600px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* CARDS */
+  .concept-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 0;
+    transition: border-color 0.2s;
+  }
+
+  .concept-card:hover { border-color: var(--border-accent); }
+
+  .concept-card.highlight {
+    border-left: 3px solid var(--accent);
+  }
+
+  .concept-card.warning {
+    border-left: 3px solid var(--orange);
+  }
+
+  .concept-card.example {
+    border-left: 3px solid var(--blue);
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card-label.analogy { color: var(--accent); }
+  .card-label.interview { color: var(--orange); }
+  .card-label.example-label { color: var(--blue); }
+  .card-label.danger { color: var(--red); }
+  .card-label.your-work { color: var(--purple); }
+  .card-label.key-point { color: var(--cyan); }
+
+  /* CODE */
+  pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  p code, li code {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  .keyword { color: var(--purple); }
+  .string { color: var(--accent); }
+  .comment { color: var(--text-dim); }
+  .func { color: var(--blue); }
+  .num { color: var(--orange); }
+
+  /* LISTS */
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 14px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  /* DIAGRAM */
+  .pipeline-diagram {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 24px 0;
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .pipeline-node {
+    background: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 6px;
+    padding: 10px 16px;
+    color: var(--text-bright);
+    white-space: nowrap;
+  }
+
+  .pipeline-node.ml { border-color: var(--accent); color: var(--accent); }
+  .pipeline-node.data { border-color: var(--blue); color: var(--blue); }
+  .pipeline-node.output { border-color: var(--orange); color: var(--orange); }
+
+  .pipeline-arrow { color: var(--text-dim); font-size: 18px; }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border-bottom: 2px solid var(--border-accent);
+    color: var(--text-dim);
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:hover td { background: var(--accent-glow); }
+
+  strong { color: var(--text-bright); }
+  em { color: var(--text-dim); font-style: italic; }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav { display: none; }
+    .main { margin-left: 0; padding: 32px 24px 80px; }
+    .hero h1 { font-size: 32px; }
+    .pipeline-flow { flex-direction: column; }
+    .pipeline-arrow { transform: rotate(90deg); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-title">Study Guide</div>
+
+  <div class="nav-section-label">Foundations</div>
+  <a href="#ml-pipeline">The ML Pipeline</a>
+  <a href="#train-test">Train/Test Splits</a>
+  <a href="#metrics">Precision, Recall, F1</a>
+  <a href="#feature-eng">Feature Engineering</a>
+  <a href="#scikit-learn">Scikit-learn in Practice</a>
+  <a href="#fine-tuning">Model Fine-Tuning</a>
+  <a href="#classification">Classification Models</a>
+  <a href="#time-series">Time-Series Basics</a>
+
+  <div class="nav-section-label">AI / LLM Systems</div>
+  <a href="#embeddings">Embeddings & Similarity</a>
+  <a href="#vector-dbs">Vector Databases</a>
+  <a href="#rag">RAG Architecture</a>
+  <a href="#langchain">LangChain & LangGraph</a>
+  <a href="#llamaindex">LlamaIndex</a>
+  <a href="#prompt-eng">Prompt Engineering</a>
+
+  <div class="nav-section-label">Your Work</div>
+  <a href="#joulea-pipeline">Joulea IoT Pipeline</a>
+  <a href="#chatbot">RAG Chatbot</a>
+  <a href="#data-labeling">AI Data Labeling</a>
+  <a href="#fault-detection">Fault Detection Story</a>
+  <a href="#interview-scripts">Interview Scripts</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>ML/AI <span>Interview Deep Dive</span></h1>
+    <p>Everything you need to speak confidently about machine learning, AI systems, and the work you've actually done. Built to survive a technical conversation, not just a recruiter screen.</p>
+    <div class="tag-row">
+      <span class="tag">Scikit-learn</span>
+      <span class="tag">RAG</span>
+      <span class="tag">LangChain</span>
+      <span class="tag">FAISS</span>
+      <span class="tag">Embeddings</span>
+      <span class="tag">Feature Engineering</span>
+      <span class="tag">Time-Series</span>
+      <span class="tag">Fine-Tuning</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: THE ML PIPELINE -->
+  <!-- ============================================================ -->
+  <div class="section" id="ml-pipeline">
+    <div class="section-number">01</div>
+    <h2>The ML Pipeline: End to End</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Think of an ML pipeline like building a restaurant. You don't just cook food (train a model). You first <strong>source ingredients</strong> (collect data), <strong>prep them</strong> (clean and transform), <strong>taste-test the recipe</strong> (evaluate), and then <strong>serve to customers</strong> (deploy). If any step is sloppy, the final dish suffers. Most ML engineering is the prep work, not the cooking.</p>
+    </div>
+
+    <p>The standard ML pipeline has these stages. Every interviewer expects you to know this flow:</p>
+
+    <div class="pipeline-diagram">
+      <div class="pipeline-flow">
+        <div class="pipeline-node data">Raw Data</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Clean & Transform</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Feature Engineering</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">Train / Validate</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">Evaluate</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node output">Deploy / Monitor</div>
+      </div>
+    </div>
+
+    <h3>Stage by Stage</h3>
+
+    <p><strong>1. Data Collection</strong> - You gather your raw inputs. At Joulea, this was IoT sensor data streaming through RabbitMQ: temperature readings, humidity, energy consumption, pressure values, all coming in from 200+ buildings at 10M+ data points per day.</p>
+
+    <p><strong>2. Data Cleaning & Transformation</strong> - Raw data is always messy. Sensors drop out, send duplicates, use different naming conventions (TMP vs TEMP vs Temperature). You normalize formats, handle missing values (imputation or removal), remove outliers, and align timestamps. This is where your generative AI labeling workflow fits in: using the OpenAI API to standardize vendor-specific naming.</p>
+
+    <p><strong>3. Feature Engineering</strong> - This is where you go from raw readings to <em>meaningful signals</em>. More on this in the Feature Engineering section.</p>
+
+    <p><strong>4. Model Training & Validation</strong> - Split your data, pick an algorithm, train it, tune hyperparameters. More detail in the Train/Test and Scikit-learn sections.</p>
+
+    <p><strong>5. Evaluation</strong> - Measure how good the model is using metrics like precision, recall, F1 score, accuracy. Covered in the Metrics section.</p>
+
+    <p><strong>6. Deployment & Monitoring</strong> - Put the model into production. At Joulea, this means the model runs against incoming sensor data in real-time or near-real-time, flagging HVAC faults. You monitor for <strong>model drift</strong> (when the model's accuracy degrades over time because the incoming data distribution changes).</p>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>When asked "walk me through an ML pipeline," don't jump straight to the model. Start with the data. Interviewers want to hear that you understand the <strong>full lifecycle</strong>, not just the scikit-learn `.fit()` call. Your Joulea experience is perfect here because you literally built the data ingestion pipeline that feeds the ML system.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: TRAIN/TEST SPLITS -->
+  <!-- ============================================================ -->
+  <div class="section" id="train-test">
+    <div class="section-number">02</div>
+    <h2>Train/Test Splits</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Imagine studying for an exam. If you practice using the <em>exact same questions</em> that will appear on the test, you'll ace it, but you haven't actually learned anything. You've just memorized answers. A train/test split is like studying with one set of problems (training set) and then proving you learned the concepts by solving <em>different</em> problems you've never seen (test set).</p>
+    </div>
+
+    <h3>The Core Idea</h3>
+    <p>You split your dataset into portions so the model is evaluated on data it has <strong>never seen during training</strong>. This tells you whether the model has actually learned patterns vs. just memorizing your data (overfitting).</p>
+
+    <h3>Common Splits</h3>
+    <table>
+      <tr><th>Split</th><th>Ratio</th><th>Purpose</th></tr>
+      <tr>
+        <td><strong>Train</strong></td>
+        <td>70-80%</td>
+        <td>Model learns patterns from this data</td>
+      </tr>
+      <tr>
+        <td><strong>Validation</strong></td>
+        <td>10-15%</td>
+        <td>Tune hyperparameters, compare model variants. Like a practice exam.</td>
+      </tr>
+      <tr>
+        <td><strong>Test</strong></td>
+        <td>10-15%</td>
+        <td>Final evaluation only. Touch this ONCE. This is the real exam.</td>
+      </tr>
+    </table>
+
+    <h3>In Code (Scikit-learn)</h3>
+<pre><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
+
+<span class="comment"># Simple 80/20 split</span>
+X_train, X_test, y_train, y_test = <span class="func">train_test_split</span>(
+    features, labels,
+    test_size=<span class="num">0.2</span>,
+    random_state=<span class="num">42</span>  <span class="comment"># reproducibility</span>
+)
+
+<span class="comment"># With validation set: first split 80/20, then split train into 75/25</span>
+X_train, X_test, y_train, y_test = <span class="func">train_test_split</span>(
+    features, labels, test_size=<span class="num">0.2</span>, random_state=<span class="num">42</span>
+)
+X_train, X_val, y_train, y_val = <span class="func">train_test_split</span>(
+    X_train, y_train, test_size=<span class="num">0.25</span>, random_state=<span class="num">42</span>
+)
+<span class="comment"># Result: 60% train, 20% validation, 20% test</span></pre>
+
+    <h3>Cross-Validation</h3>
+    <p>When you don't have a ton of data, <strong>k-fold cross-validation</strong> is better than a single split. You divide data into k folds (usually 5 or 10), train on k-1 folds, validate on the remaining fold, and repeat k times. Every data point gets used for both training and validation.</p>
+
+<pre><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score
+
+scores = <span class="func">cross_val_score</span>(model, X, y, cv=<span class="num">5</span>, scoring=<span class="string">'f1'</span>)
+print(f<span class="string">"Mean F1: {scores.mean():.3f} (+/- {scores.std():.3f})"</span>)</pre>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>For time-series data like HVAC readings, you <strong>cannot</strong> do random splits. You must split chronologically: train on older data, test on newer data. Otherwise you're "leaking" future information into training. This is called <strong>temporal leakage</strong> and it's a classic mistake. Mention this proactively and you'll stand out.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We had millions of data points per day from 200+ buildings. When building fault detection models, we split chronologically, training on historical data and validating on recent unseen data, because random splits would leak future sensor patterns into the model. We used time-based cross-validation to account for seasonal variation in HVAC behavior."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: METRICS -->
+  <!-- ============================================================ -->
+  <div class="section" id="metrics">
+    <div class="section-number">03</div>
+    <h2>Precision, Recall, F1 Score</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Imagine you're a smoke detector. <strong>Precision</strong> = "When I beep, is there actually a fire?" (Are my alarms real or false alarms?). <strong>Recall</strong> = "When there IS a fire, do I beep?" (Am I catching all the real fires?). A smoke detector with high precision but low recall barely ever beeps, but misses real fires. One with high recall but low precision catches every fire but also beeps when you make toast. You need a balance.</p>
+    </div>
+
+    <h3>The Confusion Matrix</h3>
+    <p>Everything flows from four numbers:</p>
+    <table>
+      <tr><th></th><th>Predicted Positive</th><th>Predicted Negative</th></tr>
+      <tr>
+        <td><strong>Actually Positive</strong></td>
+        <td style="color: var(--accent);">True Positive (TP)</td>
+        <td style="color: var(--red);">False Negative (FN) - Missed it</td>
+      </tr>
+      <tr>
+        <td><strong>Actually Negative</strong></td>
+        <td style="color: var(--red);">False Positive (FP) - False alarm</td>
+        <td style="color: var(--accent);">True Negative (TN)</td>
+      </tr>
+    </table>
+
+    <h3>The Metrics</h3>
+
+    <p><strong>Precision</strong> = TP / (TP + FP)<br>
+    "Of everything I flagged as positive, how many were actually positive?"<br>
+    High precision = few false alarms.</p>
+
+    <p><strong>Recall</strong> (also called Sensitivity) = TP / (TP + FN)<br>
+    "Of all actual positives, how many did I catch?"<br>
+    High recall = few missed cases.</p>
+
+    <p><strong>F1 Score</strong> = 2 * (Precision * Recall) / (Precision + Recall)<br>
+    The harmonic mean of precision and recall. It balances both. If either precision or recall is very low, F1 will be low too.</p>
+
+    <p><strong>Accuracy</strong> = (TP + TN) / Total<br>
+    Sounds great but is <strong>misleading with imbalanced data</strong>. If 95% of your HVAC readings are "normal" and 5% are "fault," a model that always predicts "normal" has 95% accuracy but catches zero faults. Useless.</p>
+
+    <h3>Which to Optimize For?</h3>
+
+    <div class="concept-card">
+      <div class="card-label key-point">DEPENDS ON THE COST OF ERRORS</div>
+      <p><strong>Optimize Precision</strong> when false positives are expensive. Example: sending a maintenance crew to a building costs money. You don't want to dispatch them for a false alarm.</p>
+      <p><strong>Optimize Recall</strong> when false negatives are dangerous. Example: missing a real HVAC fault could cause equipment failure or tenant complaints. You'd rather have some false alarms than miss a real problem.</p>
+      <p><strong>Optimize F1</strong> when you need a balance, which is the most common choice for fault detection.</p>
+    </div>
+
+    <h3>In Code</h3>
+<pre><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> (
+    precision_score, recall_score, f1_score,
+    classification_report, confusion_matrix
+)
+
+<span class="comment"># Individual metrics</span>
+precision = <span class="func">precision_score</span>(y_test, y_pred)
+recall = <span class="func">recall_score</span>(y_test, y_pred)
+f1 = <span class="func">f1_score</span>(y_test, y_pred)
+
+<span class="comment"># The full picture in one call</span>
+print(<span class="func">classification_report</span>(y_test, y_pred))
+
+<span class="comment"># Output looks like:
+#               precision    recall  f1-score   support
+#     normal       0.97      0.95      0.96      1200
+#      fault       0.72      0.81      0.76       150
+#   accuracy                           0.93      1350</span></pre>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"For HVAC fault detection, we prioritized recall slightly over precision because a missed fault could lead to equipment degradation or wasted energy, and we'd rather flag something for a technician to review than let a real fault go unnoticed. We tracked F1 as our primary metric since we still needed reasonable precision to avoid alert fatigue for building managers."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: FEATURE ENGINEERING -->
+  <!-- ============================================================ -->
+  <div class="section" id="feature-eng">
+    <div class="section-number">04</div>
+    <h2>Feature Engineering</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Think of raw sensor data like raw ingredients in a kitchen. A pile of flour, eggs, and sugar is useless to a restaurant customer. Feature engineering is the chef's work: combining, transforming, and presenting those raw ingredients into something meaningful. A "rolling average temperature over 24 hours" is a <em>dish</em>; a single temperature reading at 2:47 PM is just an <em>egg</em>.</p>
+    </div>
+
+    <h3>What Is It?</h3>
+    <p>Feature engineering is the process of transforming raw data into <strong>features</strong> (input variables) that make machine learning models more effective. It's widely considered the highest-leverage activity in applied ML. Better features beat better algorithms almost every time.</p>
+
+    <h3>Feature Types for HVAC / Time-Series Data</h3>
+
+    <h4>Statistical Aggregations</h4>
+    <p>Instead of individual readings, you compute summaries over time windows:</p>
+    <ul>
+      <li><strong>Rolling mean</strong> - Average temperature over the last 1hr, 6hr, 24hr</li>
+      <li><strong>Rolling std deviation</strong> - How much is the reading fluctuating? High variance might signal a malfunctioning sensor.</li>
+      <li><strong>Min / Max in window</strong> - Did the temperature spike or drop?</li>
+      <li><strong>Rate of change (delta)</strong> - How fast is the temperature changing? A rapid drop could signal a fault.</li>
+    </ul>
+
+    <h4>Temporal Features</h4>
+    <p>Time itself carries information:</p>
+    <ul>
+      <li><strong>Hour of day</strong> - HVAC behavior differs at 3 AM vs 3 PM</li>
+      <li><strong>Day of week</strong> - Weekday vs weekend occupancy patterns</li>
+      <li><strong>Season / month</strong> - Summer cooling vs winter heating</li>
+      <li><strong>Is business hours?</strong> - Binary flag: 1 if 8AM-6PM weekday, 0 otherwise</li>
+    </ul>
+
+    <h4>Domain-Specific Features</h4>
+    <ul>
+      <li><strong>Delta-T (supply vs return temperature)</strong> - A core HVAC metric. If the difference between supply and return air is abnormal, something's wrong.</li>
+      <li><strong>Outdoor temp vs indoor temp ratio</strong> - Is the building responding appropriately to outside conditions?</li>
+      <li><strong>Deviation from setpoint</strong> - How far is the actual reading from the target?</li>
+      <li><strong>Equipment runtime hours</strong> - Longer runtimes can predict maintenance needs</li>
+    </ul>
+
+    <h4>Lag Features</h4>
+    <p>Past values as input features. "What was the temperature 1 hour ago? 6 hours ago? Yesterday at the same time?" This helps the model learn temporal patterns.</p>
+
+    <h3>In Code</h3>
+<pre><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+
+<span class="comment"># Rolling statistics</span>
+df[<span class="string">'temp_rolling_mean_24h'</span>] = df[<span class="string">'temperature'</span>].<span class="func">rolling</span>(window=<span class="num">24</span>).<span class="func">mean</span>()
+df[<span class="string">'temp_rolling_std_24h'</span>]  = df[<span class="string">'temperature'</span>].<span class="func">rolling</span>(window=<span class="num">24</span>).<span class="func">std</span>()
+df[<span class="string">'temp_rate_of_change'</span>]   = df[<span class="string">'temperature'</span>].<span class="func">diff</span>()
+
+<span class="comment"># Temporal features</span>
+df[<span class="string">'hour'</span>]         = df[<span class="string">'timestamp'</span>].dt.hour
+df[<span class="string">'day_of_week'</span>]  = df[<span class="string">'timestamp'</span>].dt.dayofweek
+df[<span class="string">'is_weekend'</span>]   = df[<span class="string">'day_of_week'</span>].<span class="func">isin</span>([<span class="num">5</span>, <span class="num">6</span>]).<span class="func">astype</span>(int)
+df[<span class="string">'is_business_hours'</span>] = (
+    (df[<span class="string">'hour'</span>] >= <span class="num">8</span>) & (df[<span class="string">'hour'</span>] <= <span class="num">18</span>) & (~df[<span class="string">'is_weekend'</span>])
+).<span class="func">astype</span>(int)
+
+<span class="comment"># Domain features</span>
+df[<span class="string">'delta_t'</span>] = df[<span class="string">'supply_temp'</span>] - df[<span class="string">'return_temp'</span>]
+df[<span class="string">'setpoint_deviation'</span>] = df[<span class="string">'actual_temp'</span>] - df[<span class="string">'setpoint_temp'</span>]
+
+<span class="comment"># Lag features</span>
+df[<span class="string">'temp_lag_1h'</span>]  = df[<span class="string">'temperature'</span>].<span class="func">shift</span>(<span class="num">1</span>)
+df[<span class="string">'temp_lag_24h'</span>] = df[<span class="string">'temperature'</span>].<span class="func">shift</span>(<span class="num">24</span>)</pre>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>If asked "what features did you engineer?", don't just say "rolling averages." Be specific: "We computed rolling 24-hour mean and standard deviation for temperature readings, created delta-T features comparing supply and return air temps, added temporal signals like hour-of-day and is-business-hours flags, and used lag features to capture how current readings compare to the same time yesterday. The temporal and delta-T features had the highest feature importance in our Random Forest model."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: SCIKIT-LEARN -->
+  <!-- ============================================================ -->
+  <div class="section" id="scikit-learn">
+    <div class="section-number">05</div>
+    <h2>Scikit-learn in Practice</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Scikit-learn is to machine learning what Express.js is to backend APIs. It's the standard library that gives you a consistent interface for doing the most common ML tasks. Every model follows the same pattern: <code>fit()</code> to train, <code>predict()</code> to infer, <code>score()</code> to evaluate. Learn one, you know the API for all of them.</p>
+    </div>
+
+    <h3>The Universal Pattern</h3>
+<pre><span class="comment"># EVERY scikit-learn model follows this exact pattern:</span>
+
+<span class="comment"># 1. Import the model class</span>
+<span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier
+
+<span class="comment"># 2. Create an instance with hyperparameters</span>
+model = <span class="func">RandomForestClassifier</span>(
+    n_estimators=<span class="num">100</span>,    <span class="comment"># number of trees</span>
+    max_depth=<span class="num">10</span>,         <span class="comment"># limit tree depth to prevent overfitting</span>
+    random_state=<span class="num">42</span>
+)
+
+<span class="comment"># 3. Train (fit) on training data</span>
+model.<span class="func">fit</span>(X_train, y_train)
+
+<span class="comment"># 4. Predict on new data</span>
+y_pred = model.<span class="func">predict</span>(X_test)
+
+<span class="comment"># 5. Evaluate</span>
+score = model.<span class="func">score</span>(X_test, y_test)  <span class="comment"># accuracy by default</span></pre>
+
+    <h3>Models You Should Know</h3>
+
+    <table>
+      <tr><th>Model</th><th>Use When</th><th>Pros</th><th>Cons</th></tr>
+      <tr>
+        <td><strong>Random Forest</strong></td>
+        <td>Good default for classification and regression. Great first model to try.</td>
+        <td>Handles non-linear data, feature importance built in, hard to overfit</td>
+        <td>Slower to train on huge datasets, less interpretable than single tree</td>
+      </tr>
+      <tr>
+        <td><strong>Gradient Boosting (XGBoost, LightGBM)</strong></td>
+        <td>When you need maximum performance on tabular data</td>
+        <td>Usually highest accuracy for tabular, handles missing data</td>
+        <td>Easier to overfit, more hyperparameters to tune</td>
+      </tr>
+      <tr>
+        <td><strong>Logistic Regression</strong></td>
+        <td>Simple binary classification, baseline model, interpretability needed</td>
+        <td>Fast, interpretable, good baseline</td>
+        <td>Can't capture non-linear relationships without feature engineering</td>
+      </tr>
+      <tr>
+        <td><strong>SVM (Support Vector Machine)</strong></td>
+        <td>Smaller datasets, high-dimensional features</td>
+        <td>Works well in high dimensions</td>
+        <td>Slow on large datasets, doesn't scale well</td>
+      </tr>
+    </table>
+
+    <h3>Preprocessing Pipeline</h3>
+    <p>Real ML code uses scikit-learn <strong>Pipelines</strong> to chain preprocessing and modeling together. This prevents data leakage and makes your code reproducible:</p>
+
+<pre><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline
+<span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler
+<span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier
+
+pipeline = <span class="func">Pipeline</span>([
+    (<span class="string">'scaler'</span>, <span class="func">StandardScaler</span>()),        <span class="comment"># normalize features</span>
+    (<span class="string">'classifier'</span>, <span class="func">RandomForestClassifier</span>(
+        n_estimators=<span class="num">100</span>, max_depth=<span class="num">10</span>
+    ))
+])
+
+<span class="comment"># Fit entire pipeline (scaler + model) on training data</span>
+pipeline.<span class="func">fit</span>(X_train, y_train)
+
+<span class="comment"># Predict - scaler automatically transforms before predicting</span>
+y_pred = pipeline.<span class="func">predict</span>(X_test)</pre>
+
+    <h3>Hyperparameter Tuning</h3>
+<pre><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV
+
+param_grid = {
+    <span class="string">'n_estimators'</span>: [<span class="num">50</span>, <span class="num">100</span>, <span class="num">200</span>],
+    <span class="string">'max_depth'</span>: [<span class="num">5</span>, <span class="num">10</span>, <span class="num">20</span>, None],
+    <span class="string">'min_samples_split'</span>: [<span class="num">2</span>, <span class="num">5</span>, <span class="num">10</span>]
+}
+
+grid_search = <span class="func">GridSearchCV</span>(
+    RandomForestClassifier(), param_grid,
+    cv=<span class="num">5</span>, scoring=<span class="string">'f1'</span>, n_jobs=-<span class="num">1</span>
+)
+grid_search.<span class="func">fit</span>(X_train, y_train)
+print(f<span class="string">"Best params: {grid_search.best_params_}"</span>)
+print(f<span class="string">"Best F1: {grid_search.best_score_:.3f}"</span>)</pre>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We used a Random Forest classifier as our primary model for HVAC fault detection because it handles mixed feature types well, provides built-in feature importance rankings, and is robust against overfitting with our high-dimensional sensor data. We used scikit-learn's Pipeline to chain StandardScaler with the classifier, and tuned hyperparameters using GridSearchCV with 5-fold time-series cross-validation, optimizing for F1 score."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: FINE-TUNING -->
+  <!-- ============================================================ -->
+  <div class="section" id="fine-tuning">
+    <div class="section-number">06</div>
+    <h2>Model Fine-Tuning</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Fine-tuning is like taking someone who speaks fluent English (a pre-trained model) and teaching them industry jargon for HVAC systems. You're not teaching them language from scratch. You're adding specialized knowledge on top of what they already know. This is WAY cheaper and faster than training from zero.</p>
+    </div>
+
+    <h3>Two Contexts for "Fine-Tuning"</h3>
+
+    <p>In interviews, "fine-tuning" can mean two different things depending on context:</p>
+
+    <h4>1. Traditional ML Fine-Tuning (Scikit-learn world)</h4>
+    <p>This means <strong>hyperparameter tuning</strong>: adjusting knobs on your model (learning rate, tree depth, number of estimators) to improve performance. This is what GridSearchCV does. It's the more common meaning in classical ML.</p>
+
+    <h4>2. LLM Fine-Tuning (AI/NLP world)</h4>
+    <p>This means taking a pre-trained foundation model (like GPT or an open-source model) and <strong>training it further on your own domain-specific data</strong> to specialize it. There are several approaches:</p>
+
+    <table>
+      <tr><th>Approach</th><th>What It Does</th><th>Cost</th></tr>
+      <tr>
+        <td><strong>Full Fine-Tuning</strong></td>
+        <td>Update ALL model weights on your data</td>
+        <td>Very expensive. Needs lots of data + GPUs.</td>
+      </tr>
+      <tr>
+        <td><strong>LoRA / QLoRA</strong></td>
+        <td>Freeze most weights, train small adapter layers</td>
+        <td>Much cheaper. Can fine-tune on a single GPU.</td>
+      </tr>
+      <tr>
+        <td><strong>Prompt Tuning</strong></td>
+        <td>Learn optimal prompt embeddings, freeze model</td>
+        <td>Cheapest. Model weights never change.</td>
+      </tr>
+      <tr>
+        <td><strong>RAG (what you did)</strong></td>
+        <td>Don't change the model at all. Feed it relevant context at inference time.</td>
+        <td>No training cost. Just retrieval infrastructure.</td>
+      </tr>
+    </table>
+
+    <div class="concept-card">
+      <div class="card-label key-point">KEY DISTINCTION</div>
+      <p><strong>RAG vs Fine-Tuning</strong>: RAG is "giving the model a reference sheet during the exam." Fine-tuning is "teaching the model before the exam." RAG is better when your knowledge base changes frequently (like building documentation). Fine-tuning is better when you need the model to learn a consistent style or behavior pattern.</p>
+    </div>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"For our chatbot, we chose RAG over fine-tuning because our building documentation changed frequently, and we needed the system to always reference the latest specs without retraining. However, for the data labeling workflow, we effectively used prompt engineering as a form of lightweight tuning, providing detailed examples and context in the system prompt to guide the OpenAI API's classification behavior for our specific sensor naming conventions."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: CLASSIFICATION -->
+  <!-- ============================================================ -->
+  <div class="section" id="classification">
+    <div class="section-number">07</div>
+    <h2>Classification Models</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Classification is like a doctor diagnosing a patient. The patient presents symptoms (features), and the doctor categorizes them into a diagnosis (class label). <strong>Binary classification</strong>: "Is this patient sick or healthy?" <strong>Multi-class</strong>: "Does this patient have a cold, flu, or allergies?" Your HVAC fault detection is classification: "Is this sensor reading normal, or is there a fault? And if there's a fault, what type?"</p>
+    </div>
+
+    <h3>Binary vs Multi-Class</h3>
+    <p><strong>Binary</strong>: Two classes. Fault / No Fault. Spam / Not Spam. This is your primary use case.</p>
+    <p><strong>Multi-class</strong>: Multiple fault types. Could be: "normal," "stuck valve," "sensor drift," "refrigerant leak," etc.</p>
+
+    <h3>The Classification Workflow (Your HVAC Fault Detection)</h3>
+
+<pre><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier
+<span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
+<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report
+<span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler
+<span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline
+
+<span class="comment"># 1. Load your sensor data with engineered features</span>
+df = pd.<span class="func">read_csv</span>(<span class="string">'hvac_features.csv'</span>)
+
+<span class="comment"># 2. Define features (X) and label (y)</span>
+feature_cols = [
+    <span class="string">'temp_rolling_mean_24h'</span>, <span class="string">'temp_rolling_std_24h'</span>,
+    <span class="string">'delta_t'</span>, <span class="string">'setpoint_deviation'</span>,
+    <span class="string">'hour'</span>, <span class="string">'is_business_hours'</span>,
+    <span class="string">'temp_rate_of_change'</span>, <span class="string">'runtime_hours'</span>
+]
+X = df[feature_cols]
+y = df[<span class="string">'is_fault'</span>]  <span class="comment"># 0 = normal, 1 = fault</span>
+
+<span class="comment"># 3. Time-based split (NOT random for time-series!)</span>
+split_idx = int(len(df) * <span class="num">0.8</span>)
+X_train, X_test = X[:split_idx], X[split_idx:]
+y_train, y_test = y[:split_idx], y[split_idx:]
+
+<span class="comment"># 4. Build and train pipeline</span>
+pipeline = <span class="func">Pipeline</span>([
+    (<span class="string">'scaler'</span>, <span class="func">StandardScaler</span>()),
+    (<span class="string">'clf'</span>, <span class="func">RandomForestClassifier</span>(
+        n_estimators=<span class="num">100</span>, max_depth=<span class="num">10</span>,
+        class_weight=<span class="string">'balanced'</span>  <span class="comment"># handles imbalanced data!</span>
+    ))
+])
+pipeline.<span class="func">fit</span>(X_train, y_train)
+
+<span class="comment"># 5. Evaluate</span>
+y_pred = pipeline.<span class="func">predict</span>(X_test)
+print(<span class="func">classification_report</span>(y_test, y_pred))</pre>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>Notice <code>class_weight='balanced'</code> above. This is critical for imbalanced data. In HVAC, most readings are normal (maybe 95%) and faults are rare (5%). Without class weighting, the model will just predict "normal" every time and get 95% accuracy while being completely useless. <code>class_weight='balanced'</code> tells the model to pay more attention to the rare fault class. Always mention this when discussing fault detection.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 8: TIME-SERIES -->
+  <!-- ============================================================ -->
+  <div class="section" id="time-series">
+    <div class="section-number">08</div>
+    <h2>Time-Series Basics</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Time-series data is like a heartbeat monitor. The <em>order</em> matters. You can't shuffle the readings and expect them to make sense. Each point depends on what came before it. This is fundamentally different from tabular data like "predict house prices from square footage and bedrooms," where row order doesn't matter.</p>
+    </div>
+
+    <h3>Why Time-Series Is Special</h3>
+    <ul>
+      <li><strong>Temporal dependencies</strong>: Today's reading is correlated with yesterday's. You can't treat rows as independent.</li>
+      <li><strong>Seasonality</strong>: HVAC data has daily patterns (day vs night), weekly patterns (weekday vs weekend), and annual patterns (summer vs winter).</li>
+      <li><strong>Trend</strong>: Equipment degrades over time. A slow upward trend in energy consumption might signal declining efficiency.</li>
+      <li><strong>No random splits</strong>: As discussed, you MUST split chronologically.</li>
+    </ul>
+
+    <h3>Time-Series Cross-Validation</h3>
+    <p>Standard k-fold won't work. Use <strong>TimeSeriesSplit</strong>:</p>
+
+<pre><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> TimeSeriesSplit
+
+tscv = <span class="func">TimeSeriesSplit</span>(n_splits=<span class="num">5</span>)
+
+<span class="comment"># Each fold trains on all prior data, tests on next chunk:
+# Fold 1: Train [---]  Test [--]
+# Fold 2: Train [-----]  Test [--]
+# Fold 3: Train [-------]  Test [--]
+# Fold 4: Train [---------]  Test [--]
+# Fold 5: Train [-----------]  Test [--]</span></pre>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We processed 10M+ data points daily from building sensors, which is inherently time-series data. We engineered temporal features like hour-of-day, rolling statistics, and lag features to capture the patterns in HVAC behavior. For validation, we used TimeSeriesSplit rather than random cross-validation to avoid temporal leakage. Seasonal patterns were important because HVAC fault signatures look different in summer cooling mode versus winter heating mode."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 9: EMBEDDINGS -->
+  <!-- ============================================================ -->
+  <div class="section" id="embeddings">
+    <div class="section-number">09</div>
+    <h2>Embeddings & Semantic Similarity</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Imagine you're organizing books in a library. Traditional keyword search is like organizing alphabetically: "HVAC troubleshooting" and "air conditioning repair guide" end up in completely different sections even though they're about the same thing. <strong>Embeddings</strong> are like organizing by <em>meaning</em>: both books end up in the same neighborhood because they cover the same topic, even though they use different words. An embedding converts text into a list of numbers (a vector) that captures its meaning.</p>
+    </div>
+
+    <h3>What Is an Embedding?</h3>
+    <p>An embedding is a numerical representation (vector) of text that captures semantic meaning. Similar concepts end up with similar vectors, measured by distance or angle between them.</p>
+
+    <p>The sentence "The AC unit is broken" might become a vector like <code>[0.23, -0.45, 0.89, ..., 0.12]</code> (typically 768 to 1536 dimensions). The sentence "The air conditioning system has a malfunction" would produce a very <strong>similar</strong> vector, even though the words are completely different.</p>
+
+    <h3>How Similarity Is Measured</h3>
+
+    <table>
+      <tr><th>Method</th><th>How It Works</th><th>Range</th><th>When to Use</th></tr>
+      <tr>
+        <td><strong>Cosine Similarity</strong></td>
+        <td>Measures the angle between two vectors</td>
+        <td>-1 to 1 (1 = identical)</td>
+        <td>Most common for text embeddings. What FAISS uses by default.</td>
+      </tr>
+      <tr>
+        <td><strong>Euclidean Distance (L2)</strong></td>
+        <td>Straight-line distance between vectors</td>
+        <td>0 to infinity (0 = identical)</td>
+        <td>Works when vector magnitudes are normalized</td>
+      </tr>
+      <tr>
+        <td><strong>Dot Product</strong></td>
+        <td>Sum of element-wise products</td>
+        <td>-inf to inf</td>
+        <td>Fast computation, used when vectors are normalized (equivalent to cosine)</td>
+      </tr>
+    </table>
+
+    <h3>Embedding Models</h3>
+    <p>Different models produce embeddings of different quality and dimensions:</p>
+    <ul>
+      <li><strong>OpenAI text-embedding-ada-002</strong>: 1536 dimensions. Good general-purpose. What you'd use via the OpenAI API.</li>
+      <li><strong>OpenAI text-embedding-3-small/large</strong>: Newer, better performance, configurable dimensions.</li>
+      <li><strong>Sentence-BERT (all-MiniLM-L6-v2)</strong>: Open source, 384 dimensions, runs locally. Good for cost-sensitive applications.</li>
+      <li><strong>Cohere embed-v3</strong>: Another commercial option with strong performance.</li>
+    </ul>
+
+    <h3>In Code</h3>
+<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+client = <span class="func">OpenAI</span>()
+
+<span class="comment"># Generate an embedding</span>
+response = client.embeddings.<span class="func">create</span>(
+    input=<span class="string">"HVAC supply air temperature sensor fault"</span>,
+    model=<span class="string">"text-embedding-ada-002"</span>
+)
+vector = response.data[<span class="num">0</span>].embedding  <span class="comment"># list of 1536 floats</span>
+
+<span class="comment"># Cosine similarity between two vectors</span>
+<span class="keyword">def</span> <span class="func">cosine_similarity</span>(a, b):
+    a, b = np.<span class="func">array</span>(a), np.<span class="func">array</span>(b)
+    <span class="keyword">return</span> np.<span class="func">dot</span>(a, b) / (np.linalg.<span class="func">norm</span>(a) * np.linalg.<span class="func">norm</span>(b))
+
+<span class="comment"># similarity = 0.92 means very semantically similar</span></pre>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"In our RAG chatbot, we embedded building documentation into vectors using an embedding model and stored them in FAISS. When a user asked a question, we embedded their query, performed cosine similarity search against the document vectors, and retrieved the most semantically relevant passages to provide as context to the LLM. This is what made the chatbot able to answer questions about specific buildings even though the LLM had never been trained on our data."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10: VECTOR DATABASES -->
+  <!-- ============================================================ -->
+  <div class="section" id="vector-dbs">
+    <div class="section-number">10</div>
+    <h2>Vector Databases (FAISS & Pinecone)</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>A vector database is like a smart librarian. Instead of looking up books by exact title (keyword search), you describe what you're looking for in plain language, and the librarian finds the most relevant books based on <em>meaning</em>. Under the hood, it's organizing millions of vectors (book representations) so that finding the nearest neighbors is fast, even at scale. Without a vector DB, you'd have to compare your query against every single document, which is impossibly slow.</p>
+    </div>
+
+    <h3>FAISS (Facebook AI Similarity Search)</h3>
+    <p><strong>What it is</strong>: An open-source library (not a database service) for fast similarity search over dense vectors. Developed by Meta. Runs locally in-memory.</p>
+    <p><strong>When to use it</strong>: Smaller to medium datasets (thousands to low millions of vectors), or when you don't want to pay for a managed service. Great for prototyping and when your data fits in memory.</p>
+
+<pre><span class="keyword">import</span> faiss
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="comment"># Create an index for 1536-dimensional vectors</span>
+dimension = <span class="num">1536</span>
+index = faiss.<span class="func">IndexFlatL2</span>(dimension)  <span class="comment"># exact L2 search</span>
+
+<span class="comment"># Add document vectors (numpy array, shape: [n_docs, dimension])</span>
+doc_vectors = np.<span class="func">array</span>(all_embeddings).<span class="func">astype</span>(<span class="string">'float32'</span>)
+index.<span class="func">add</span>(doc_vectors)
+
+<span class="comment"># Search: find 5 nearest neighbors to a query</span>
+query_vector = np.<span class="func">array</span>([query_embedding]).<span class="func">astype</span>(<span class="string">'float32'</span>)
+distances, indices = index.<span class="func">search</span>(query_vector, k=<span class="num">5</span>)
+
+<span class="comment"># indices[0] gives you the IDs of the 5 most similar documents</span></pre>
+
+    <h3>Pinecone</h3>
+    <p><strong>What it is</strong>: A managed, cloud-hosted vector database service. No infrastructure to manage.</p>
+    <p><strong>When to use it</strong>: Production systems at scale, when you need persistence, filtering (metadata), and don't want to manage infrastructure. Costs money but saves engineering time.</p>
+
+    <h3>FAISS vs Pinecone: Trade-offs</h3>
+    <table>
+      <tr><th></th><th>FAISS</th><th>Pinecone</th></tr>
+      <tr><td><strong>Hosting</strong></td><td>Local / self-managed</td><td>Fully managed cloud</td></tr>
+      <tr><td><strong>Cost</strong></td><td>Free (your compute)</td><td>Pay per usage</td></tr>
+      <tr><td><strong>Persistence</strong></td><td>In-memory (save/load manually)</td><td>Built-in</td></tr>
+      <tr><td><strong>Metadata filtering</strong></td><td>DIY</td><td>Built-in (filter by building_id, date, etc.)</td></tr>
+      <tr><td><strong>Scale</strong></td><td>Good to ~10M vectors</td><td>Billions of vectors</td></tr>
+      <tr><td><strong>Best for</strong></td><td>Prototyping, cost-sensitive, smaller scale</td><td>Production, enterprise, large scale</td></tr>
+    </table>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We used FAISS for our RAG chatbot because our document corpus was manageable in size, we needed fast iteration during development, and we wanted to avoid the cost of a managed service for an internal tool. FAISS gave us sub-millisecond retrieval for our vector searches. If we needed to scale to hundreds of thousands of documents or add complex metadata filtering, like filtering by building ID or document type, Pinecone would have been the better choice."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 11: RAG -->
+  <!-- ============================================================ -->
+  <div class="section" id="rag">
+    <div class="section-number">11</div>
+    <h2>RAG Architecture</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>RAG is like an open-book exam. The student (LLM) is smart and knows how to reason, but instead of relying purely on memory, they get to look up specific pages in their textbook before answering each question. The retrieval step finds the relevant pages; the generation step writes the answer using those pages as context. Without RAG, the LLM would hallucinate answers from memory. With RAG, it grounds its answers in your actual documents.</p>
+    </div>
+
+    <h3>The RAG Pipeline</h3>
+    <div class="pipeline-diagram">
+      <div class="pipeline-flow">
+        <div class="pipeline-node data">User Query</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Embed Query</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">Vector Search</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Retrieve Docs</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">LLM + Context</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node output">Answer</div>
+      </div>
+    </div>
+
+    <h3>Step by Step</h3>
+
+    <p><strong>1. Ingestion (offline, done once)</strong></p>
+    <ul>
+      <li>Take your documents (PDFs, manuals, specs)</li>
+      <li><strong>Chunk</strong> them into smaller pieces (e.g., 500-1000 tokens each, with overlap)</li>
+      <li><strong>Embed</strong> each chunk into a vector</li>
+      <li><strong>Store</strong> vectors + metadata in a vector database (FAISS, Pinecone)</li>
+    </ul>
+
+    <p><strong>2. Retrieval (at query time)</strong></p>
+    <ul>
+      <li>User asks a question</li>
+      <li>Embed the question using the same embedding model</li>
+      <li>Search the vector DB for the k most similar chunks (typically k = 3-5)</li>
+    </ul>
+
+    <p><strong>3. Generation (at query time)</strong></p>
+    <ul>
+      <li>Construct a prompt: system instructions + retrieved chunks + user question</li>
+      <li>Send to LLM</li>
+      <li>LLM generates answer grounded in the retrieved context</li>
+    </ul>
+
+    <h3>Chunking Strategy</h3>
+    <p>How you split documents matters a lot:</p>
+    <table>
+      <tr><th>Strategy</th><th>How</th><th>Trade-off</th></tr>
+      <tr>
+        <td><strong>Fixed-size</strong></td>
+        <td>Split every N tokens</td>
+        <td>Simple but may split mid-sentence</td>
+      </tr>
+      <tr>
+        <td><strong>Recursive character</strong></td>
+        <td>Split on paragraphs, then sentences, then characters</td>
+        <td>Better semantic boundaries. LangChain default.</td>
+      </tr>
+      <tr>
+        <td><strong>Semantic</strong></td>
+        <td>Use embeddings to detect topic shifts</td>
+        <td>Best quality but slower and more complex</td>
+      </tr>
+    </table>
+    <p><strong>Overlap</strong>: Chunks should overlap (e.g., 100-200 tokens) so context isn't lost at boundaries. If chunk 1 ends mid-explanation, chunk 2 repeats that section so it's retrievable from either.</p>
+
+    <h3>Key Design Decisions in RAG</h3>
+
+    <div class="concept-card">
+      <div class="card-label key-point">DECISIONS YOU SHOULD BE ABLE TO DISCUSS</div>
+      <ul>
+        <li><strong>Chunk size</strong>: Smaller chunks = more precise retrieval but might miss context. Larger chunks = more context but might dilute relevance. 500-1000 tokens is typical.</li>
+        <li><strong>Number of retrieved chunks (k)</strong>: Too few = might miss relevant info. Too many = fills up the LLM context window with noise. 3-5 is common.</li>
+        <li><strong>Embedding model choice</strong>: Trade-off between quality and cost/speed.</li>
+        <li><strong>Reranking</strong>: After initial vector search, use a cross-encoder to rerank results for better precision. Adds latency but improves quality.</li>
+        <li><strong>Conversation memory</strong>: For multi-turn chats, you need to either include conversation history in the prompt or summarize it.</li>
+      </ul>
+    </div>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We built an agent-based RAG system for building management support. Building documentation, equipment specs, and troubleshooting guides were chunked using recursive character splitting, embedded, and stored in FAISS. At query time, we retrieved the top relevant chunks and provided them as context to the LLM via LangChain. We implemented conversation memory with context windowing so multi-turn conversations maintained coherence without exceeding the context window. The system achieved 85% accuracy validated by subject matter experts."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 12: LANGCHAIN & LANGGRAPH -->
+  <!-- ============================================================ -->
+  <div class="section" id="langchain">
+    <div class="section-number">12</div>
+    <h2>LangChain & LangGraph</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p><strong>LangChain</strong> is to LLM applications what <strong>Express.js</strong> is to web servers. Express doesn't make HTTP requests for you, but it gives you middleware, routing, and structure so you can build web apps faster. LangChain doesn't run the LLM, but it gives you chains, prompts, retrievers, memory, and tooling so you can build LLM-powered applications faster instead of duct-taping raw API calls together.</p>
+      <p><strong>LangGraph</strong> is the upgrade: it's like going from Express middleware (linear pipeline) to a <strong>state machine</strong> where your AI agent can loop, branch, and make decisions about what to do next.</p>
+    </div>
+
+    <h3>LangChain Core Concepts</h3>
+
+    <h4>Chains</h4>
+    <p>A chain is a sequence of steps. The simplest: take user input, format a prompt, send to LLM, return output.</p>
+
+<pre><span class="keyword">from</span> langchain_openai <span class="keyword">import</span> ChatOpenAI
+<span class="keyword">from</span> langchain.prompts <span class="keyword">import</span> ChatPromptTemplate
+
+<span class="comment"># Define a prompt template</span>
+prompt = ChatPromptTemplate.<span class="func">from_messages</span>([
+    (<span class="string">"system"</span>, <span class="string">"You are an HVAC expert. Answer using the context: {context}"</span>),
+    (<span class="string">"human"</span>, <span class="string">"{question}"</span>)
+])
+
+<span class="comment"># Create the chain: prompt -> LLM -> output</span>
+llm = <span class="func">ChatOpenAI</span>(model=<span class="string">"gpt-4"</span>)
+chain = prompt | llm  <span class="comment"># LCEL (LangChain Expression Language) pipe syntax</span>
+
+<span class="comment"># Run it</span>
+response = chain.<span class="func">invoke</span>({
+    <span class="string">"context"</span>: retrieved_docs,
+    <span class="string">"question"</span>: <span class="string">"Why is Building 42's AHU running constantly?"</span>
+})</pre>
+
+    <h4>Retrievers</h4>
+    <p>A retriever wraps your vector DB and provides a standard interface for fetching relevant documents:</p>
+
+<pre><span class="keyword">from</span> langchain_community.vectorstores <span class="keyword">import</span> FAISS
+<span class="keyword">from</span> langchain_openai <span class="keyword">import</span> OpenAIEmbeddings
+
+<span class="comment"># Load existing FAISS index</span>
+vectorstore = FAISS.<span class="func">load_local</span>(<span class="string">"faiss_index"</span>, OpenAIEmbeddings())
+
+<span class="comment"># Create a retriever (returns top 4 similar docs)</span>
+retriever = vectorstore.<span class="func">as_retriever</span>(search_kwargs={<span class="string">"k"</span>: <span class="num">4</span>})</pre>
+
+    <h4>Memory</h4>
+    <p>Memory lets the chain remember previous messages in a conversation:</p>
+
+<pre><span class="keyword">from</span> langchain.memory <span class="keyword">import</span> ConversationBufferWindowMemory
+
+<span class="comment"># Keep last 10 exchanges (window memory)</span>
+memory = <span class="func">ConversationBufferWindowMemory</span>(k=<span class="num">10</span>, return_messages=True)
+
+<span class="comment"># Types of memory:
+# ConversationBufferMemory     - stores everything (expensive for long chats)
+# ConversationBufferWindowMemory - last k messages (your choice)
+# ConversationSummaryMemory    - LLM summarizes old messages (saves tokens)</span></pre>
+
+    <h3>LangGraph: Agent State Machines</h3>
+    <p>LangGraph lets you build agents that can <strong>decide what to do next</strong> based on the current state. Instead of a linear chain, you define a graph of nodes (actions) and edges (transitions).</p>
+
+<pre><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> StateGraph, END
+
+<span class="comment"># Define the state</span>
+<span class="keyword">class</span> AgentState(TypedDict):
+    messages: list
+    context: str
+    should_retrieve: bool
+
+<span class="comment"># Define nodes (functions that process state)</span>
+<span class="keyword">def</span> <span class="func">classify_query</span>(state):
+    <span class="comment"># Decide if we need to retrieve documents or can answer directly</span>
+    ...
+
+<span class="keyword">def</span> <span class="func">retrieve_docs</span>(state):
+    <span class="comment"># Fetch relevant documents from vector DB</span>
+    ...
+
+<span class="keyword">def</span> <span class="func">generate_response</span>(state):
+    <span class="comment"># Generate answer using LLM + context</span>
+    ...
+
+<span class="comment"># Build the graph</span>
+graph = <span class="func">StateGraph</span>(AgentState)
+graph.<span class="func">add_node</span>(<span class="string">"classify"</span>, classify_query)
+graph.<span class="func">add_node</span>(<span class="string">"retrieve"</span>, retrieve_docs)
+graph.<span class="func">add_node</span>(<span class="string">"generate"</span>, generate_response)
+
+<span class="comment"># Define edges (routing logic)</span>
+graph.<span class="func">add_edge</span>(<span class="string">"classify"</span>, <span class="string">"retrieve"</span>)  <span class="comment"># or skip to generate</span>
+graph.<span class="func">add_edge</span>(<span class="string">"retrieve"</span>, <span class="string">"generate"</span>)
+graph.<span class="func">add_edge</span>(<span class="string">"generate"</span>, END)
+
+app = graph.<span class="func">compile</span>()</pre>
+
+    <div class="concept-card">
+      <div class="card-label key-point">LANGCHAIN VS LANGGRAPH</div>
+      <p><strong>LangChain</strong>: Linear pipelines. Input goes through a sequence of steps. Great for straightforward RAG, simple chains.<br>
+      <strong>LangGraph</strong>: Cyclic graphs with branching logic. The agent can loop back, try different tools, or take different paths based on the query. Use it when your agent needs to make decisions, like "should I search the docs, call an API, or ask for clarification?"</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 13: LLAMAINDEX -->
+  <!-- ============================================================ -->
+  <div class="section" id="llamaindex">
+    <div class="section-number">13</div>
+    <h2>LlamaIndex</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>If LangChain is a general-purpose LLM framework (like a Swiss army knife), LlamaIndex is a specialized tool built specifically for the <strong>data ingestion and retrieval</strong> part of the pipeline. Think of LlamaIndex as the <strong>librarian</strong> and LangChain as the <strong>entire library system</strong> (librarian + checkout desk + event space + cafe). LlamaIndex is laser-focused on connecting your data to LLMs.</p>
+    </div>
+
+    <h3>Core Abstractions</h3>
+
+    <h4>Documents & Nodes</h4>
+    <p>A Document is a container for your raw data (a PDF, a web page). LlamaIndex splits Documents into Nodes (chunks) with metadata and relationships preserved.</p>
+
+    <h4>Indexes</h4>
+    <p>An Index structures your Nodes for retrieval. The most common is <code>VectorStoreIndex</code>, which embeds nodes and enables similarity search.</p>
+
+<pre><span class="keyword">from</span> llama_index.core <span class="keyword">import</span> VectorStoreIndex, SimpleDirectoryReader
+
+<span class="comment"># Load all documents from a directory</span>
+documents = SimpleDirectoryReader(<span class="string">"./building_docs"</span>).<span class="func">load_data</span>()
+
+<span class="comment"># Build the index (embeds all chunks automatically)</span>
+index = VectorStoreIndex.<span class="func">from_documents</span>(documents)
+
+<span class="comment"># Query it</span>
+query_engine = index.<span class="func">as_query_engine</span>()
+response = query_engine.<span class="func">query</span>(
+    <span class="string">"What is the recommended maintenance schedule for AHU-3?"</span>
+)
+print(response)</pre>
+
+    <h3>LlamaIndex vs LangChain</h3>
+    <table>
+      <tr><th></th><th>LlamaIndex</th><th>LangChain</th></tr>
+      <tr><td><strong>Focus</strong></td><td>Data ingestion, indexing, retrieval</td><td>Full LLM application framework</td></tr>
+      <tr><td><strong>Strength</strong></td><td>Best-in-class document parsing and chunking</td><td>Chains, agents, tools, memory, broad ecosystem</td></tr>
+      <tr><td><strong>Use together?</strong></td><td colspan="2">Yes! Use LlamaIndex for retrieval, LangChain for orchestration. They integrate well.</td></tr>
+    </table>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"We used LlamaIndex for its document parsing and indexing capabilities since it handles PDFs and technical manuals well out of the box, and LangChain for the conversational agent layer including memory management, prompt templating, and the chain orchestration. LlamaIndex's SimpleDirectoryReader made it easy to ingest our building documentation library, and its chunking preserved document structure better than manual splitting."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 14: PROMPT ENGINEERING -->
+  <!-- ============================================================ -->
+  <div class="section" id="prompt-eng">
+    <div class="section-number">14</div>
+    <h2>Prompt Engineering</h2>
+
+    <div class="concept-card highlight">
+      <div class="card-label analogy">ANALOGY</div>
+      <p>Prompt engineering is like being a really good manager giving instructions to a highly capable but literal new employee. The employee (LLM) can do amazing work, but the quality of their output depends entirely on how clearly and specifically you tell them what you want, what format to use, what constraints to follow, and what examples to reference. Vague instructions get vague results.</p>
+    </div>
+
+    <h3>Key Techniques</h3>
+
+    <h4>Few-Shot Prompting</h4>
+    <p>Provide examples of the input/output format you want. This was critical for your data labeling workflow:</p>
+
+<pre><span class="comment"># Your data labeling prompt might look like:</span>
+<span class="string">"""
+You are a sensor data normalization expert. Given a raw sensor label,
+output the standardized label.
+
+Examples:
+- Input: "TMP_SUPPLY" -> Output: "supply_air_temperature"
+- Input: "RH-ZONE1"   -> Output: "zone_1_relative_humidity"
+- Input: "AHU3_SAT"   -> Output: "ahu_3_supply_air_temperature"
+
+Now normalize this label:
+Input: "{raw_label}"
+"""</span></pre>
+
+    <h4>Chain-of-Thought (CoT)</h4>
+    <p>Ask the model to reason step by step. Improves accuracy on complex problems:</p>
+    <p><code>"Think through this step by step before giving your answer."</code></p>
+
+    <h4>System Prompts</h4>
+    <p>Set the model's role, constraints, and behavior upfront. For the chatbot:</p>
+<pre><span class="string">"You are a building management support assistant. Only answer questions
+using the provided context documents. If the answer is not in the
+context, say 'I don't have enough information to answer that.'
+Never make up technical specifications."</span></pre>
+
+    <h4>Output Formatting</h4>
+    <p>Tell the model exactly what format you want:</p>
+    <p><code>"Respond in JSON format with keys: label, confidence, reasoning"</code></p>
+
+    <div class="concept-card">
+      <div class="card-label your-work">YOUR JOULEA CONTEXT</div>
+      <p>"Our data labeling workflow used few-shot prompting extensively. We provided the OpenAI API with examples of raw sensor labels mapped to standardized names, which effectively taught it our naming conventions without any model training. For the chatbot, we used detailed system prompts to constrain the model to only answer from retrieved context, reducing hallucination. This combination of prompt engineering with RAG retrieval is what got us to 85% accuracy."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 15: JOULEA IoT PIPELINE -->
+  <!-- ============================================================ -->
+  <div class="section" id="joulea-pipeline">
+    <div class="section-number">15</div>
+    <h2>Your Joulea IoT Pipeline (Deep Dive)</h2>
+
+    <p>This is the system you should be able to whiteboard end to end. Here's the complete architecture:</p>
+
+    <div class="pipeline-diagram">
+      <div class="pipeline-flow">
+        <div class="pipeline-node data">Sensors (200+ bldgs)</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">VOLTTRON</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">RabbitMQ</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">Normalization (LLM)</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">Fault Detection</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node output">PostgreSQL / S3</div>
+      </div>
+    </div>
+
+    <h3>Component by Component</h3>
+
+    <p><strong>Building Sensors</strong>: Thousands of IoT sensors across 200+ commercial buildings sending temperature, humidity, pressure, energy consumption, and equipment status readings. 10M+ data points per day total.</p>
+
+    <p><strong>VOLTTRON</strong>: Open-source platform from the Department of Energy. Acts as the gateway between building sensors and your cloud infrastructure. Critical feature: <strong>message replay</strong>. When a building's internet goes down (common with commercial Wi-Fi), VOLTTRON queues the sensor data locally and replays it once connectivity is restored. This is how you solved the data gap problem.</p>
+
+    <p><strong>RabbitMQ</strong>: Message broker that decouples data producers (sensors) from consumers (your services). Provides buffering, routing, and guaranteed delivery. If your normalization service is temporarily down, messages queue in RabbitMQ and get processed when it comes back. Dead letter queues catch messages that fail processing multiple times.</p>
+
+    <p><strong>LLM Normalization Service</strong>: Your generative AI labeling workflow. Different HVAC vendors label their sensors differently (TMP, TEMP, Temperature, SAT, supply_air_temp). This service uses the OpenAI API with few-shot prompting to standardize all labels to a consistent schema. 67% speed improvement over manual labeling, 90% accuracy.</p>
+
+    <p><strong>Fault Detection</strong>: ML models that analyze the normalized sensor data to identify equipment faults. Classification models flag abnormal patterns (stuck valves, sensor drift, refrigerant leaks, excessive runtime).</p>
+
+    <p><strong>Storage</strong>: Dual storage strategy. <strong>Hot data</strong> (last 7 days) in RDS Aurora PostgreSQL for fast API queries powering the real-time dashboard. <strong>Cold data</strong> (historical) migrated to S3 via AWS Glue ETL jobs, queried via Athena for analytics. This hot/cold split reduced infrastructure costs by 57%.</p>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>When you whiteboard this, tell the story of a single data point: "A temperature sensor in Building 42 sends a reading. VOLTTRON picks it up at the edge and forwards it via HTTP to our cloud, where it hits RabbitMQ. A consumer service pulls it off the queue, runs it through our LLM normalization to standardize the label, then it goes through fault detection. If it's normal, it's persisted to PostgreSQL. If it's a fault, it triggers an alert on the dashboard. After 7 days, AWS Glue moves it to S3 for long-term storage." Follow the data, not the technology.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 16: CHATBOT -->
+  <!-- ============================================================ -->
+  <div class="section" id="chatbot">
+    <div class="section-number">16</div>
+    <h2>Your RAG Chatbot (Deep Dive)</h2>
+
+    <h3>Architecture</h3>
+    <div class="pipeline-diagram">
+      <div class="pipeline-flow">
+        <div class="pipeline-node data">Building Docs</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Chunk + Embed</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">FAISS Index</div>
+      </div>
+    </div>
+    <div class="pipeline-diagram" style="margin-top: 12px;">
+      <div class="pipeline-flow">
+        <div class="pipeline-node data">User Question</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node data">Embed Query</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">FAISS Retrieval</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node ml">LangChain Agent</div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-node output">Response</div>
+      </div>
+    </div>
+
+    <h3>Design Decisions You Made (and Why)</h3>
+
+    <ul>
+      <li><strong>FAISS over Pinecone</strong>: Internal tool, manageable corpus size, faster iteration, lower cost.</li>
+      <li><strong>RAG over Fine-Tuning</strong>: Documentation changes frequently. RAG retrieves latest docs without retraining.</li>
+      <li><strong>LlamaIndex for ingestion</strong>: Handled PDF parsing and maintained document structure during chunking.</li>
+      <li><strong>LangChain for orchestration</strong>: Managed the chain of retrieval, prompt assembly, LLM call, and memory.</li>
+      <li><strong>Conversation memory (window)</strong>: Kept last N messages for multi-turn context without exceeding token limits.</li>
+      <li><strong>System prompt constraints</strong>: Instructed LLM to only answer from provided context. Reduced hallucination.</li>
+    </ul>
+
+    <h3>The 85% Accuracy Number</h3>
+    <p>Validated through internal SME (subject matter expert) testing. Building engineers and operations staff asked real questions and rated the responses. This is a legitimate evaluation approach for domain-specific chatbots where automated metrics (like BLEU score) don't capture whether the answer is technically correct for HVAC.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 17: DATA LABELING -->
+  <!-- ============================================================ -->
+  <div class="section" id="data-labeling">
+    <div class="section-number">17</div>
+    <h2>Your AI Data Labeling (Deep Dive)</h2>
+
+    <h3>The Problem</h3>
+    <p>200+ buildings, dozens of HVAC vendors, each using different naming conventions for the same sensors. One vendor calls it "TMP_SUPPLY", another calls it "SAT", another calls it "supply_air_temp_f". Before your ML models or dashboards can work, all this data needs standardized labels.</p>
+
+    <h3>The Old Way</h3>
+    <p>Manual mapping. An engineer looks at each raw label, figures out what it means, and maps it to the standard schema. Slow, error-prone, doesn't scale as you onboard new buildings.</p>
+
+    <h3>Your Solution</h3>
+    <p>An OpenAI API-based pipeline using few-shot prompting. You provided examples of known mappings, and the model generalized to handle new labels it hadn't seen before. This is fundamentally an <strong>NLP classification task</strong> using in-context learning rather than traditional model training.</p>
+
+    <h3>Why This Is ML</h3>
+    <p>Even though you didn't train a model from scratch, this is a legitimate machine learning approach:</p>
+    <ul>
+      <li><strong>In-context learning</strong> is how LLMs perform few-shot classification</li>
+      <li><strong>Embedding-based similarity</strong> is how the model understands that "TMP" and "temperature" are related</li>
+      <li><strong>The pipeline design</strong> (input normalization, classification, validation, output) follows standard ML pipeline patterns</li>
+      <li><strong>90% accuracy</strong> was measured against ground truth labels, which is standard ML evaluation</li>
+    </ul>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>If someone pushes back with "but you didn't train a model," your answer is: "We chose in-context learning over traditional model training because our label vocabulary keeps expanding as we onboard new buildings and vendors. Training a static classifier would require retraining every time a new vendor is added. The LLM-based approach generalizes to unseen label formats without retraining, which was the right trade-off for our use case. The 67% speed improvement and 90% accuracy validated the approach." This shows trade-off reasoning, which is what senior engineers do.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 18: FAULT DETECTION -->
+  <!-- ============================================================ -->
+  <div class="section" id="fault-detection">
+    <div class="section-number">18</div>
+    <h2>Fault Detection: Your ML Story</h2>
+
+    <p>This is the new bullet on your resume. Here's how to talk about it with confidence:</p>
+
+    <h3>The Story (STAR Format)</h3>
+
+    <p><strong>Situation:</strong> Joulea manages 200+ commercial buildings with thousands of HVAC sensors. Equipment faults (stuck valves, sensor drift, inefficient operation) waste energy and cause tenant complaints. Building managers can't manually monitor all sensors 24/7.</p>
+
+    <p><strong>Task:</strong> Build an automated fault detection system that analyzes incoming sensor data and flags anomalies for building operators.</p>
+
+    <p><strong>Action:</strong></p>
+    <ul>
+      <li>Designed feature engineering pipeline extracting rolling statistics, temporal features, domain-specific metrics (delta-T, setpoint deviation), and lag features from raw time-series sensor data</li>
+      <li>Built classification models using Scikit-learn (Random Forest as primary) with class balancing for the imbalanced fault/normal distribution</li>
+      <li>Used time-series cross-validation to avoid temporal leakage</li>
+      <li>Evaluated on F1 score (prioritizing recall slightly to minimize missed faults)</li>
+      <li>Deployed as a service in the pipeline, processing data after normalization</li>
+    </ul>
+
+    <p><strong>Result:</strong> Improved fault detection precision across 200+ buildings. Contributed to the platform delivering 25% energy cost savings by catching faults that would have gone unnoticed.</p>
+
+    <div class="concept-card warning">
+      <div class="card-label interview">INTERVIEW TIP</div>
+      <p>Key phrases to use naturally: "feature engineering pipeline," "time-series classification," "class imbalance handling," "temporal cross-validation," "F1 optimization." These signal ML literacy. But don't just drop buzzwords. Anchor each one to a specific decision: "We used class_weight='balanced' in our Random Forest because faults were only about 5% of the data, and without it the model just predicted 'normal' every time."</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 19: INTERVIEW SCRIPTS -->
+  <!-- ============================================================ -->
+  <div class="section" id="interview-scripts">
+    <div class="section-number">19</div>
+    <h2>Interview Scripts: Ready-to-Use Answers</h2>
+
+    <div class="concept-card example">
+      <div class="card-label example-label">Q: "TELL ME ABOUT YOUR MACHINE LEARNING EXPERIENCE"</div>
+      <p>"At Joulea, I worked across multiple ML applications in our IoT platform for commercial building management. On the classical ML side, I built feature engineering pipelines to extract meaningful signals from time-series HVAC sensor data, things like rolling statistics, temporal features, and domain-specific metrics like delta-T between supply and return air. We used these features to train classification models in Scikit-learn for automated fault detection across 200+ buildings.</p>
+      <p>On the LLM and NLP side, I designed a generative AI data labeling workflow using the OpenAI API. Different vendors label sensors differently, so we used few-shot prompting and embedding-based similarity to standardize labels automatically, cutting manual processing time by 67%. I also helped build an agent-based RAG chatbot using LangChain, LlamaIndex, and FAISS for vector retrieval, which achieved 85% response accuracy for building management questions."</p>
+    </div>
+
+    <div class="concept-card example">
+      <div class="card-label example-label">Q: "WALK ME THROUGH YOUR RAG ARCHITECTURE"</div>
+      <p>"Sure. The offline pipeline: we took building documentation, equipment manuals, and troubleshooting guides, used LlamaIndex to parse and chunk them with overlap, embedded each chunk using an embedding model, and stored those vectors in a FAISS index.</p>
+      <p>At query time: user asks a question, we embed that question with the same model, do a similarity search against FAISS to get the top relevant document chunks, then assemble a prompt with those chunks as context plus the question, and send it to the LLM through LangChain. We used conversation window memory so multi-turn conversations maintained context without exceeding token limits.</p>
+      <p>Key decisions: FAISS over Pinecone because it was an internal tool and the corpus was manageable. RAG over fine-tuning because our documentation updated frequently. Recursive character splitting for chunks to preserve semantic boundaries."</p>
+    </div>
+
+    <div class="concept-card example">
+      <div class="card-label example-label">Q: "HOW DID YOU HANDLE THE IOT DATA PIPELINE?"</div>
+      <p>"We processed 10 million plus data points daily from sensors across 200+ commercial buildings. The flow was: sensors at the building edge, picked up by VOLTTRON, which acts as our edge gateway. VOLTTRON was key because when a building loses internet, which happens more than you'd expect with commercial Wi-Fi, it queues sensor data locally and replays it once connectivity is restored. That's how we ensured zero data loss.</p>
+      <p>From VOLTTRON, data flows to RabbitMQ as our message broker, which decouples producers and consumers and provides buffering. Then our normalization service standardizes sensor labels using LLM-based classification, and the data moves through fault detection before persisting to PostgreSQL for real-time dashboards. Historical data beyond 7 days gets migrated to S3 via AWS Glue ETL jobs and queried through Athena, which saved us 57% on infrastructure costs."</p>
+    </div>
+
+    <div class="concept-card example">
+      <div class="card-label example-label">Q: "WHAT'S THE DIFFERENCE BETWEEN PRECISION AND RECALL?"</div>
+      <p>"Precision is 'when my model flags a fault, is it actually a fault?' It measures how trustworthy your positive predictions are. Recall is 'of all real faults that exist, how many did my model catch?' It measures completeness.</p>
+      <p>For our HVAC fault detection, we prioritized recall slightly because a missed fault could cause equipment damage or wasted energy, and we'd rather have a building operator investigate a false alarm than miss a real issue. We used F1 score as our primary metric since it balances both, but we leaned toward higher recall."</p>
+    </div>
+
+    <div class="concept-card example">
+      <div class="card-label example-label">Q: "WHAT FEATURES DID YOU ENGINEER FOR FAULT DETECTION?"</div>
+      <p>"We had several categories. Statistical features like rolling 24-hour mean and standard deviation for temperature and humidity, and rate of change to detect sudden spikes. Temporal features like hour of day, day of week, and an is-business-hours flag, because HVAC patterns look completely different during occupied versus unoccupied hours. Domain-specific features like delta-T, the difference between supply and return air temperatures, which is a core HVAC diagnostic metric, and setpoint deviation, how far actual conditions are from the target. And lag features comparing current readings to the same time yesterday, which helps the model learn normal daily patterns. The temporal and delta-T features consistently ranked highest in feature importance."</p>
+    </div>
+
+    <div class="concept-card highlight" style="margin-top: 40px;">
+      <div class="card-label analogy">FINAL REMINDER</div>
+      <p>You have real experience building real systems that use ML. The IoT pipeline, the RAG chatbot, the data labeling workflow, these are genuine ML engineering projects. The new resume claims (classification models, feature engineering, predictive analytics) are grounded extensions of that work. Own it. When you walk into that interview, you're not pretending to know ML. You're a software engineer who has built ML-powered systems in production. Lead with the systems, explain the decisions, cite the impact numbers. That's what senior engineers do.</p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
